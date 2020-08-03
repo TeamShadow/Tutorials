@@ -22,13 +22,13 @@ __all__ = ['ShadowLexer']
 
 class ShadowLexer(RegexLexer):
     """
-    For `Shadow <http://www.shadow-language.org/>` source code.
+    For `Shadow <http://shadow-language.org/>` source code.
     """
 
     name = 'Shadow'
     aliases = ['shadow']
     filenames = ['*.shadow']
-    mimetypes = ['text/plain']
+    mimetypes = ['text/x-shadow']
 
     flags = re.MULTILINE | re.DOTALL | re.UNICODE
 
@@ -39,20 +39,19 @@ class ShadowLexer(RegexLexer):
             (r'/\*.*?\*/', Comment.Multiline),
             # keywords: go before method names to avoid lexing "throw new XYZ"
             # as a method signature
-            (r'(and|assert|break|case|cast|catch|check|continue|copy|create|default|destroy|do|else|exception|finally|for|foreach|freeze|if|in|is|or|recover|return|send|skip|spawn|super|switch|this|throw|try|while|xor)\b',
+            (r'(and|assert|break|case|cast|catch|check|continue|copy|create|default|destroy|do|else|finally|for|foreach|freeze|if|in|is|or|recover|return|send|skip|spawn|super|switch|this|throw|try|while|xor)\b',
              Keyword),
             # method names
-            (r'((?:(?:[^\W\d]|\$)[\w.\[\]$<>]*\s+)+?)'  # return arguments
-             r'((?:[^\W\d]|\$)[\w$]*)'                  # method name
+            (r'((?:[^\W\d]|\$)[\w$]*)'                  # method name
              r'(\s*)(\()',                              # signature start
-             bygroups(using(this), Name.Function, Text, Punctuation)),
+             bygroups(Name.Function, Text, Punctuation)),
             (r'\[[^\W\d][\w]*(,\s*[^\W\d][\w])*\]', Name.Decorator),
-            (r'(abstract|constant|extern|get|import|immutable|locked|native|nullable|private|protected|public|readonly|set)\b', Keyword.Declaration),
+            (r'(abstract|constant|extern|get|immutable|locked|native|nullable|private|protected|public|readonly|set)\b', Keyword.Declaration),
             (r'(boolean|byte|code|double|float|int|long|short|ubyte|uint|ulong|ushort|var)\b',
              Keyword.Type),
-            (r'(package)(\s+)', bygroups(Keyword.Namespace, Text), 'import'),
+            (r'(import)(\s+)', bygroups(Keyword.Namespace, Text), 'import'),
             (r'(false|null|true)\b', Keyword.Constant),
-            (r'(class|enum|interface|singleton)(\s+)', bygroups(Keyword.Declaration, Text),
+            (r'(class|enum|exception|interface|singleton)(\s+)', bygroups(Keyword.Declaration, Text),
              'class'),
             (r'(var)(\s+)', bygroups(Keyword.Declaration, Text),
              'var'),
@@ -63,9 +62,9 @@ class ShadowLexer(RegexLexer):
             (r'(\.)((?:[^\W\d]|\$)[\w$]*)', bygroups(Punctuation,
                                                      Name.Attribute)),
             (r'([^\W\d]|\$)[\w$]*', Name),
-            (r'([0-9][0-9_]*\.([0-9][0-9_]*)?|'
-             r'\.[0-9][0-9_]*)'
-             r'([eE][+\-]?[0-9][0-9_]*)?[fFdD]?|'
+            (r'([0-9]+\.([0-9]+)?|'
+             r'\.[0-9]+)'
+             r'([eE][+\-]?[0-9]+)?[fFdD]?|'
              r'[0-9][eE][+\-]?[0-9][0-9_]*[fFdD]?|'
              r'[0-9]([eE][+\-]?[0-9][0-9_]*)?[fFdD]|'
              r'0[xX]([0-9a-fA-F][0-9a-fA-F_]*\.?|'
@@ -86,6 +85,6 @@ class ShadowLexer(RegexLexer):
             (r'([^\W\d])[\w]*', Name, '#pop')
         ],
         'import': [
-            (r'[\w:]*[\w]+(@[\w]+)?', Name.Namespace, '#pop')
+            (r'[\w\d:]*[^\W\d][\w\d]*(@[^\W\d][\w]*)?', Name.Namespace, '#pop')
         ],
     }

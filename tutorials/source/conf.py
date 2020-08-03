@@ -24,7 +24,7 @@ copyright = '2020, Barry Wittman and Olivia Mauger'
 author = 'Barry Wittman and Olivia Mauger'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = '0.8.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -49,12 +49,19 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'bizstyle'
+import rtcat_sphinx_theme
+html_theme = "rtcat_sphinx_theme"
+html_theme_path = [rtcat_sphinx_theme.get_html_theme_path()]
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
+html_title = 'Shadow Tutorials'
+html_short_title = 'Tutorials'
 html_static_path = ['_static']
+html_show_sourcelink = False
+
+language = 'en'
 
 
 def setup(app):
