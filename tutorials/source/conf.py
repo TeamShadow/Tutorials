@@ -63,6 +63,8 @@ html_show_sourcelink = False
 
 language = 'en'
 
+pygments_style = 'colorful'
+
 
 def setup(app):
     app.add_lexer('shadow', ShadowLexer)
