@@ -25,8 +25,8 @@ Comments
 The very first line in the program serves as a *comment*. Comments allow an author to annotate code with relevant information. 
 In practice, comments are used to describe the function of a segment of code or to provide important information about the program. There are two (really three) different rules which define comments:
 
-* Anything between // and the end of the line will be ignored
-* Anything between /* and */ will be ignored - even across multiple lines
+* Anything between `//` and the end of the line will be ignored
+* Anything between `/*` and `*/` will be ignored - even across multiple lines
 
 .. code-block:: shadow
     :linenos: 
@@ -37,7 +37,7 @@ In practice, comments are used to describe the function of a segment of code or 
      * Not this line either.
      */
 
-Comments are only present within the source code of a program. Neither the compiler nor the end-product executable will be impacted by comments. The third kind of comment is a documentation comment which contains specially marked-up information about code that can be used to automatically generate documentation. A documentation comment looks like the second kind of comment except that it begins with /** instead of /*.
+Comments are only present within the source code of a program. Neither the compiler nor the end-product executable will be impacted by comments. The third kind of comment is a documentation comment which contains specially marked-up information about code that can be used to automatically generate documentation. A documentation comment looks like the second kind of comment except that it begins with `/**` instead of `/*`.
 
 Importing Packages with ``import``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -66,8 +66,8 @@ Defining a Class
 
 The first line in this segment declares a class named ``HelloWorld``. The definition of ``HelloWorld`` begins on the following line with a left brace (``{``) and ends several lines later with a corresponding right brace (``}``). All methods and variables declared in this space become members of ``HelloWorld``. All code in Shadow must be encapsulated within a class.
 
-The ``main`` Method
-^^^^^^^^^^^^^^^^^^^^
+The ``main()`` Method
+^^^^^^^^^^^^^^^^^^^^^
 .. code-block:: shadow
     :linenos: 
 

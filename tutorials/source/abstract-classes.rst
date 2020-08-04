@@ -8,7 +8,7 @@ Drawing heavily on inheritance principles discussed in the previous section, we 
 
 What do we mean by ``abstract``? Similar to interfaces, if a method is declared to be ``abstract``, no method body is provided, and the method header ends in a semi-colon. Any classes that extend an ``abstract`` **class** *must* provide implementation for every ``abstract`` method in the parent class.  However, not every method has to be ``abstract``. Child classes of an ``abstract`` class also inherit **concrete** (implemented) methods that can be, but do not have to be, overridden. 
 
-How do we create an ``abstract`` class? It’s simple. ``abstract class ClassName`` is the proper syntax. Making an abstract method is similar: ``public abstract methodName() => ();``. You will get a compile error if you try to provide implementation for an ``abstract`` method. 
+How do we create an ``abstract`` class? It's simple. ``abstract class ClassName`` is the proper syntax. Making an abstract method is similar: ``public abstract methodName() => ();``. You will get a compile error if you try to provide implementation for an ``abstract`` method. 
 
 Now that we have covered *how* to create an ``abstract`` class, it also important to understand *why* we use ``abstract`` classes, and *how* they are different from interfaces. 
 
@@ -20,8 +20,8 @@ In addition, ``abstract`` classes are different from interfaces for a couple of 
 
 Take a look at the example below to see how an ``abstract`` **class** works. 
 
-Example
-^^^^^^^^
+Abstract class example
+^^^^^^^^^^^^^^^^^^^^^^
 
 The first class is ``Vehicle``, the abstract class. 
 
@@ -108,7 +108,7 @@ First, before we get into any explanations, take a few minutes and examine the t
 
 Now that you have a general idea how the program works, we will first touch on the ``abstract`` class ``Vehicle``. Aside from the word ``abstract`` in the class header and the ``abstract`` method ``takeATrip()`` , ``Vehicle`` does not appear to be any different than the classes we have studied previously. It still has a constructor, member variables, and one concrete method, ``buyAuto()``. 
 
-The second class, ``Motorcycle``, extends ``Vehicle``, as you can tell from the keyword ``is`` in the class header. ``Motorcycle`` does not override ``buyAuto()``, but it must provide default implementation for ``takeATrip()``, as seen in **Lines 11-15**. Notice how in **Line 8** we use the ``super()`` call to invoke the ``Vehicle`` constructor. Using ``super()`` was covered in a :ref:`previous section<Implementation>`. 
+The second class, ``Motorcycle``, extends ``Vehicle``, as you can tell from the keyword ``is`` in the class header. ``Motorcycle`` does not override ``buyAuto()``, but it must provide default implementation for ``takeATrip()``, as seen in **Lines 11-15**. Notice how in **Line 8** we use the ``super()`` call to invoke the ``Vehicle`` constructor. Using ``super()`` was covered in a :ref:`previous section<Extending classes>`. 
 
 Lastly, the driver program should not look any different from any of the examples we have used thus far. We have created a ``Motorcycle`` object and called methods on it. However, it is important to note we could have declared ``harley`` like this as well:  
 

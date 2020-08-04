@@ -1,7 +1,7 @@
 Reading from the Console
 ------------------------
 
-Oftentimes when writing code, we want to prompt the user to input some value that we can use in the program. For example, what if you wanted to create a program that calculates someone’s BMI? You would need to first ask the user their height in inches and then their weight in pounds. After storing these values in separate variables, you would be able to perform calculations to output their BMI. 
+Oftentimes when writing code, we want to prompt the user to input some value that we can use in the program. For example, what if you wanted to create a program that calculates someone's BMI? You would need to first ask the user their height in inches and then their weight in pounds. After storing these values in separate variables, you would be able to perform calculations to output their BMI. 
 
 How is this done? There are 4 main methods used for reading input as seen in the list below: 
 
@@ -12,10 +12,10 @@ How is this done? There are 4 main methods used for reading input as seen in the
 
 In addition to what is listed above, all 4 methods also return a ``boolean`` that indicates if the end of a file being read from is reached or not. This can be ignored for user input, as it will never be true when reading input from the keyboard. 
 
-Example
-^^^^^^^
+Input example
+^^^^^^^^^^^^^
 
-Now, let’s analyze an example. 
+Now, let's analyze an example. 
 
 .. code-block:: shadow
     :linenos: 
@@ -41,7 +41,7 @@ As discussed in the previous page, :ref:`Methods<Methods>`, methods in Shadow ca
 
 **A note on** ``readString()`` **vs** ``readLine()``: 
 
-Although using either of these two methods requires you to assign the input to a ``String`` variable, ``readLine()`` will read the entire line of text (including spaces) while ``readString`` will include everything up until a space, a tab, a new line, or a line feed character is reached. Thus, if I entered "Aquarius I think" as my Zodiac sign, the variable ``sign`` will be equal to "Aquarius" and not "Aquarius I think". 
+Although using either of these two methods requires you to assign the input to a ``String`` variable, ``readLine()`` will read the entire line of text (including spaces) while ``readString`` will include everything up until a space, a tab, a new line, or a line feed character is reached. Thus, if I entered ``Aquarius I think`` as my Zodiac sign, the variable ``sign`` will be equal to ``"Aquarius"`` and not ``"Aquarius I think"``. 
 	
 
 Reading Numeric Values

@@ -28,7 +28,7 @@ Although this exception is thrown automatically at run time, we are also able to
 
 This statement would produce the same output as the example above, excluding the ``Index 4``. 
 
-Overall, an ``IndexOutOfBoundsException`` is just one exception in the Shadow ``standard`` package. Other exceptions and brief explanations from the `Shadow API <http://shadow-language.org/documentation/shadow/standard/$package-summary.html>`_ are below. 
+Overall, an ``IndexOutOfBoundsException`` is just one exception in the Shadow ``standard`` package. Other exceptions and brief explanations from the `Shadow API <http://shadow-language.org/documentation/shadow/standard/$package-summary.html>`__ are below. 
 
 * ``CastException`` (trying to cast one type to an incompatible type)
 * ``Exception`` (parent type of all exceptions) 
@@ -44,7 +44,7 @@ Writing and Catching Exceptions
 
 While we have covered "built-in" exceptions in Shadow, you are also able to create your own exceptions using the ``exception`` keyword. In order to understand **writing** and **catching** exceptions, consider the extended example outlined below: 
 
-In the midst of a global pandemic, you realize that you have a lot of free time on your hands. Naturally, you decide to fill this time by learning how to cook. Although you have mastered mac ‘n cheese and toast, you are ready to move on to some more "advanced" recipes. Just in case, you decide to outline some things that could go wrong in the kitchen by defining 3 different **exceptions**. 
+In the midst of a global pandemic, you realize that you have a lot of free time on your hands. Naturally, you decide to fill this time by learning how to cook. Although you have mastered mac 'n cheese and toast, you are ready to move on to some more "advanced" recipes. Just in case, you decide to outline some things that could go wrong in the kitchen by defining 3 different **exceptions**. 
 
 The first exception is called ``BurnedFoodException``: 
 
@@ -89,7 +89,7 @@ The last is ``OutOfIngredientsException``:
 
 Upon examining these 3 different ``Exception`` classes, there are a few key things to take away. For one, instead of the keyword ``class``, they are all created with the following syntax: ``exception ClassName``. 
 
-In addition, each has a single constructor that calls the parent class’ constructor via ``super()``. As for all exceptions, the parent class is called ``Exception``. ``Exception`` has 2 constructors, one that takes no parameters (creating an exception without a message) and one that takes a ``String`` representing an explanation for the exception. In all 3 examples, we have invoked the parent constructor that takes in a ``String``. These ``String`` values are the messages displayed when the specific exception is thrown. For instance, if in a driver class we stated, ``throw MeasuringMistakeException:create();``, the console output would have been ``except@MeasuringMistakeException: Brush up on your fractions! You measured wrong!``
+In addition, each has a single constructor that calls the parent class' constructor via ``super()``. As for all exceptions, the parent class is called ``Exception``. ``Exception`` has 2 constructors, one that takes no parameters (creating an exception without a message) and one that takes a ``String`` representing an explanation for the exception. In all 3 examples, we have invoked the parent constructor that takes in a ``String``. These ``String`` values are the messages displayed when the specific exception is thrown. For instance, if in a driver class we stated, ``throw MeasuringMistakeException:create();``, the console output would have been ``except@MeasuringMistakeException: Brush up on your fractions! You measured wrong!``
 
 Now that we have established **how** to create our own exceptions, it is time to move on to **catching exceptions**. 
 
@@ -97,7 +97,7 @@ Now that we have established **how** to create our own exceptions, it is time to
 
 Although knowing how to create and throw exceptions is important, it is even more useful to know how to **catch** them. As you have seen from the previous examples, when an exception is thrown, the program stops running at that point. **Catching** an exception circumvents this issue by identifying and "handling" the exception that may or may not result when a given action is taken. 
 
-Let’s revisit our cooking example by looking at the driver program, ``ExceptionTest`` below. 
+Let's revisit our cooking example by looking at the driver program, ``ExceptionTest`` below. 
 
 .. code-block:: shadow 
     :linenos: 
@@ -166,7 +166,7 @@ Let’s revisit our cooking example by looking at the driver program, ``Exceptio
 
 First, ignore the ``main()`` method and look at **Lines 47-61**. Here we see 3 methods: ``burnFood()``, ``runOut()``, and ``measureMistake()``. These methods represent 3 different actions you could take to ruin your cooking, so it makes sense that each of these methods throws a corresponding exception (defined above). If you simply called ``burnFood()`` in the ``main()`` method, you would get an exception with the message "Oh no! You have burned the food!", and the program would terminate. This is not very useful, especially if you want the program to keep running.
 
-Wouldn’t it be better if you got a warning that you were about to burn your food or run out of ingredients? This is where the **try-catch** block comes in. The syntax is as follows: 
+Wouldn't it be better if you got a warning that you were about to burn your food or run out of ingredients? This is where the **try-catch** block comes in. The syntax is as follows: 
 
 .. code-block:: shadow
 
@@ -189,7 +189,7 @@ Before we discuss the ``try`` block in the example, it is important to touch on 
 
 Now, based on the number stored in ``number``, a method will be called that could produce a certain exception. This is done through a ``switch`` :ref:`statement<switch>`. However, ``case(0)`` indicates it is possible for no cooking mistake to be made. There is a ¼ chance that this will happen.
 
-For the sake of the example, let’s say that ``number`` holds the value 2. Look at **Line 23** of ``ExceptionTest``. For this case, we are calling the method ``runOut()``, which throws an ``OutOfIngredientsException``. Once this exception is thrown, we say that it is **in flight**. In other words, the program goes back to the try-catch block and runs through each ``catch`` statement (from top to bottom) until it finds an exception of compatible type. 
+For the sake of the example, let's say that ``number`` holds the value 2. Look at **Line 23** of ``ExceptionTest``. For this case, we are calling the method ``runOut()``, which throws an ``OutOfIngredientsException``. Once this exception is thrown, we say that it is **in flight**. In other words, the program goes back to the try-catch block and runs through each ``catch`` statement (from top to bottom) until it finds an exception of compatible type. 
 
 
 
@@ -204,7 +204,7 @@ More on Catching Exceptions
 Although we have covered the basics of creating a try-catch block in the previous example, there are some important nuances and rules that are outlined below. 
 
 * There is no limit to how many ``catch`` blocks you can have 
-* If you do include **multiple** ``catch`` **blocks**, the **most specific** exceptions should be put first, getting more general/broad at the end. For example, let’s say we added the ``catch`` statement -- ``catch (Exception ex)`` -- as the first ``catch`` after the ``try`` block. Since all exceptions are children of ``Exception``, any exception that could be thrown would match with this first ``catch`` block. Thus, none of the other ``catch`` blocks could ever be reached, **leading to a compile error** ( ``Unreachable code:`` ). 
+* If you do include **multiple** ``catch`` **blocks**, the **most specific** exceptions should be put first, getting more general/broad at the end. For example, let's say we added the ``catch`` statement -- ``catch (Exception ex)`` -- as the first ``catch`` after the ``try`` block. Since all exceptions are children of ``Exception``, any exception that could be thrown would match with this first ``catch`` block. Thus, none of the other ``catch`` blocks could ever be reached, **leading to a compile error** ( ``Unreachable code:`` ). 
 * If an exception is thrown from a ``try`` block and is never caught, the program simply terminates and the exception is displayed on the console. 
 * There are no restrictions on the number or type statements we can put inside the ``try`` block. We can call methods, create variables, create objects, etc. 
 
@@ -214,7 +214,7 @@ The ``finally`` Block
 
 In addition to ``catch`` blocks, another feature of exceptions is the ``finally`` block.  A ``finally`` block is code that is **guaranteed to run** before you exit the try-catch.  Although it is legal to have multiple ``catch`` blocks, you may only have **1** ``finally`` block for every ``try`` block. It also must be the **very last** block in a try-catch, or your code will not compile. 
 
-For example, let’s say we added the following ``finally`` block at the end of our cooking example: 
+For example, let's say we added the following ``finally`` block at the end of our cooking example: 
 
 
 .. code-block:: shadow 
@@ -231,6 +231,7 @@ In addition, ``catch`` blocks are technically not even required following a ``tr
 
 
 .. code-block:: console
+
     Bon Appetit!
     default@OutOfIngredientsException: Whoops! You ran out of ingredients!
 
@@ -323,7 +324,7 @@ In order to understand how an an exception **unwinds** once it is **in flight**,
     }
 
 
-Let’s start at **Line 49** in the ``main()`` method. Here we see a method call, ``test3();`` Control flows to this method and inside the ``try`` block (**Line 39**), we see another method call to ``test2()``. Once we enter ``test2()``, we see yet another method call in a ``try`` block (**Line 23**). This time, the method call is to ``test1()``. Inside ``test1()`` , there is a call to ``test()`` within the ``try`` block (**Line 11**).
+Let's start at **Line 49** in the ``main()`` method. Here we see a method call, ``test3();`` Control flows to this method and inside the ``try`` block (**Line 39**), we see another method call to ``test2()``. Once we enter ``test2()``, we see yet another method call in a ``try`` block (**Line 23**). This time, the method call is to ``test1()``. Inside ``test1()`` , there is a call to ``test()`` within the ``try`` block (**Line 11**).
 
 Now, control has shifted to ``test()``, and at **Line 5** we see that an exception, ``ExceptionB``, is explicitly thrown. At this point, we say that the exception is **in flight** and begins the unwinding process. In other words, starting with the try-catch block in ``test1()``, the exception will propagate downwards through the methods that were called until the exception is caught by one of the ``catch`` blocks (from the top of the stack). If control is passed back to the ``main()`` method and the exception has not been caught (still in flight), then the program will terminate with the exception message printed to the console. 
 

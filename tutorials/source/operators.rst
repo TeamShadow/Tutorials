@@ -163,7 +163,7 @@ The variable ``test`` is assigned ``true``. However, suppose you wanted to compa
     var compare = (want == need); 
     Console.printLine(compare); 
 
-Here, the variables ``want`` and ``need`` both are equal to the literal ``String`` value "coffee," so the result is ``true``. While the ``==`` compares literal values, Shadow also has the ``===`` operator which compares **references**. Let’s say we assign ``want`` and ``need`` to new ``String`` objects (see :ref:`Classes: The Basics<Classes: The Basics>`) that have the same literal value: 
+Here, the variables ``want`` and ``need`` both are equal to the literal ``String`` value "coffee," so the result is ``true``. While the ``==`` compares literal values, Shadow also has the ``===`` operator which compares **references**. Let's say we assign ``want`` and ``need`` to new ``String`` objects (see :ref:`Classes: The Basics<Classes: The Basics>`) that have the same literal value: 
 
 .. code-block:: shadow 
 
@@ -172,7 +172,7 @@ Here, the variables ``want`` and ``need`` both are equal to the literal ``String
 
     Console.printLine(want === need); 
 
-Although their **literal** values are the same, ``false`` is printed because the variables’ now point to different references (created two distinct objects). 
+Although their **literal** values are the same, ``false`` is printed because the variables' now point to different references (created two distinct objects). 
 
 The following short program provides examples and explanations for the remaining relational operators. 
 
@@ -324,7 +324,7 @@ When you think of assignment operators, the ``=`` probably comes to mind. The ``
 * ``/=``
 * ``%=``
 
-Let’s examine the following segments of code to see why these operators are useful. 
+Let's examine the following segments of code to see why these operators are useful. 
 
 
 .. code-block:: shadow
@@ -346,7 +346,7 @@ Although **Lines 2 and 7** effectively do the same thing, line 2 is a more simpl
 The Concatenation Operator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As mentioned in the previous :ref:`Code Example and Variable Names<Code Example and Variable Names>` section, ``#`` is called the **octothorpe**. It is **Shadow’s** version of the concatenation operator. 
+As mentioned in the previous :ref:`Code Example and Variable Names<Code Example and Variable Names>` section, ``#`` is called the **octothorpe**. It is **Shadow's** version of the concatenation operator. 
 
 The main function of ``#`` is to concatenate other types onto string values. For example, we use ``#`` to include literal values of variables in ``Console.printLine()`` statements. Another example is below. It is important to note that this operator has a lower precedence than addition (i.e. 1+1 will be added before it is connected with a ``String``). 
 

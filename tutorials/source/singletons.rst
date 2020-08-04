@@ -3,7 +3,7 @@ Singletons
 
 In other programming languages, when a method or a variable is marked as ``static``, it means that the method or variable is shared between all instances of a class. It does not "belong" to an individual object. However, in **Shadow** ``static`` does not exist. Instead, we are able to create a specific type of class called ``singleton``. In a broad sense, defining a  ``singleton`` class means that **only one object of that class can exist at one time,** per thread. For example, if your program has 5 threads, only one copy of the object is allowed to exist in each. 
 
-Although creating a ``singleton`` class can be helpful, it should not be used too often. Some popular applications of ``singleton`` would be to either log data (e.g. logging patient info in a doctor’s office database), or to keep track of the number of times a particular object is created. Overall, the goal is put a lot of information **into** the ``singleton`` (like with a logger), as opposed to taking information out of it. 
+Although creating a ``singleton`` class can be helpful, it should not be used too often. Some popular applications of ``singleton`` would be to either log data (e.g. logging patient info in a doctor's office database), or to keep track of the number of times a particular object is created. Overall, the goal is put a lot of information **into** the ``singleton`` (like with a logger), as opposed to taking information out of it. 
 
 How does this work? Take a look at the example below. The ``singleton`` object keeps track of the number of times a ``CovertOperation`` object is created.
  
@@ -54,7 +54,7 @@ Now, let's break down the ``CovertOperation`` class.
 
 
 
-``CovertOperation`` is a simple class with 3 member variables, including a ``singleton`` object -- ``tracker``. The constructor, which starts on **Line 7**, initializes ``password`` and ``secret``. As seen in **Line 11**, the method ``startMission()`` is called on ``tracker``, which is a  ``singleton``.  This ensures that every time a ``CovertOperation`` object is created, the ``singleton`` object’s member variable ``numOperations`` is incremented by 1. So, in basic terms, ``tracker`` represents the number of times a ``CovertOperation`` object has been instantiated. 
+``CovertOperation`` is a simple class with 3 member variables, including a ``singleton`` object -- ``tracker``. The constructor, which starts on **Line 7**, initializes ``password`` and ``secret``. As seen in **Line 11**, the method ``startMission()`` is called on ``tracker``, which is a  ``singleton``.  This ensures that every time a ``CovertOperation`` object is created, the ``singleton`` object's member variable ``numOperations`` is incremented by 1. So, in basic terms, ``tracker`` represents the number of times a ``CovertOperation`` object has been instantiated. 
 
 You might be asking, "How can ``tracker`` keep track of the total number of objects created, when each ``CovertOperation`` object has its own ``tracker`` member variable?" In reality, the ``tracker`` member variable **is actually the same object** for every instance of the ``CovertOperation`` class. After all, the whole point of a ``singleton`` is to only allow one object of the class to exist at one time. 
 
@@ -83,7 +83,7 @@ Console output:
 
 In **Line 1** it *appears* that we are creating another ``OperationTracker`` object. This is not possible: both ``ot`` in the driver program and ``tracker`` in ``CovertOperation`` **are the same object**. That is why, after each time we use the ``get`` property to retrieve the value ``numOperations`` from ``ot``, it reflects the ``track.startMission()`` call from the ``OperationTracker`` constructor.  We never needed to call ``startMission()`` on ``ot`` to increment the ``numOperations``. It is kept track of "behind the scenes" as we continue to create more ``CovertOperation`` objects. See the console output above. 
 
-As a final note, it may seem strange that we never initializd the ``OperationTracker`` object with ``create``. If you tried to write ``OperationTracker tracker = OperationTracker:create();`` you would get a compile error. This makes sense. Again, the whole point of a ``singleton`` is to have one object of the class at a time. The object’s creation is handled in the first method where it appears.
+As a final note, it may seem strange that we never initializd the ``OperationTracker`` object with ``create``. If you tried to write ``OperationTracker tracker = OperationTracker:create();`` you would get a compile error. This makes sense. Again, the whole point of a ``singleton`` is to have one object of the class at a time. The object's creation is handled in the first method where it appears.
 
 
 A note on ``Console``

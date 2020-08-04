@@ -109,7 +109,7 @@ Although the implementation is not shown, you are also able and encouraged to cr
 Bounds
 ^^^^^^^ 
 
-Another feature of generics in Shadow is the ability to create **bounds**. In basic terms, using bounds with generics allows you specify constraints for acceptable types, ``T``. For example, in our ``Chest`` class above, let’s say we only wanted ``Chest`` to be able to "hold" instances of the ``Treasure`` class and any of its children. All we would need to do is modify the class header slightly: ``class tutorials:generics@Chest<T is Treasure>``. Now, if we tried to create ``numChest`` from the previous section, we would get a compile error because ``int`` is not a child of ``Treasure``. This is called an **upper bound**. 
+Another feature of generics in Shadow is the ability to create **bounds**. In basic terms, using bounds with generics allows you specify constraints for acceptable types, ``T``. For example, in our ``Chest`` class above, let's say we only wanted ``Chest`` to be able to "hold" instances of the ``Treasure`` class and any of its children. All we would need to do is modify the class header slightly: ``class tutorials:generics@Chest<T is Treasure>``. Now, if we tried to create ``numChest`` from the previous section, we would get a compile error because ``int`` is not a child of ``Treasure``. This is called an **upper bound**. 
 
 Since ``T is Treasure``, we could also add the following method to ``Chest`` in order to access the member variable ``value`` of ``Treasure`` objects (and objects of its subclasses). 
 
@@ -231,7 +231,7 @@ Lastly,  for overloading arithmetic operators, the interfaces ``CanAdd<T>``, ``C
 
 Look back at the ``Surprise`` class. **Lines 17-20** show how we implemented the ``add()`` method of the ``CanAdd`` interface. The method header must follow this syntax **exactly** for the code to compile: ``public add(T other) => (T)``. Once again, we have simply substituted ``Surprise`` for ``T``. 
 
-Inside the method, it is **up to the programmer** to decide how two objects of a class are added together. In this example, we have somewhat arbitrarily decided to combine the object’s ``word`` variable with a space and add their magic numbers together and use the results as parameters for a new ``Surprise`` object. 
+Inside the method, it is **up to the programmer** to decide how two objects of a class are added together. In this example, we have somewhat arbitrarily decided to combine the object's ``word`` variable with a space and add their magic numbers together and use the results as parameters for a new ``Surprise`` object. 
 
 Lastly, focus now on the driver program excerpt.  As you can see in **Line 6**, using the ``+`` operator, we have added the objects ``birthday`` and ``party`` together and printed the resulting object (see the ``toString()`` method in the ``Surprise`` class). The ``+`` operator invokes the ``add()`` method of ``Surprise``. However, we also could have written ``birthday.add(party);``, but the whole purpose of implementing the ``CanAdd`` interface is to overload the ``+``. 
 

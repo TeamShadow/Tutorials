@@ -1,16 +1,16 @@
 Polymorphism and Casting
 ------------------------
 
-This brief, but very important, tutorial on **polymorphism** and **casting** touches on a key **Object-Oriented** programming principle. **Polymorphism**, an often confusing term to define, is best understood in terms of an example. 
+This brief, but very important, tutorial on **polymorphism** and **casting** touches on a key **object-oriented** programming principle. **Polymorphism**, a confusing term, is best understood in terms of an example. 
 
-Consider the classes from the :ref:`inheritance tutorial<Inheritance>`. There is a parent class called ``Employee`` and 3 child classes: ``Waiter``, ``Chef``, and ``Manager`` (only the ``Waiter`` implementation is shown, as ``Chef`` and ``Manager`` were given as exercises). All 3 of these child classes will inherit the methods ``clockIn()`` and ``clockOut()`` from ``Employee``. Let’s say we decided to **override** ``clockIn()`` in the child classes and create a method in the driver class called ``work()``. ``work()`` takes in an ``Employee`` object as a parameter and calls the object’s ``clockIn()`` method. Since ``Chef``, ``Manager``, and ``Waiter`` are all children of ``Employee``, you could pass objects of **any** of these classes as parameters legally. 
+Consider the classes from the :ref:`inheritance tutorial<Inheritance>`. There is a parent class called ``Employee`` and three child classes: ``Waiter``, ``Chef``, and ``Manager`` (only the ``Waiter`` implementation is shown, as ``Chef`` and ``Manager`` were given as exercises). All three of these child classes will inherit the methods ``clockIn()`` and ``clockOut()`` from ``Employee``. Let's say we decided to **override** ``clockIn()`` in the child classes and create a method in the driver class called ``work()``. ``work()`` takes in an ``Employee`` object as a parameter and calls the object's ``clockIn()`` method. Since ``Chef``, ``Manager``, and ``Waiter`` are all children of ``Employee``, you could pass objects of **any** of these classes as parameters legally. 
 
-Now, the "same" ``work()`` method calls on children of ``Employee`` give completely different results, as they all have overridden the ``clockIn()`` method . This is the  essence of polymorphism: that many different objects can be passed into the same method yet result in many different behaviors. After all, polymorphism literally means "many forms". 
+Now, the "same" ``work()`` method calls on children of ``Employee`` give completely different results, as they all have overridden the ``clockIn()`` method . This is the  essence of polymorphism: that many different objects can be passed into the same method yet result in many different behaviors. After all, polymorphism literally means "many forms." 
 
 The following example will hopefully solidify your understanding of polymorphism, and lead us into casting. 
 
-Example
-^^^^^^^^
+Polymorphism example
+^^^^^^^^^^^^^^^^^^^^
 
 First, here is our parent class, ``SeaCreature``. 
 
@@ -22,18 +22,18 @@ First, here is our parent class, ``SeaCreature``.
     class tutorials:polymorph@SeaCreature
     {
         get String type; 
-	get String ocean; 
-	
-	public create(String t, String o)
-	{
-	    type = t; 
-	    ocean = o; 
-	}
-	
-	public swim() => ()
-	{
-	    Console.printLine("This " # type # " is swimming!"); 
-	}
+		get String ocean; 
+		
+		public create(String t, String o)
+		{
+			type = t; 
+			ocean = o; 
+		}
+		
+		public swim() => ()
+		{
+			Console.printLine("This " # type # " is swimming!"); 
+		}
     }
 
 The following are two child classses of ``SeaCreature``. 
@@ -46,15 +46,15 @@ The following are two child classses of ``SeaCreature``.
 
     class tutorials:polymorph@Dolphin is SeaCreature
     {
-	public create(String t, String o)
-	{
-	    super(t,o); 
-	}
-	
-	public swim() => ()
-	{
-	    Console.printLine("This " # this->type # " jumps above the waves!"); 
-	}
+		public create(String t, String o)
+		{
+			super(t,o); 
+		}
+		
+		public swim() => ()
+		{
+			Console.printLine("This " # this->type # " jumps above the waves!"); 
+		}
     }
 
  
@@ -101,13 +101,13 @@ Before we delve into **polymorphism**, make sure to read through the classes abo
 
 Static vs Dynamic Type
 ^^^^^^^^^^^^^^^^^^^^^^
-In the **driver program**, the **static type** of each object is ``SeaCreature``. An object’s static type (seen on the left side of the equals sign) is the type that is checked at **compile time**. 
+In the **driver program**, the **static type** of each object is ``SeaCreature``. An object's static type (seen on the left side of the equals sign) is the type that is checked at **compile time**. 
 
-When would you get a compile error? Let’s say that ``Dolphin`` has a method called ``dive()`` that ``SeaCreature`` does not, and we made the method call ``dolphin.dive()``. **This code would not compile** because the static type of ``dolphin`` is ``SeaCreature``, and ``SeaCreature`` does not have a ``dive()`` method. Even though **dynamic type** of ``dolphin`` is   ``Dolphin`` (has the ``dive()`` method), it does not matter because **static type** is what is checked at compile time. An object’s **dynamic type**, seen on the right side of the equals sign, is what is checked at **run time**. 
+When would you get a compile error? Let's say that ``Dolphin`` has a method called ``dive()`` that ``SeaCreature`` does not, and we made the method call ``dolphin.dive()``. **This code would not compile** because the static type of ``dolphin`` is ``SeaCreature``, and ``SeaCreature`` does not have a ``dive()`` method. Even though **dynamic type** of ``dolphin`` is   ``Dolphin`` (has the ``dive()`` method), it does not matter because **static type** is what is checked at compile time. An object's **dynamic type**, seen on the right side of the equals sign, is what is checked at **run time**. 
 
 .. note:: The error message would be: ``Undefined symbol: Method dive not defined in this context``
 
-This concept of **dynamic type** leads us into the next point. Look at **Lines 4-8** in the driver program. We call ``swim()`` on both ``dolphin`` and ``turtle``. You may be asking yourself, how do we know which ``swim()`` method will be executed -- the one in ``SeaCreature`` or the overridden one in ``Dolphin``/``Turtle``? Although the static type determines if the program will compile, the object’s dynamic type determines which method will run. For ``dolphin``, its dynamic type is ``Dolphin``, so the ``swim()`` method in that class will run. The same goes for ``turtle``; its dynamic type is ``Turtle``, so the swim method in ``Turtle`` will run, as seen in the console output. This is a prime example of **polymorphism** in action. Both ``turtle`` and ``dolphin`` share the same type, but perform different actions when ``swim()`` is called on them. 
+This concept of **dynamic type** leads us into the next point. Look at **Lines 4-8** in the driver program. We call ``swim()`` on both ``dolphin`` and ``turtle``. You may be asking yourself, how do we know which ``swim()`` method will be executed -- the one in ``SeaCreature`` or the overridden one in ``Dolphin``/``Turtle``? Although the static type determines if the program will compile, the object's dynamic type determines which method will run. For ``dolphin``, its dynamic type is ``Dolphin``, so the ``swim()`` method in that class will run. The same goes for ``turtle``; its dynamic type is ``Turtle``, so the swim method in ``Turtle`` will run, as seen in the console output. This is a prime example of **polymorphism** in action. Both ``turtle`` and ``dolphin`` share the same type, but perform different actions when ``swim()`` is called on them. 
 
 
 Casting
@@ -163,7 +163,7 @@ Lastly, as a final note on casting, since ``Object`` is the root class for all `
     Object o = cast<Object>(s);
 
 Primitive Casting
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 Although we have discussed casting in terms of objects so far,  it also possible to cast  **primitive types** as well. 
 
@@ -183,7 +183,7 @@ For example, consider the short segment of code below:
 
 **Lines 2 and 4** both print  8.0 to the console. However, you may be wondering what the difference is, then, between how ``w`` and ``x`` were initialized. ``w`` is initialized with an **explicit cast** from a ``int`` to a ``double``. On the other hand, ``x`` is an example of an **implicit cast**; 8 becomes 8.0 when stored in a ``double``. 
 
-Now, let’s look another example: 
+Now, let's look another example: 
 
 .. code-block:: shadow 
     :linenos: 
@@ -220,12 +220,28 @@ First, look at the two examples below:
     Console.printLine(anotherNum2); 
 
 
-In the first example, we are casting the ``code`` '7' into an  ``int`` called ``num``. You might expect that ``num`` now stores the *numeric* value 7, but this is not the case. It actually holds 55. The **character** 7, when converted to a number is 55. An `ASCII Table <http://www.asciitable.com/>`_ can be used to make these conversions. 
+In the first example, we are casting the ``code`` '7' into an  ``int`` called ``num``. You might expect that ``num`` now stores the *numeric* value 7, but this is not the case. It actually holds 55. The **character** ``'7'``, when converted to a number is 55. Programmers rarely need to know the numerical values of characters, but it is possible to look them up in `Unicode reference information <https://en.wikipedia.org/wiki/List_of_Unicode_characters>`_.
 
-The same applies for converting an ``int`` to a ``code`` like in the second example. The character corresponding to the numeric value 97 is ``a``, and this is what is printed to the console. This is why it is important to be careful and intentional when casting between primitive -- and any -- types. 
+The same applies when converting an ``int`` to a ``code`` as in the second example. The character corresponding to the numeric value 97 is ``a``, and this is what is printed to the console. This is why it is important to be careful and intentional when casting between primitive -- and any -- types. 
 
+.. note:: You may **not** cast a ``String`` to a ``code`` or vice versa.
 
-.. note:: You may **not** cast a ``String`` to a ``code`` and vice versa. 
+It can be useful to remember that the numerical values of the uppercase Latin letters ``'A'`` through ``'Z'`` are sequentially numbered.  Thus, the value of ``'B'`` is larger than the value of ``'A'`` by exactly 1, and the value of ``'C'`` is larger than the value of ``'A'`` by exactly 2.  Similarly, the lowercase Latin characters ``'a'`` through ``'z'`` are also sequentially numbered (and are, perhaps strangely, larger than the values of the uppercase Latin letters).  Finally, the numerical values of the digits ``'0'`` through ``'9'`` are also sequentially numbered.  Using ``if`` statements, a programmer can employ this knowledge to see if a particular character belongs to one of these three categories.
+
+.. code-block:: shadow
+
+    public printCharacterType(code character)
+	{
+		if(character >= 'A' and character <= 'Z')
+			Console.printLine("Uppercase"); 
+		else if(character >= 'a' and character <= 'z')
+			Console.printLine("Lowercase"); 
+		else if(character >= '0' and character <= '1')
+			Console.printLine("Digit"); 
+		else
+			Console.printLine("Something else"); 
+	}
+
 
 
     

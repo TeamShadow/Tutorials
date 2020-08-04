@@ -9,7 +9,7 @@ This page introduces and analyzes **arrays** in Shadow. An array is a very usefu
 Each "box"  represents the location of the data being stored in the array. The numbers demonstrate how arrays are **indexed**. *It is important to remember that the first position is indexed at 0, NOT 1.*  In the dog breed example, each numbered location would correspond to a different dog breed (e.g. At location 0, it could hold "Beagle"). 
 
 Initializing and Displaying an Array
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 There are multiple ways to **declare** and **fill** an array in Shadow.  If you would like to input literal values, or variables of the same type as the array, the declaration is as follows: 
 
 .. code-block:: shadow 
@@ -40,7 +40,7 @@ Finally, **Line 4** shows an easy way to nicely format and print out an array, a
 
 **Other Methods of Initialization** 
 
-Sometimes, as programmers, we are not able to or do not want to declare and fill an array all at once. Instead, we can specify the array’s **size**: 
+Sometimes, as programmers, we are not able to or do not want to declare and fill an array all at once. Instead, we can specify the array's **size**: 
 
 For example, 
 
@@ -48,7 +48,7 @@ For example,
 
     int[] golfScores = int:create[5]; 
 	
-Here, we have created an array called ``golfScores`` that can hold 5 values. *Once an array’s size is set, it cannot change.* Although we haven’t filled the array with golf scores yet, the array is **not empty.** Each index is given the same default value. The default values of frequently used types are listed below: 
+Here, we have created an array called ``golfScores`` that can hold 5 values. *Once an array's size is set, it cannot change.* Although we haven't filled the array with golf scores yet, the array is **not empty.** Each index is given the same default value. The default values of frequently used types are listed below: 
 
 * ``int``: ``0``
 * ``double``: ``0.0``
@@ -59,7 +59,7 @@ Here, we have created an array called ``golfScores`` that can hold 5 values. *On
 *A Brief Side Note: At this point, you may be wondering why we used the reserved word* ``create`` *when initializing the array. This is because in Shadow, arrays are designed to be "object-like." Although we will be covering objects later in the tutorials, all you need to know for now is the syntax.* 
 
 
-Thus, the array ``golfScores`` holds five 0’s. Now you may ask, how do we input the golf scores? Although you cannot change the size of the array once it is created, you can change/update the values of individual elements. The following examples illustrate two possible ways to do so: 
+Thus, the array ``golfScores`` holds five 0's. Now you may ask, how do we input the golf scores? Although you cannot change the size of the array once it is created, you can change/update the values of individual elements. The following examples illustrate two possible ways to do so: 
 
 .. code-block:: shadow 
     :linenos:   
@@ -99,7 +99,7 @@ Thus, the array ``golfScores`` holds five 0’s. Now you may ask, how do we inpu
     golfScores[3] = 108; 
     golfScores[4] = 110; 
 	
-Both of these examples achieve the desired result of putting the golf scores into the ``int`` array. The most important thing to take away is how we accessed specific elements of the array. As mentioned before, an array’s first element is indexed at zero. So, if you wanted to put your score as the first element, you would say ``golfScores[0] = 102;`` (or ``golfScores[index]`` when index equals 0 for the ``for`` loop example). **If you ever need to access individual elements of an array, this is the correct syntax.** e.g. ``var worstScore = golfScores[4];`` Now, ``worstScore`` holds the value 110. 
+Both of these examples achieve the desired result of putting the golf scores into the ``int`` array. The most important thing to take away is how we accessed specific elements of the array. As mentioned before, an array's first element is indexed at zero. So, if you wanted to put your score as the first element, you would say ``golfScores[0] = 102;`` (or ``golfScores[index]`` when index equals 0 for the ``for`` loop example). **If you ever need to access individual elements of an array, this is the correct syntax.** e.g. ``var worstScore = golfScores[4];`` Now, ``worstScore`` holds the value 110. 
 
 ``size``
 ^^^^^^^^
@@ -108,7 +108,7 @@ Suppose you have an array called ``randomness`` and you want to implement a ``fo
 
 ``var length = randomness->size;``	
 
-Let’s say ``randomness`` has 4 elements. Now the variable ``length`` is equal to 4. 
+Let's say ``randomness`` has 4 elements. Now the variable ``length`` is equal to 4. 
 
 ``default``
 ^^^^^^^^^^^
@@ -141,7 +141,7 @@ As seen in **Line 1** and the console output below, the addition of ``:default("
 
 The ``Array`` class has a useful keyword called ``copy``, which *completely* copies the contents of one array into another array. This is called a **deep copy**. In addition to arrays, the ``copy`` keyword can be used with any object in order to create a deep copy of the object, including all of its members. ``copy`` will be discussed in more detail in the :ref:`Properties of Classes and Objects<Properties of Classes and Objects>` tutorial. 
 
-Using the example from the ``default`` section above, where ``a`` is a ``String`` array with size 5, let’s examine how ``copy`` works. 
+Using the example from the ``default`` section above, where ``a`` is a ``String`` array with size 5, let's examine how ``copy`` works. 
 
 
 .. code-block:: shadow 
@@ -170,7 +170,7 @@ Below is the console output:
     a[0]: Serendipity
     b[0]: Oops
 
-The expression ``copy(a)``  in **Line 1** is the proper syntax used in order to copy everything in ``a`` to store in ``b``. However, it is important to note that when we change the value of the first element in ``b`` to “Oops” (**Line 7**), **it does not change the first element in** ``a``.  It is still “Serendipity”. The arrays do not point to the same reference. 
+The expression ``copy(a)``  in **Line 1** is the proper syntax used in order to copy everything in ``a`` to store in ``b``. However, it is important to note that when we change the value of the first element in ``b`` to "Oops" (**Line 7**), **it does not change the first element in** ``a``.  It is still "Serendipity". The arrays do not point to the same reference. 
 
 
 
@@ -203,7 +203,7 @@ The array we are making a subarray from, ``a``, has three elements. Using ``suba
 
 
 ``index()``
-^^^^^^^^^
+^^^^^^^^^^^
 
 ``index()`` is a useful method for accessing/changing the elements in an array. Additionally, ``index()`` is an **overloaded** method, in this case meaning that it has two different method signatures. The first way you can use ``index()`` is to access/return an element of an array at a specific index. The only parameter is the desired index. The second way to use ``index()`` is to change the value of an element at a specific index. The parameters are the index and the new value. See the short program below for an example implementation. 
 
@@ -268,7 +268,7 @@ This is the error statement displayed on the console:
 
     shadow:standard@IndexOutOfBoundsException: Index 4
 
-Why is this exception thrown? The array ``outOfBounds`` is created correctly and filled without error. However, notice in **Line 6** that we try to add a 4th element to the array by stating ``outOfBounds[4] = 4;`` This will cause an ``IndexOutOfBounds`` exception to be thrown and the program to terminate with an error (displayed on the console) because there is no index of 4 in the array. Again, *once an array’s size is declared, it cannot change.* It is especially important to pay attention to indices of arrays when writing the conditions for a loop (e.g. a ``for`` loop).  
+Why is this exception thrown? The array ``outOfBounds`` is created correctly and filled without error. However, notice in **Line 6** that we try to add a 4th element to the array by stating ``outOfBounds[4] = 4;`` This will cause an ``IndexOutOfBounds`` exception to be thrown and the program to terminate with an error (displayed on the console) because there is no index of 4 in the array. Again, *once an array's size is declared, it cannot change.* It is especially important to pay attention to indices of arrays when writing the conditions for a loop (e.g. a ``for`` loop).  
 
 
 2-D Arrays
@@ -285,10 +285,10 @@ Now, we will move into a discussion on 2-Dimensional arrays. A 2-D array is an a
 |  2,0    |    2,1  |  2,2    |  2,3    |  2,4    |
 +---------+---------+---------+---------+---------+
 
-In the ordered pairs above, the first number represents the **row** number, and the second number represent the **column** number. When referring to elements of a 2-D array, the row index also comes first. But first, let’s discuss how to declare and initialize a 2-D array. 
+In the ordered pairs above, the first number represents the **row** number, and the second number represent the **column** number. When referring to elements of a 2-D array, the row index also comes first. But first, let's discuss how to declare and initialize a 2-D array. 
 
 
-``String[][] dimensions = {{"don’t","stop","believin"}, {"livin","lonely","world"}, {"small","town", "girl"}};``
+``String[][] dimensions = {{"don't","stop","believin"}, {"livin","lonely","world"}, {"small","town", "girl"}};``
 
 ``int[][] temp = int:create[4][5];``
 			
@@ -354,7 +354,7 @@ Console:
 
 The key statement in this block of code is **Line 3**: ``foreach ( String value in a)``. This means that the program will trace through every single element in the array, starting at the first index. The statement inside the loop will be executed for each element. 
 
-What if my array is of a different type, and a different name than the example? The answer is simple: replace ``String`` with your array’s type, and ``a`` with your array’s name. 
+What if my array is of a different type, and a different name than the example? The answer is simple: replace ``String`` with your array's type, and ``a`` with your array's name. 
 
 
 

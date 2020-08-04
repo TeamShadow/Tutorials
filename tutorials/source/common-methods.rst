@@ -1,7 +1,7 @@
-``String`` and ``Int`` Methods
--------------------------------
+``String`` and Numerical Methods
+--------------------------------
 
-This brief tutorial will cover some commonly used methods of the ``String`` and ``Int`` class. Each explanation is followed by a coded example. However, this is not an all-inclusive list. To see a complete list of all ``String`` and ``Int`` methods, visit the `Shadow API <http://shadow-language.org/reference/>`_.
+This brief tutorial will cover some commonly used methods of the ``String`` and  numerical classes, focusing on the ``int`` class. Each explanation is followed by a coded example. Note that these examples are not exhaustive. To see a complete list of all ``String`` and numerical methods, visit the `Shadow API <http://shadow-language.org/reference/>`__.
  
 
 Numeric Conversions
@@ -89,7 +89,7 @@ The ``isEmpty()`` method for returns ``true`` if the ``String`` the method being
 Other ``String`` Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following is a list of the remaining "built-in" ``String`` methods. For more information, here is the link to `Shadow API <http://shadow-language.org/documentation/shadow/standard/String.html>`_. 
+The following is a list of the remaining built-in ``String`` methods. For more information, here is the link to ```String`` API <http://shadow-language.org/documentation/shadow/standard/String.html>`__. 
 
 * ``concatenate(nullable Object other)``
 
@@ -133,7 +133,7 @@ Within the ``int`` class in Shadow, there are many methods that can be useful fo
 More Advanced Mathematical Operations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Also within the ``int`` class, there are many useful methods to perform more advanced mathematical calculations. Although only a few are discussed here, once again, the rest can be found on the `Shadow API <http://shadow-language.org/reference/>`_. 
+Also within the ``int`` class, there are many useful methods to perform more advanced mathematical calculations. Although only a few are discussed here, once again, the rest can be found on the `Shadow API <http://shadow-language.org/documentation/>`__. 
 
 The method ``abs()`` takes in an ``int`` as a parameter, and returns the non-negative version of that ``int`` (i.e. a ``uint``). ``logBase10()`` does exactly what its name implies: it takes the logarithm to the base 10 of whatever number it is called on. In addition, ``min()`` and ``max()`` take one ``int`` as a parameter each and compare it to the ``int`` the method was called on, returning the minimum and maximum of the two numbers, respectively.  ``pow()`` raises the current value to an exponent, which is the single parameter for the method, and returns a ``double``. Lastly, the ``sin()`` method takes the sine of the current value (returning a ``double``). The ``cos()`` method works in the same way, except that it takes the cosine of the current value.  The current value is assumed to be in *radians*. 
 
@@ -158,7 +158,7 @@ The method ``abs()`` takes in an ``int`` as a parameter, and returns the non-neg
 Other ``int`` Methods
 ^^^^^^^^^^^^^^^^^^^^^
 
-Although we have touched on a few ``int`` methods, they only represent a handful of them. A complete list can be found on the `Shadow API <http://shadow-language.org/documentation/shadow/standard/int.html>`_. It is also important to note that there are different versions of some of the methods we discussed above, like ``add()`` (e.g. it can also return a ``double``). 
+Although we have touched on a few ``int`` methods, they only represent a handful of them. A complete list can be found on the `documentation page for ``int`` http://shadow-language.org/documentation/shadow/standard/int.html>`_. It is also important to note that there are different versions of some of the methods we discussed above, like ``add()`` (e.g., it can also return a ``double``). 
 
 * ``addWithOverflow(int other)``
 * ``bitAnd(int other)``, can also take a ``long``
@@ -185,7 +185,7 @@ Although we have touched on a few ``int`` methods, they only represent a handful
 * ``toDouble()`` (same for ``float``, ``int``, ``long``, ``short``, ``String``, ``ubyte``, ``uint``, ``ulong``, ``ushort``, and ``unsigned``)
 * ``trailingZeroes()``
 
-Lastly, the ``double`` class has methods that can be called on ``double`` values. They can be found `here <http://shadow-language.org/documentation/shadow/standard/double.html>`_. The same can be said for the ``code``, ``long``, ``boolean``, etc. classes. In order to explore all of these methods and their capabilities, visit the Shadow API, `standard package <http://shadow-language.org/documentation/shadow/standard/$package-summary.html>`_, and select the desired class to see its methods. 
+Lastly, the ``double`` class has methods that can be called on ``double`` values. They can be found on the ` documentation page for ``double`` <http://shadow-language.org/documentation/shadow/standard/double.html>`_. The same is true for all of the other primitive types such as ``code``, ``long``, ``boolean``, and so on. In order to explore the entire Shadow standard library, visit the `documentation page for the ``standard`` package <http://shadow-language.org/documentation/shadow/standard/$package-summary.html>`_, and select the desired class or interface to see its methods and properties. 
 
 		
 

@@ -22,7 +22,7 @@ You could then easily write a class called ``Employee`` and give it member varia
 
 You *could* forgo the ``Employee`` class completely and write separate classes: ``Waiter`` , ``Manager`` , and ``Chef`` . Each class would still contain all the abilities of a general employee, but with some additions. While this sounds like a logical solution, it is not very efficient because a lot of code will be repeated between the classes. What if there was a way for  the ``Waiter``, ``Manager``, and ``Chef`` classes to **extend** an ``Employee`` class, just as interfaces are implemented? That way, we would not have to rewrite methods multiple times. In **Shadow**, **this is possible** via *inheritance*. 
 
-Before we go over how to implement this example, let’s define some basic terms in regards to inheritance. 
+Before we go over how to implement this example, let's define some basic terms in regards to inheritance. 
 
 * **Superclass** : A superclass, or parent class, is the class that others extend from. In this example, the superclass is ``Employee``. 
 
@@ -35,8 +35,8 @@ Before we go over how to implement this example, let’s define some basic terms
 **That being said, it is extremely important to note that a given class can only extend one other class**. In basic terms, this means that a child class **may only have one parent** (e.g. A ``Waiter`` cannot extend ``Employee`` **and** a ``Student`` class).  However, this does not mean that a parent class cannot extend another class (e.g. ``Employee`` *could* extend a class called ``Person``). In fact, the root class of all objects is ``Object``. 
 
 
-Implementation
-^^^^^^^^^^^^^^
+Extending classes
+^^^^^^^^^^^^^^^^^
 
 In order to understand the syntax and implementation of extending classes, there are two example classes provided below: ``Employee`` and ``Waiter``. Glance over them first, and then we will break them down. 
 
@@ -256,7 +256,7 @@ It is useful to note that in addition to constructors, ``super()`` can also be u
 The ``locked`` Keyword
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Another feature of Shadow is the ``locked`` keyword. When you declare a method to be ``locked``, it means that the **children of the class cannot override the method**. In other words, you don’t want the implementation of a certain method to change. Declaring a method as ``locked`` can help increase the efficiency of a program, even if just slightly. 
+Another feature of Shadow is the ``locked`` keyword. When you declare a method to be ``locked``, it means that the **children of the class cannot override the method**. In other words, you don't want the implementation of a certain method to change. Declaring a method as ``locked`` can help increase the efficiency of a program, even if just slightly. 
 
 The method header of a ``locked`` method is as follows: 
 

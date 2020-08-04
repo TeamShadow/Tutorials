@@ -90,7 +90,7 @@ While it appears that a Shadow variable can be declared of type ``String``, you 
 
 For example, 
 
-Let’s use our ``age`` variable again (``int age = 20;``). If you had a birthday and wanted to update your age, you could write the following line of code: 
+Let's use our ``age`` variable again (``int age = 20;``). If you had a birthday and wanted to update your age, you could write the following line of code: 
 
 .. code-block:: shadow
 
@@ -110,7 +110,7 @@ However, now consider the following ``String`` variable.
 
     String name = "Olivia"; // note: you must put the characters in quotes
 
-Let’s say you wanted to change your name to "Stephanie" :
+Let's say you wanted to change your name to "Stephanie" :
 
 .. code-block:: shadow 
 
@@ -195,9 +195,9 @@ There are a few more key naming conventions for Shadow.
     Console.printLine("I love eating at " # restaurantName # "."); 
     Console.printLine("I would like " # quantity # " " # meal # "(s).");
     
-As explained in a previous section "Printing text", ``Console.printLine()`` is used to display text on the console. Literal text goes in " ", but you are also able to print variable values as well. For example, as seen in the above segment of code, say you want to output ``I love eating at Taco Tuesday.`` You could easily just type out "Taco Tuesday" in between the " ". However, you could also use the variable ``restaurantName`` and print its literal value, which is also "Taco Tuesday". To do so, use the **octothorpe** (``#``) on either side of the variable’s name outside of the " " (see above).  Thus, in place of ``# restaurantName #``, ``Taco Tuesday`` will be printed. 
+As explained in a previous section "Printing text", ``Console.printLine()`` is used to display text on the console. Literal text goes in " ", but you are also able to print variable values as well. For example, as seen in the above segment of code, say you want to output ``I love eating at Taco Tuesday.`` You could easily just type out "Taco Tuesday" in between the " ". However, you could also use the variable ``restaurantName`` and print its literal value, which is also "Taco Tuesday". To do so, use the **octothorpe** (``#``) on either side of the variable's name outside of the " " (see above).  Thus, in place of ``# restaurantName #``, ``Taco Tuesday`` will be printed. 
 
-Since these two methods result in the same output, what is the advantage of using the ``#``? Let’s say in the line after you declare ``restaurantName`` you decide you want to eat at a different restaurant and write 
+Since these two methods result in the same output, what is the advantage of using the ``#``? Let's say in the line after you declare ``restaurantName`` you decide you want to eat at a different restaurant and write 
 
 .. code-block:: shadow
 

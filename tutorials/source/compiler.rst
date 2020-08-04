@@ -86,25 +86,28 @@ The ``<system>`` tag is used to explicitly specify that the Shadow standard libr
 
 **Configuration for Microsoft Windows**
 
-The configuration file below describes the platform attributes for compiling on (and for) Microsoft Windows. Because MinGW does not support 64-bit compilation, it is important to prevent the compiler from attempting to do so.
+The configuration file below describes the platform attributes for compiling on (and for) Microsoft Windows. 
 
-.. code-block:: shadow
+.. code-block:: xml
+
     <?xml version="1.0" encoding="UTF-8"?>
-    <shadow os="Windows" arch="32" target="x86-unknown-mingw32">
+    <shadow os="Windows" arch="64" target="x86_64-pc-windows-msvc">
+		<system>.</system>
+		<import>.</import>
     </shadow>
 
 **LLVM Target Triples**
 
 During compilation, the Shadow compiler uses a third party tool, the LLVM compiler, to generate the final, platform-specific machine code of an executable. Because the LLVM compiler is an external tool, it requires its own set of platform information to generate valid machine code. During compilation, the contents of the ``target`` attribute (either taken from a configuration file or automatically determined) are handed directly to the LLVM compiler. Thus, the attribute must follow the formatting of an LLVM target "triple". The following information provides some explanation of how to format these triples:
 
-The canonical form of LLVM target triple is either ``Architecture-Vendor-OperatingSystem or Architecture-Vendor-OperatingSystem-Environment.``
+The canonical form of LLVM target triple is either ``Architecture-Vendor-OperatingSystem`` or ``Architecture-Vendor-OperatingSystem-Environment.``
 
-	* Architecture: ``arm, mips, sparc, x86, x86_64``, etc.
-	* Vendor: ``apple, pc, nvidia``, etc.
-	* Operating System: ``freebsd, ios, linux, macosx, win32, windows``, etc.
-	* Environment: ``gnu, android, msvc``, etc.
+	* Architecture: ``arm``, ``mips``, ``sparc``, ``x86``, ``x86_64``, etc.
+	* Vendor: ``apple``, ``pc``, ``nvidia``, etc.
+	* Operating System: ``freebsd``, ``ios``, ``linux``, ``macosx``, ``win32``, ``windows``, etc.
+	* Environment: ``gnu``, ``android``, ``msvc``, etc.
 
-*Note: unknown is a valid entry in any of these fields. The most critical fields to fill in are those for architecture and operating system.*
+*Note: ``unknown`` is a valid entry in any of these fields. The most critical fields to fill in are those for architecture and operating system.*
 
 Many additional, arguably more obscure options exist for each field. See the beginning of the **header file** from LLVM's triple-handling code for a more complete listing. Unfortunately, the document seems to provide incomplete information (for example, the ``mingw32`` operating system attribute is not listed).
 

@@ -67,8 +67,9 @@ pygments_style = 'colorful'
 
 
 def setup(app):
-    app.add_lexer('shadow', ShadowLexer)
+	app.add_lexer('shadow', ShadowLexer)
+	app.add_lexer('Shadow', ShadowLexer)
 
-smartquotes = False
+smartquotes = True
 
 extensions = ['sphinx.ext.autosectionlabel']

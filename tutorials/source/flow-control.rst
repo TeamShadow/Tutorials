@@ -113,7 +113,7 @@ Which ride should Surya go on?
 
 Why should Surya go on Madness Mountain? Let's trace through the code. 
 
-**Lines 8-11** establish the "rules" for determining what ride he should go on. We know that he prefers rides that go 100 mph, don’t have loops, and have heights. Control then is passed to  **Line 13**. This expression evaluates to ``false`` because ``scaredOfHeights`` is ``false``. This means that the statement inside the first ``if`` is skipped, and execution is passed to **Line 17**. Since his ideal ride speed is not greater than or equal to 110 mph, the expression evaluates to ``false`` and control is passed to **Line 21.** Neither statement is ``true``, so the last ``else if`` evaluates to ``false``. Therefore, the statement inside the final ``else`` is printed (there is no condition), and Surya should ride Madness Mountain. 
+**Lines 8-11** establish the "rules" for determining what ride he should go on. We know that he prefers rides that go 100 mph, don't have loops, and have heights. Control then is passed to  **Line 13**. This expression evaluates to ``false`` because ``scaredOfHeights`` is ``false``. This means that the statement inside the first ``if`` is skipped, and execution is passed to **Line 17**. Since his ideal ride speed is not greater than or equal to 110 mph, the expression evaluates to ``false`` and control is passed to **Line 21.** Neither statement is ``true``, so the last ``else if`` evaluates to ``false``. Therefore, the statement inside the final ``else`` is printed (there is no condition), and Surya should ride Madness Mountain. 
 
 It is important to note that if one of the earlier ``else if`` statements had evaluated to ``true``, the rest of the ``else if`` and final ``else`` would NOT be evaluated, and control would be passed to the the next line after the final ``else``. 
 
@@ -150,7 +150,7 @@ The first type of loop discussed is the ``while`` loop, which repeats code based
 
 Although not defined above, a key concept for ``while`` loops, and really any loop, is the **control variable or loop counter**. This variable controls how many times the loop will execute and prevents **infinite looping**. 
 
-For example, let’s examine this block of code: 
+For example, let's examine this block of code: 
 
 
 .. code-block:: shadow
@@ -198,7 +198,7 @@ Here is the output:
 
     ^$^$^$^$^$ 
 
-If you count, you will see that there are 5 of each character! Before we move on, let’s analyze some *key elements* of this block of code. The first step is seen in **Line 2**, where the loop counter, ``count``,  is declared. It is important to note why we chose to initialize ``count`` to 1 instead of 0. A lot of times it is left up to simply programmer preference, but sometimes the choice of an initial value can make a program significantly less (or more) complicated. In this case, we started ``count`` at 1 because we are told to assume that the first character is odd. We could have made it work by starting ``count`` at 0, but there would need to be an extra step because ``0 % 2 == 0`` (which prints the even-number character). However, regardless of what value you set the counter to, **counter variables must always be initialized**.
+If you count, you will see that there are 5 of each character! Before we move on, let's analyze some *key elements* of this block of code. The first step is seen in **Line 2**, where the loop counter, ``count``,  is declared. It is important to note why we chose to initialize ``count`` to 1 instead of 0. A lot of times it is left up to simply programmer preference, but sometimes the choice of an initial value can make a program significantly less (or more) complicated. In this case, we started ``count`` at 1 because we are told to assume that the first character is odd. We could have made it work by starting ``count`` at 0, but there would need to be an extra step because ``0 % 2 == 0`` (which prints the even-number character). However, regardless of what value you set the counter to, **counter variables must always be initialized**.
 
 **Line 5** is the boolean expression that drives the ``while`` loop.  As long as ``count`` is less than or equal to 10, control flows to the body of the loop, and this action is repeated until ``count`` is greater than 10. It is also important to note what we used ``<=`` instead of ``<``. If we had used ``<``, when ``count`` gets to 10, ``10 < 10`` evaluates to false, and we end up with one less character than needed. However, if ``count`` had started at 0, ``count < 10`` would be the appropriate expression. 
 
@@ -321,7 +321,7 @@ This code prints out "Hey you! Wake up!!" 5 separate times.
 
 ``int i = 1;``
 
-The first thing you should do when writing a ``for`` loop is declare and initialize a **counter variable**. This variable is used to dictate the number of times the program will run through the loop.  There is no requirement for the variable’s name, but typically something short is chosen, like ``i``. Usually, the variable is declared and initialized inside the loop, as seen above. 
+The first thing you should do when writing a ``for`` loop is declare and initialize a **counter variable**. This variable is used to dictate the number of times the program will run through the loop.  There is no requirement for the variable's name, but typically something short is chosen, like ``i``. Usually, the variable is declared and initialized inside the loop, as seen above. 
 
 However, ``i`` does not *have* to be initialized inside the ``for`` loop. It could look something like this instead: 
 
@@ -392,13 +392,13 @@ The ouput is as follows:
     @@@@@@@@@
 
 
-There are two important aspects of the nested ``for`` loop: the **outer loop** and the **inner loop**. Let’s trace through the example to see how control flows between the outer and inner loops. 
+There are two important aspects of the nested ``for`` loop: the **outer loop** and the **inner loop**. Let's trace through the example to see how control flows between the outer and inner loops. 
 
 The outer loop is the "driver" of the nested ``for`` loop. For example, the goal of the block of code above is to output a 5 ``@`` tall right triangle. Since we will need five separate lines of varying length to do so, the outer loop needs to run a total of 5 times. Thus, the statement on **Line 1** ensures that will happen. 
 
-But how do we get the different numbers of ``@`` symbols on each of the 5 lines? That is controlled by the **inner** loop. Initially, the outer loop counter variable, ``i``,  is  equal to 5. Before ``i`` is decremented by 1, control is passed to the inner loop. ``j`` is initialized to 5, so the condition that ``j >= i;``  is ``true``. Then a ``@`` is printed and ``j`` is decremented by 1, so ``j``` is no longer greater than or equal to ``i``. Once the **inner loop** has completely executed, then control flows to the statement outside the inner loop -- the empty ``Console.printLine()`` that starts the next line of ``@``’s. (If we had forgotten **Line 7**, all the ``@``’s would have been printed on the same line). 
+But how do we get the different numbers of ``@`` symbols on each of the 5 lines? That is controlled by the **inner** loop. Initially, the outer loop counter variable, ``i``,  is  equal to 5. Before ``i`` is decremented by 1, control is passed to the inner loop. ``j`` is initialized to 5, so the condition that ``j >= i;``  is ``true``. Then a ``@`` is printed and ``j`` is decremented by 1, so ``j``` is no longer greater than or equal to ``i``. Once the **inner loop** has completely executed, then control flows to the statement outside the inner loop -- the empty ``Console.printLine()`` that starts the next line of ``@``'s. (If we had forgotten **Line 7**, all the ``@``'s would have been printed on the same line). 
 
-Now, control flows back the **outer loop**, and ``i`` is decreased by one (so now ``i`` equals 4). It is important to note that when the inner loop is executed again, it is in essence "reset", so ``j`` starts as equal to 5 and two ``*``’s will be printed before ``i >= j`` becomes ``false``. This process continues until the fifth line of 5 ``*``’s is printed and ``i`` becomes 0, which causes the program to exit the outer loop. The triangle is now complete! 
+Now, control flows back the **outer loop**, and ``i`` is decreased by one (so now ``i`` equals 4). It is important to note that when the inner loop is executed again, it is in essence "reset", so ``j`` starts as equal to 5 and two ``*``'s will be printed before ``i >= j`` becomes ``false``. This process continues until the fifth line of 5 ``*``'s is printed and ``i`` becomes 0, which causes the program to exit the outer loop. The triangle is now complete! 
 
 .. _switch: 
 
@@ -470,7 +470,7 @@ Below are some important takeaways for ``switch`` statements.
 
 Two statements that can alter the flow of control in a Shadow program are ``break`` and ``continue``. These statements can be useful to either exit a loop or skip statements in the body of the loop. 
 
-First, let’s discuss ``break``. When a program reaches a break statement, it will immediately terminate the current loop, and control will flow to the next statement outside of the loop. For example, see the short block of code below: 
+First, let's discuss ``break``. When a program reaches a break statement, it will immediately terminate the current loop, and control will flow to the next statement outside of the loop. For example, see the short block of code below: 
 
 .. code-block:: shadow
     :linenos: 

@@ -24,8 +24,8 @@ By convention, interface names usually begin with ``Can`` and then some word(s) 
 
 However, for some interfaces that have many abilities (or methods), it does not make sense to use ``Can``. The ``List`` interface, which will be covered in a later tutorial, is a perfect example of this. It has numerous methods, so naming it something like ``CanDoListyThings`` would not be super clear. 
 
-Implementation
-^^^^^^^^^^^^^^
+Implementing interfaces
+^^^^^^^^^^^^^^^^^^^^^^^
 At this point you are probably wondering *how* to implement an interface. Take a look at the two classes below. 
 
 First, is the ``Bermuda`` class: 
@@ -76,7 +76,7 @@ Second, is the ``Madagascar`` class:
     }
 
 
-First, let’s examine **Line 3** of both classes. As you can see, ``class ClassName`` is followed by ``is CanVacation`` in each class header. The keyword ``is`` tells the program that the class **implements** the following interface -- in this case, ``CanVacation``. What does this mean for the ``Bermuda`` and ``Madagascar`` classes? They must provide implementation for **all** methods in the interface ``CanVacation``, or else you will get a compile error. 
+First, let's examine **Line 3** of both classes. As you can see, ``class ClassName`` is followed by ``is CanVacation`` in each class header. The keyword ``is`` tells the program that the class **implements** the following interface -- in this case, ``CanVacation``. What does this mean for the ``Bermuda`` and ``Madagascar`` classes? They must provide implementation for **all** methods in the interface ``CanVacation``, or else you will get a compile error. 
 
 Examine **Lines 5-9** in both classes to see how the implementation works. First and foremost, the method header must *exactly* match the header in the interface, with one exception. Although in an interface each method is automatically marked as ``public``, you will explicitly need to include the keyword ``public`` in the class method headers (and if a method is marked ``readonly`` in the interface, you must also include it in the class method header). Lastly, there are no restrictions to what is included in the method body, but make sure that if the method has a return type, you have a correct ``return`` statement. 
 
@@ -110,7 +110,7 @@ Below is a sample driver program and console output for the above interface and 
 
 First and foremost, it is important to understand that **you may not create objects/instances of interfaces**. You can, and should, create instances of the classes that implement interfaces, as shown in the example above. 
 
-Let’s look at the ``bermuda`` object first. It is an object of the ``Bermuda`` class, and the ``vacation()`` method is called on it. The syntax is the same as discussed in the :ref:`Classes: The Basics<Classes: The Basics>` tutorial. 
+Let's look at the ``bermuda`` object first. It is an object of the ``Bermuda`` class, and the ``vacation()`` method is called on it. The syntax is the same as discussed in the :ref:`Classes: The Basics<Classes: The Basics>` tutorial. 
 
 Now, look at the declaration of the ``madagascar`` object. The object itself is an instance of the ``Madagascar`` class, but it is stored as type ``CanVacation``, an interface. Although there is no real difference between these two different ways of instantiating an object, it is often useful to store an object in an  ``interface`` type variable. If you happen to change the object in one place, you would not need to modify any code that expects an ``interface``. 
 
@@ -132,7 +132,7 @@ The order the interfaces are presented in *does not matter* so long as they are 
 
 What does this mean for the body of the class? Now, the class must implement **every method** of every interface stated in its class header in order for the code to compile. 
 
-For example, let’s say that we added an interface called ``CanScubaDive`` that has one method called ``scubaDive()`` and both ``Madagascar`` and ``Bermuda`` implement it. Now, look back at the driver program from the previous section. If we added the expression ``bermuda.scubaDive();`` , the ``scubaDive()`` method from the ``Bermuda`` class would execute as expected. However, what if we added ``madagascar.scubaDive();`` ? Would the code compile? **No.** It would not compile because ``madagascar`` is declared to be of type ``CanVacation``. This means that when you try to call a method from another interface (in this case, ``CanScubaDive``), the method would not be defined in this context. Therefore, when a class implements more than one interface, pay attention to the variable type when creating objects of the class. 
+For example, let's say that we added an interface called ``CanScubaDive`` that has one method called ``scubaDive()`` and both ``Madagascar`` and ``Bermuda`` implement it. Now, look back at the driver program from the previous section. If we added the expression ``bermuda.scubaDive();`` , the ``scubaDive()`` method from the ``Bermuda`` class would execute as expected. However, what if we added ``madagascar.scubaDive();`` ? Would the code compile? **No.** It would not compile because ``madagascar`` is declared to be of type ``CanVacation``. This means that when you try to call a method from another interface (in this case, ``CanScubaDive``), the method would not be defined in this context. Therefore, when a class implements more than one interface, pay attention to the variable type when creating objects of the class. 
 
 No Default Implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
