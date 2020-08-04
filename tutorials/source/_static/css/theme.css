@@ -4194,9 +4194,6 @@ div[class^='highlight'] pre {
     display: none;
   }
 }
-em {
-  font-style: normal;
-}
 
 a:hover {
   color: #d7263d;
@@ -4204,9 +4201,10 @@ a:hover {
   border-top: 0;
 }
 
+/*
 .simple {
   margin-bottom: 0 !important;
-}
+} */
 
 a.btn.btn-neutral {
   padding: 5px 14px;
