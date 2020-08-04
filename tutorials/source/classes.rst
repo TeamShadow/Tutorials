@@ -1,7 +1,7 @@
-Classes: The Basics
--------------------
+Classes
+-------
 
-Congratulations! Now that you have reached this point in the tutorials, you should have good understanding of the basics of the  **Shadow** language. We have covered everything from variables, operators, and methods to arrays and loops. Now, it is time to move on to classes, objects, and interfaces — three crucial topics. Similar to Java, **Shadow** is part **Object-Oriented**. However, before we dive into creating and using objects, we must first define the key components of a **Shadow** class. 
+Congratulations! Now that you have reached this point in the tutorials, you should have good understanding of the basics of the Shadow language: variables, operators, making choices, loops, methods, and arrays. Now, it is time to move on to classes, objects, and interfaces -- three crucial topics. Similar to Java, Shadow is **object-oriented**. However, before we dive into creating and using objects, we must first define the key components of a Shadow class. 
 
 Whenever we write a program, we always start by creating and naming the class that serves as the "container" for our code. So far, we have been writing the majority of our code directly inside the ``main()`` method to test out the language basics. However, this is not entirely realistic. In most cases we we want to define a **class** that represents some **object**, or idea. Then, we create and test the methods/properties of objects of the class in the ``main()`` method. 
 
@@ -293,7 +293,7 @@ Defining different methods within a class gives the class greater functionality 
 Packages
 ^^^^^^^^
 
-**Packages** in **Shadow** are a means of organizing groups of classes that serve a similar function or have some commonality that unites them. They are created by putting these different classes in folders/directories. You have already been exposed to packages, just not explicitly. For example, consider the ``shadow:standard`` package. It contains essential classes, interfaces, singletons, and exceptions (to be explained in later tutorials) needed for any Shadow program. These types do not need to be explicitly imported because the compiler will do so automatically. The other built-in Shadow packages are listed below (as described in the `Shadow API <http://shadow-language.org/reference/>`_). 
+**Packages** in Shadow are a means of organizing groups of classes that serve a similar function or have some commonality that unites them. They are created by putting these different classes in folders/directories. You have already been exposed to packages, just not explicitly. For example, consider the ``shadow:standard`` package. It contains essential classes, interfaces, singletons, and exceptions (to be explained in later tutorials) needed for any Shadow program. These types do not need to be explicitly imported because the compiler will do so automatically. The other built-in Shadow packages are listed below (as described in the `Shadow API <http://shadow-language.org/reference/>`_). 
 
 * Package ``shadow:io`` contains fundamental types used for input and output, both for the console and for file and path manipulation
 

@@ -1,7 +1,7 @@
-Properties of Classes and Objects
----------------------------------
+Advanced Features of Classes
+----------------------------
 
-Now that we have covered the basics of classes in **Shadow**, we can move on to some features/properties of classes. 
+Now that we have covered the basics of classes in Shadow, we can move on to some features/properties of classes. 
 
 .. _immutable-and-freeze-keywords: 
 
@@ -10,7 +10,7 @@ The ``immutable`` and ``freeze`` Keywords
 
 In a :ref:`previous tutorial <\`\`String\`\` and immutability>`, we discussed the concept of **immutability** in terms of a ``String``. When we say that a ``String`` is **immutable**, we mean that once it is created, **its value cannot be changed**. 
 
-In **Shadow**, a ``String`` is not the only thing that is ``immutable`` -- classes and references can be as well. We will start with analyzing ``immutable`` classes. See the basic example below: 
+In Shadow, a ``String`` is not the only thing that is ``immutable`` -- classes and references can be as well. We will start with analyzing ``immutable`` classes. See the basic example below: 
 
 
 .. code-block:: shadow 
@@ -114,7 +114,7 @@ Another notable feature of Shadow and Shadow classes is the ability to create **
 
 Nevertheless, to be precise, making a **deep copy** means not only copying the object, but all members of the object as well. This is different than storing an object in another reference, as this only creates an **alias** to the original object. Especially in other programming languages such as Java, attempting to make a deep copy can lead to a circular reference,  where a cycle of copying begins that never terminates. Shadow mitigates this potential problem through the keywords ``copy`` and ``freeze``.  
 
-See below for an example of using ``copy`` (references the ``Otter`` class from the :ref:`previous tutorial<Classes: The Basics>`): 
+See below for an example of using ``copy`` (references the ``Otter`` class from the :ref:`previous tutorial <Classes>`): 
 
 .. code-block:: shadow 
 
@@ -171,7 +171,7 @@ Often confused with method overloading, **method overriding** is when the progra
 ``toString()``
 ^^^^^^^^^^^^^^
 
-You may have noticed in an :ref:`earlier section<nullable-arrays>` that the ``String`` representation of the ``Otter`` object ``ophelia`` was ``default@Otter`` . In other languages like Java, ``toString()`` returns a number representing the location of that object in memory, and most of that time the number is meaningless to the programmer. In **Shadow**, the default implementation of ``toString()`` **returns the package and class that the object belongs to.**  If you don't create a package for a class, like in the ``Otter`` example, the package will be default automatically. 
+You may have noticed in an :ref:`earlier section<nullable-arrays>` that the ``String`` representation of the ``Otter`` object ``ophelia`` was ``default@Otter`` . In other languages like Java, ``toString()`` returns a number representing the location of that object in memory, and most of that time the number is meaningless to the programmer. In Shadow, the default implementation of ``toString()`` **returns the package and class that the object belongs to.**  If you don't create a package for a class, like in the ``Otter`` example, the package will be default automatically. 
 
 Either way, the default implementation is often useless. This is where **method overriding** becomes valuable. For example, let's pretend we have a very simple class representing Shadow State Park, located in the Methods Mountain Range. The member variables represent the guest's name, length of stay, and preferred activity, respectively. See below for the full class. 
 

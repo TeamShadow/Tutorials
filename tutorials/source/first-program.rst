@@ -1,5 +1,5 @@
-Getting Started - Your First Shadow Program 
--------------------------------------------
+Your First Shadow Program 
+-------------------------
 
 In accordance with programming tradition, the first program demonstrated will print the message ``"Hello, World!"``
 

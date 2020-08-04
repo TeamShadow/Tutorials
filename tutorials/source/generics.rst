@@ -1,7 +1,7 @@
 Generics
 --------
 
-In **Shadow** and in programming in general, generics is a very powerful tool. It not only helps to eliminate casting exceptions and other errors at compile time, but provides a framework or a blueprint that is compatible with many different data types. 
+In Shadow and in programming in general, generics is a very powerful tool. It not only helps to eliminate casting exceptions and other errors at compile time, but provides a framework or a blueprint that is compatible with many different data types. 
 
 In general, generics is best understood through an example. Since there are many different aspects to generics, we will break the example down into different topics. 
 

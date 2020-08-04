@@ -1,6 +1,6 @@
 Flow Control and Looping
 ------------------------
-So far, we have learned how to create a basic program in **Shadow**, declare and use variables, and write expressions with different kinds of operators. In the simple example programs we have analyzed thus far, it is easy to see how **control flows**. Execution starts with the first statement in the program (a variable declaration, ``Console.printLine()``, etc.) and continues to the second and third and so on. Nothing is skipped and no action repeated. Straightforward. 
+So far, we have learned how to create a basic program in Shadow, declare and use variables, and write expressions with different kinds of operators. In the simple example programs we have analyzed thus far, it is easy to see how **control flows**. Execution starts with the first statement in the program (a variable declaration, ``Console.printLine()``, etc.) and continues to the second and third and so on. Nothing is skipped and no action repeated. Straightforward. 
 
 However, **flow control** becomes more interesting as we begin to introduce new statements: ``if``, ``else``, ``break``, ``continue``, ``switch``, and different kinds of loops. These statements have the power to manipulate/direct the flow of a program, thus opening the door for more powerful programs. 
 

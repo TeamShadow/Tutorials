@@ -253,7 +253,7 @@ In order to understand ``nullable``, we must first define the **default values**
 * ``boolean`` : ``false``
 * ``code`` : ``\0``
 
-For **reference types**, which includes ``String`` , the most logical default value is ``null``. However, those who are familiar with C/C++/Java will understand that ``null`` can cause many unintended errors and bugs in a program (e.g. a ``NullPointerException`` in Java). **Shadow** deals with this issue by using the ``nullable`` modifier. If a reference is marked as ``nullable``, it means that it is **able to store the value** ``null`` **in it**. For example:
+For **reference types**, which includes ``String`` , the most logical default value is ``null``. However, those who are familiar with C/C++/Java will understand that ``null`` can cause many unintended errors and bugs in a program (e.g. a ``NullPointerException`` in Java). Shadow deals with this issue by using the ``nullable`` modifier. If a reference is marked as ``nullable``, it means that it is **able to store the value** ``null`` **in it**. For example:
 
 ``nullable String word = null;``
 

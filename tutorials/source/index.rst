@@ -20,9 +20,9 @@ Welcome to the Shadow Tutorials!
    common-methods
    read-from-console
    arrays
-   classes-basics
-   classes-properties
-   interfaces-intro
+   classes
+   advanced-classes
+   interfaces
    singletons
    inheritance
    abstract-classes

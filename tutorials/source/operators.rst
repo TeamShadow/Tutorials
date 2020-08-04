@@ -163,7 +163,7 @@ The variable ``test`` is assigned ``true``. However, suppose you wanted to compa
     var compare = (want == need); 
     Console.printLine(compare); 
 
-Here, the variables ``want`` and ``need`` both are equal to the literal ``String`` value "coffee," so the result is ``true``. While the ``==`` compares literal values, Shadow also has the ``===`` operator which compares **references**. Let's say we assign ``want`` and ``need`` to new ``String`` objects (see :ref:`Classes: The Basics<Classes: The Basics>`) that have the same literal value: 
+Here, the variables ``want`` and ``need`` both are equal to the literal ``String`` value "coffee," so the result is ``true``. While the ``==`` compares literal values, Shadow also has the ``===`` operator which compares **references**. Let's say we assign ``want`` and ``need`` to new ``String`` objects (see :ref:`Classes`) that have the same literal value: 
 
 .. code-block:: shadow 
 

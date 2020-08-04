@@ -1,6 +1,7 @@
-Interfaces Intro
-----------------
-In this section we will cover another very important part of **Shadow**: interfaces. In a broad sense, an **interface** is like a contract with a class: it is made up of one or more methods that the class is required to provide implementation for. For example, consider the following simple interface. It will be used to guide our analysis for the next few sections. 
+Interfaces
+----------
+
+In this section we will cover another very important part of Shadow: interfaces. In a broad sense, an **interface** is like a contract with a class: it is made up of one or more methods that the class is required to provide implementation for. For example, consider the following simple interface. It will be used to guide our analysis for the next few sections. 
 
 .. code-block:: shadow 
     :linenos: 
@@ -110,7 +111,7 @@ Below is a sample driver program and console output for the above interface and 
 
 First and foremost, it is important to understand that **you may not create objects/instances of interfaces**. You can, and should, create instances of the classes that implement interfaces, as shown in the example above. 
 
-Let's look at the ``bermuda`` object first. It is an object of the ``Bermuda`` class, and the ``vacation()`` method is called on it. The syntax is the same as discussed in the :ref:`Classes: The Basics<Classes: The Basics>` tutorial. 
+Let's look at the ``bermuda`` object first. It is an object of the ``Bermuda`` class, and the ``vacation()`` method is called on it. The syntax is the same as discussed in the :ref:`Classes` tutorial. 
 
 Now, look at the declaration of the ``madagascar`` object. The object itself is an instance of the ``Madagascar`` class, but it is stored as type ``CanVacation``, an interface. Although there is no real difference between these two different ways of instantiating an object, it is often useful to store an object in an  ``interface`` type variable. If you happen to change the object in one place, you would not need to modify any code that expects an ``interface``. 
 
@@ -137,7 +138,7 @@ For example, let's say that we added an interface called ``CanScubaDive`` that h
 No Default Implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are familiar with Java, you are probably wondering if it is possible for an ``interface`` to provide a default implementation for some or all of its methods. In **Shadow** the answer is **no**. You will get a compile error if you try to do so. **The whole purpose of an interface is to outline methods that a class is forced to implement itself based off of the specific needs/function of the class itself**. 
+If you are familiar with Java, you are probably wondering if it is possible for an ``interface`` to provide a default implementation for some or all of its methods. In Shadow the answer is **no**. You will get a compile error if you try to do so. **The whole purpose of an interface is to outline methods that a class is forced to implement itself based off of the specific needs/function of the class itself**. 
 
 
 

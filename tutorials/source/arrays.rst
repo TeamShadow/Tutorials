@@ -139,7 +139,7 @@ As seen in **Line 1** and the console output below, the addition of ``:default("
 ``copy``
 ^^^^^^^^
 
-The ``Array`` class has a useful keyword called ``copy``, which *completely* copies the contents of one array into another array. This is called a **deep copy**. In addition to arrays, the ``copy`` keyword can be used with any object in order to create a deep copy of the object, including all of its members. ``copy`` will be discussed in more detail in the :ref:`Properties of Classes and Objects<Properties of Classes and Objects>` tutorial. 
+The ``Array`` class has a useful keyword called ``copy``, which *completely* copies the contents of one array into another array. This is called a **deep copy**. In addition to arrays, the ``copy`` keyword can be used with any object in order to create a deep copy of the object, including all of its members. ``copy`` will be discussed in more detail in the :ref:`Advanced Features of Classes` tutorial. 
 
 Using the example from the ``default`` section above, where ``a`` is a ``String`` array with size 5, let's examine how ``copy`` works. 
 

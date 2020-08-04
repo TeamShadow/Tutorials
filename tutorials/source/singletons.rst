@@ -1,7 +1,7 @@
 Singletons
 ----------
 
-In other programming languages, when a method or a variable is marked as ``static``, it means that the method or variable is shared between all instances of a class. It does not "belong" to an individual object. However, in **Shadow** ``static`` does not exist. Instead, we are able to create a specific type of class called ``singleton``. In a broad sense, defining a  ``singleton`` class means that **only one object of that class can exist at one time,** per thread. For example, if your program has 5 threads, only one copy of the object is allowed to exist in each. 
+In other programming languages, when a method or a variable is marked as ``static``, it means that the method or variable is shared between all instances of a class. It does not "belong" to an individual object. However, in Shadow ``static`` does not exist. Instead, we are able to create a specific type of class called ``singleton``. In a broad sense, defining a  ``singleton`` class means that **only one object of that class can exist at one time,** per thread. For example, if your program has 5 threads, only one copy of the object is allowed to exist in each. 
 
 Although creating a ``singleton`` class can be helpful, it should not be used too often. Some popular applications of ``singleton`` would be to either log data (e.g. logging patient info in a doctor's office database), or to keep track of the number of times a particular object is created. Overall, the goal is put a lot of information **into** the ``singleton`` (like with a logger), as opposed to taking information out of it. 
 
