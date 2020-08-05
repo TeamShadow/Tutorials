@@ -60,6 +60,7 @@ html_title = 'Shadow Tutorials'
 html_short_title = 'Tutorials'
 html_static_path = ['_static']
 html_show_sourcelink = False
+html_link_suffix = '.html'
 
 language = 'en'
 
