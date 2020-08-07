@@ -4,7 +4,7 @@ Operators and Expressions
 Assignment
 ^^^^^^^^^^
 
-In the :ref:`Variables Introduction<Variables Introduction>` page, assigning a variable a particular value is briefly touched on. For example, consider the following line of code:  
+We touch on assigning a variable a particular value in the :ref:`Variables` tutorial. For example, consider the following line of code:  
 
 .. code-block:: shadow 
 
@@ -346,9 +346,9 @@ Although **Lines 2 and 7** effectively do the same thing, line 2 is a more simpl
 The Concatenation Operator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As mentioned in the previous :ref:`Code Example and Variable Names<Code Example and Variable Names>` section, ``#`` is called the **octothorpe**. It is **Shadow's** version of the concatenation operator. 
+As mentioned in the earlier :ref:`Declaring variables` section, ``#`` is called the **octothorpe**. It is Shadow's version of the concatenation operator. 
 
-The main function of ``#`` is to concatenate other types onto string values. For example, we use ``#`` to include literal values of variables in ``Console.printLine()`` statements. Another example is below. It is important to note that this operator has a lower precedence than addition (i.e. 1+1 will be added before it is connected with a ``String``). 
+The main function of ``#`` is to concatenate other types onto string values. For example, we use ``#`` to include literal values of variables in ``Console.printLine()`` statements. Another example is below. It is important to note that this operator has a lower precedence than addition. In other words, the addition ``1 + 1`` will happen before its value is combined into a ``String`` with ``#``. 
 
 .. code-block:: shadow
     :linenos: 

@@ -9,7 +9,7 @@ In order to explain the concepts behind classes and objects, we will be analyzin
 
 
 .. code-block:: shadow 
-    :linenos:   
+    :linenos:
 
     class Otter
     {
@@ -94,7 +94,7 @@ The first line of the ``main()`` method is:
 
 ``Otter olive = Otter:create("Olive", "River", 6);``
 
-``Otter olive`` is how we declare the object. The type, which has to be the **name of the class** , is ``Otter``. ``olive`` is the name of our object, or an instance of the ``Otter`` class. The same naming conventions outlined in :ref:`Variables Introduction<Variables Introduction>` should be followed. There is no limit on the number of ``Otter`` objects we can create. 
+``Otter olive`` is how we declare the object. The type, which has to be the **name of the class** , is ``Otter``. ``olive`` is the name of our object, or an instance of the ``Otter`` class. The same naming conventions outlined in :ref:`Variables` should be followed. There is no limit on the number of ``Otter`` objects we can create. 
 
 The expression to the right of the equals sign invokes the object's **constructor** and thus creates an ``Otter`` object (as made clear by the reserved word ``create``). Inside the parentheses we see 3 literal values. Much like the method calls discussed in an earlier tutorial, **constructors** can take in parameters. 
 
@@ -142,7 +142,7 @@ The program recognizes that this second constructor exists, and now ``oliver`` h
 Default Constructors
 ^^^^^^^^^^^^^^^^^^^^^
 
-A default constructor is a "built-in" constructor that takes in no parameters and can be invoked **only when no other constructor is defined in the class**. If this is the case, the default constructor gives each member variable a **default value**. For primitive member variables, this is no problem. They are assigned their :ref:`default values<nullable-check>`. 
+A default constructor is a "built-in" constructor that takes in no parameters and can be invoked **only when no other constructor is defined in the class**. If this is the case, the default constructor gives each member variable a **default value**. For primitive member variables, this is no problem. They are assigned default values, usually a variation on ``0``. 
 
 However, what happens to **reference-type** member variables? Unless the variable declared to be **nullable**, you will get a compile error that says: 
 

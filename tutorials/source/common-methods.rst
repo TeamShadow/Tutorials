@@ -13,27 +13,32 @@ In order to convert a ``String`` value into a numeric type, there are two main m
     :linenos: 
 
     var word = "6"; 
-    var number = word.toInt(); 
-    //number now holds the int 6
+    var number = word.toInt(); // number now holds the int 6
 
 
 Changing Case
 ^^^^^^^^^^^^^^
 
-There are two ``String`` methods that are used when trying to convert to either  uppercase or lowercase characters. However, while the uppercase version of letters may be common knowledge, not every character has a distinct uppercase/lowercase version. For example, the uppercase character for ``%`` is still ``%``. 
+There are two ``String`` methods used when trying to convert to either uppercase or lowercase characters. Note that these methods only affect alphabetic letters. For example, the uppercase version of the character ``%`` is still ``%``. 
 
 The  ``toLowerCase()`` method takes a ``String`` as a parameter and returns another ``String``, with *all* characters converted to lowercase. There is also a ``toUpperCase()`` method that converts all letters to uppercase and returns this new ``String``. 
 
 
 .. code-block:: shadow 
-    :linenos: 
     
     var yell = "YELLING"; 
-    Console.printLine(yell.toLowerCase()); 
-    //"yelling" is printed to the console
+    Console.printLine(yell.toLowerCase()); // "yelling" is printed to the console
+	
+	
+It's important to note that ``String`` values are *immutable*.  This means that it is impossible to change them by calling a method on a ``String`` reference.  In this case, ``yell.toLowerCase()`` does not change ``yell``, meaning that the following code has no effect:
+
+.. code-block:: shadow 
+    
+    yell.toLowerCase(); // Does nothing unless you use the result
+  
 
 ``substring()``
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 ``substring()`` is an overloaded method. One version takes in two ``int`` values that represent the starting and ending indices of a ``String``. For example, in the word "hi", "h" has index 0 and "i" has index one. The method then returns a ``String`` with all characters from (and including) the starting index to the ending index (excluding the character at this index). 
 

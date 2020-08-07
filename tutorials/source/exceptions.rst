@@ -243,7 +243,7 @@ The ``recover`` Block
 ^^^^^^^^^^^^^^^^^^^^^^ 
 
 
-This brief section will analyze the ``recover`` block, which is used to handle an ``UnexpectedNullException``. In the example below, the ``check()`` method call causes this type of exception to be thrown and subsequently caught by the ``recover`` block. In case you need a refresher on how ``check()`` works, it can be found in an :ref:`earlier tutorial<nullable-check>`.  
+This brief section will analyze the ``recover`` block, which is used to handle an ``UnexpectedNullException``. In the example below, the ``check()`` method call causes this type of exception to be thrown and subsequently caught by the ``recover`` block. In case you need a refresher on how ``check()`` works, refer to the :ref:`earlier tutorial <\`\`nullable\`\` and \`\`check\`\`>`.  
 
 .. code-block:: shadow 
     :linenos: 

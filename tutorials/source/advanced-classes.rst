@@ -8,7 +8,7 @@ Now that we have covered the basics of classes in Shadow, we can move on to some
 The ``immutable`` and ``freeze`` Keywords
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In a :ref:`previous tutorial <\`\`String\`\` and immutability>`, we discussed the concept of **immutability** in terms of a ``String``. When we say that a ``String`` is **immutable**, we mean that once it is created, **its value cannot be changed**. 
+In a :ref:`previous tutorial <\`\`String\`\` and Numerical Methods>`, we discussed the concept of immutability of the ``String`` type. When we say that a ``String`` is immutable, we mean that once it is created, its value **cannot** be changed. 
 
 In Shadow, a ``String`` is not the only thing that is ``immutable`` -- classes and references can be as well. We will start with analyzing ``immutable`` classes. See the basic example below: 
 
