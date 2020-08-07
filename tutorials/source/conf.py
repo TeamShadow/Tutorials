@@ -61,6 +61,7 @@ html_short_title = 'Tutorials'
 html_static_path = ['_static']
 html_show_sourcelink = False
 html_link_suffix = '.html'
+html_favicon = 'favicon.ico'
 
 language = 'en'
 
