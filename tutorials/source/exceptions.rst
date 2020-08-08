@@ -187,7 +187,7 @@ Before we discuss the ``try`` block in the example, it is important to touch on 
 
 .. note:: To learn more about the different methods in ``Random``, visit this page on the `Shadow API <http://shadow-language.org/documentation/shadow/utility/Random.html>`_. 
 
-Now, based on the number stored in ``number``, a method will be called that could produce a certain exception. This is done through a ``switch`` :ref:`statement<switch>`. However, ``case(0)`` indicates it is possible for no cooking mistake to be made. There is a ¼ chance that this will happen.
+Now, based on the number stored in ``number``, a method will be called that could produce a certain exception. The method is decided using a ref:```switch`` :statement <\`\`switch\`\` statements>`. However, ``case(0)`` indicates it is possible for no cooking mistake to be made. There is a 25% chance that this will happen.
 
 For the sake of the example, let's say that ``number`` holds the value 2. Look at **Line 23** of ``ExceptionTest``. For this case, we are calling the method ``runOut()``, which throws an ``OutOfIngredientsException``. Once this exception is thrown, we say that it is **in flight**. In other words, the program goes back to the try-catch block and runs through each ``catch`` statement (from top to bottom) until it finds an exception of compatible type. 
 
