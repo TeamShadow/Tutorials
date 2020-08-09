@@ -1,27 +1,34 @@
+********************************
 ``String`` and Numerical Methods
---------------------------------
+********************************
 
-This brief tutorial will cover some commonly used methods of the ``String`` and  numerical classes, focusing on the ``int`` class. Each explanation is followed by a coded example. Note that these examples are not exhaustive. To see a complete list of all ``String`` and numerical methods, visit the `Shadow API <http://shadow-language.org/reference/>`__.
+This brief tutorial will cover some commonly used methods of the ``String`` and  numeric types, focusing on the ``int`` class. Each explanation is followed by a coded example. Note that these examples are not exhaustive. To see a complete list of all ``String`` and numerical methods, visit the `Shadow API <http://shadow-language.org/documentation/$overview.html>`__.
  
 
-Numeric Conversions
-^^^^^^^^^^^^^^^^^^^
+``String`` methods
+==================
 
-In order to convert a ``String`` value into a numeric type, there are two main methods. The ``toInt()`` method takes a ``String`` as a parameter and returns an ``int`` representation of a ``String``. The ``toDouble()`` method works in the same way, except it returns a ``double``. 
+Below are listed some of the most commonly used ``String`` methods. For an explanation of all ``String`` methods, visit the `documentation page <http://shadow-language.org/documentation/shadow/standard/String.html>`__ for ``String``. 
+
+
+Conversions to numeric types
+----------------------------
+
+In order to convert a ``String`` value into a numeric type, there are specific methods for each type. The most commonly used are the ``toInt()`` and ``toDouble()`` methods. The ``toInt()`` method converts a ``String`` representation of an ``int`` into the value of that ``int``. The ``toDouble()`` method works in the same way, except it returns a ``double``.  In all cases, a ``NumberFormatException`` will be thrown if the ``String`` is not a legally formatted version of the numeric type it is being converted to.
 
 .. code-block:: shadow 
-    :linenos: 
 
-    var word = "6"; 
-    var number = word.toInt(); // number now holds the int 6
+    var value1 = "6"; 
+    var count = value1.toInt(); // count now holds 6
+	var value2 = "7.61";
+	var amount = value2.toDouble(); // amount now holds 7.61
 
+Changing case
+-------------
 
-Changing Case
-^^^^^^^^^^^^^^
+There are two ``String`` methods used when trying to convert to either uppercase or lowercase characters. Note that these methods only affect alphabetic characters. For example, the uppercase version of the character ``%`` is still ``%``. 
 
-There are two ``String`` methods used when trying to convert to either uppercase or lowercase characters. Note that these methods only affect alphabetic letters. For example, the uppercase version of the character ``%`` is still ``%``. 
-
-The  ``toLowerCase()`` method takes a ``String`` as a parameter and returns another ``String``, with *all* characters converted to lowercase. There is also a ``toUpperCase()`` method that converts all letters to uppercase and returns this new ``String``. 
+The  ``toLowerCase()`` method returns a new ``String`` with *all* characters converted to lowercase. There is also a ``toUpperCase()`` method that returns a new ``String`` with all characters converted to uppercase. 
 
 
 .. code-block:: shadow 
@@ -30,140 +37,123 @@ The  ``toLowerCase()`` method takes a ``String`` as a parameter and returns anot
     Console.printLine(yell.toLowerCase()); // "yelling" is printed to the console
 	
 	
-It's important to note that ``String`` values are *immutable*.  This means that it is impossible to change them by calling a method on a ``String`` reference.  In this case, ``yell.toLowerCase()`` does not change ``yell``, meaning that the following code has no effect:
+Note that ``String`` values are *immutable*.  This means that it's impossible to change them by calling a method on a ``String`` reference.  In this case, ``yell.toLowerCase()`` does not change ``yell``, meaning that the following code has no effect:
 
 .. code-block:: shadow 
     
     yell.toLowerCase(); // Does nothing unless you use the result
-  
 
-``substring()``
-^^^^^^^^^^^^^^^
+Size of a ``String``
+--------------------
 
-``substring()`` is an overloaded method. One version takes in two ``int`` values that represent the starting and ending indices of a ``String``. For example, in the word "hi", "h" has index 0 and "i" has index one. The method then returns a ``String`` with all characters from (and including) the starting index to the ending index (excluding the character at this index). 
+The ``size()`` method for ``String`` returns the number of bytes used to store the characters of the ``String``.  This number is the length of the ``String`` in characters if all of the characters in the ``String`` are ASCII.  This method is also a property, so it can be called with property syntax. 
 
-The other version takes in one ``int`` representing a starting index. All characters starting from (and including) this index until the end of the ``String`` are returned. 
+
+The ``isEmpty()`` method returns ``true`` if the ``String`` has no characters (is the empty ``String``) and ``false`` otherwise.
 
 .. code-block:: shadow 
-    :linenos: 
+
+    var distance = "mile";
+    Console.printLine(distance.size()); // Prints 4
+	Console.printLine(distance->size); // Also prints 4, using property syntax
+	Console.printLine(distance.isEmpty()); // Prints false
+	
+Value at a location inside a ``String``
+---------------------------------------
+
+The ``index()`` method takes a ``long`` and returns the ``byte`` value at that location inside the ``String``.  This method is equivalent to using the ``[]`` operator.  Locations start at 0 and go up to one less than the size of the ``String``.
+
+If the ``String`` only contains ASCII characters, this method returns the character at the given location.
+
+.. code-block:: shadow 
+
+	var word = "autological";
+	Console.printLine(cast<code>(word.index(6))); // Prints "g"
+	Console.printLine(cast<code>(word[6])); // Also prints "g"
+
+Substrings
+----------
+
+``substring()`` is an overloaded method. One version takes in two ``int`` values that represent the starting and ending indices of the new ``String``. For example, in the ``String`` ``"hi"``, ``h`` has index 0 and ``i`` has index 1. The ``substring()`` method returns a new ``String`` with all byte values from (and including) the starting index to the ending index (excluding the byte value at this index). 
+
+The other version takes in one ``int`` representing a starting index. A new ``String`` containing all characters starting from (and including) this index until the end of the ``String`` are returned.
+
+If all the characters in a ``String`` are ASCII values, these methods find substrings based on the characters at the given indices.  Otherwise, the indices only refer to byte locations, which may or may not align with characters.
+
+.. code-block:: shadow 
 
     var music = "Rock n Roll"; 
-    var second = music.substring(0,4); 
-    var first= music.substring(7);  
-    Console.printLine(first.concatenate(second)); 
-    //"RollRock" is printed to the console
+    var second = music.substring(0,4); // "Rock"
+    var first = music.substring(7); // "Roll"
+    Console.printLine(first # second); // Prints "RollRock"
 
-``equal()``
-^^^^^^^^^^^^^
+``String`` comparison
+---------------------
 
-The ``equal()`` method for ``String`` values compares the current object to another ``String``, returning ``true`` if they are identical.   
+The ``equal()`` method for ``String`` values compares the current object to another ``String``, returning ``true`` if the two values have the same contents, including case.  Calling ``equal()`` is equivalent to using the ``==`` operator on two ``String`` values.   
 
-.. code-block:: shadow 
-    :linenos:
+.. code-block:: shadow
 
     var sweet1 = "chocolate"; 
     var sweet2 = "caramel"; 
-    Console.printLine(sweet1.equal(sweet2)); 
-    //false is printed to the console
-		
-``compare()``
-^^^^^^^^^^^^^
+    Console.printLine(sweet1.equal(sweet2)); // Prints false
 
-The ``compare()`` method for ``String`` values compares the current object to another String, returning -1, 0, or 1, if the current object comes earlier, at exactly the same point, or later in a lexicographic ordering than the other value, respectively.
 
-.. code-block:: shadow 
-    :linenos:
+The ``compare()`` method for ``String`` values compares the current object to another ``String``, returning -1, 0, or 1, if the current object comes earlier, at exactly the same point, or later in a lexicographic (dictionary) ordering than the other value, respectively.
+
+.. code-block:: shadow
 
     var lyric1 = "sweet";
     var lyric2 = "caroline";
-    Console.printLine(lyric1.compare(lyric2)); 
-    //1 is printed to the console because "sweet" comes after "caroline" lexicographically
-
-``isEmpty()``
-^^^^^^^^^^^^^
-
-The ``isEmpty()`` method for returns ``true`` if the ``String`` the method being called on is empty (i.e. has length 0). 
-
-.. code-block:: shadow 
-    :linenos:
-
-    var full = "";
-    Console.printLine(full.isEmpty()); 
-    //true is printed to the console
-
-Other ``String`` Methods
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-The following is a list of the remaining built-in ``String`` methods. For more information, here is the link to ```String`` API <http://shadow-language.org/documentation/shadow/standard/String.html>`__. 
-
-* ``concatenate(nullable Object other)``
-
-* ``concatenate(String other)``
-
-* ``copy(AddressMap addresses)``
-
-* ``index(long location)``
-
-* ``iterator()``
-
-* ``toByte()``
-
-* ``toFloat()``
-
-* ``toLong()``
-
-* ``toShort()``
-
-* ``toUByte()``
-
-* ``toUInt()``
-
-* ``toULong()``
-
-* ``toUShort()``
+    // Prints 1 because "sweet" comes after "caroline" lexicographically
+	Console.printLine(lyric1.compare(lyric2)); 
 
 
-Basic Mathematical Operations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Numerical methods
+=================
 
-Within the ``int`` class in Shadow, there are many methods that can be useful for performing calculations. For example, the ``add()``, ``subtract()``, ``multiply()``, ``modulus()``, and ``divide()`` methods each take an ``int`` as a parameter and return an ``int`` (other versions are mentioned in the next section). They perform the same operations as ``+``, ``-``, ``*``, ``%``, and ``/`` , respectively. 
+There is no separate class for mathematical operations like the ``Math`` class in Java.  Instead, numerical types contain methods to perform all appropriate operations on themselves.
 
-.. code-block:: shadow 
-    :linenos:
+We will describe a few useful methods for the ``int`` type, most of which also apply to the ``double`` type.  Although these two numeric types are the most important, there are also useful methods for all other primitive types such as ``code``, ``long``, ``boolean``, and so on. In order to explore the entire Shadow standard library, visit the `documentation page <http://shadow-language.org/documentation/shadow/standard/$package-summary.html>`__ for the ``standard`` package, and select the desired class or interface to see its methods and properties. 
+
+Basic mathematical operations
+-----------------------------
+
+Within the ``int`` class, there are many methods for performing calculations. For example, the ``add()``, ``subtract()``, ``multiply()``, ``modulus()``, and ``divide()`` methods each take an ``int`` as a parameter and return an ``int``.  These methods perform the same operations as ``+``, ``-``, ``*``, ``%``, and ``/`` , respectively.   There are also overloaded versions of these methods that take a different type (such as ``double``) and might return a different type as a consequence. 
+
+.. code-block:: shadow
 
     var sum = 10.add(9); 
-    Console.printLine(sum);
-    //19 is printed to the console 
+    Console.printLine(sum); // 19 is printed to the console 
 
-More Advanced Mathematical Operations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Advanced mathematical operations
+--------------------------------
 
-Also within the ``int`` class, there are many useful methods to perform more advanced mathematical calculations. Although only a few are discussed here, once again, the rest can be found on the `Shadow API <http://shadow-language.org/documentation/>`__. 
+There are also a number of methods that perform complex operations that are **not** equivalent to simple operators.  These can perform logarithms, exponentiation, trigonometric operations, and others.  A few examples follow.
 
-The method ``abs()`` takes in an ``int`` as a parameter, and returns the non-negative version of that ``int`` (i.e. a ``uint``). ``logBase10()`` does exactly what its name implies: it takes the logarithm to the base 10 of whatever number it is called on. In addition, ``min()`` and ``max()`` take one ``int`` as a parameter each and compare it to the ``int`` the method was called on, returning the minimum and maximum of the two numbers, respectively.  ``pow()`` raises the current value to an exponent, which is the single parameter for the method, and returns a ``double``. Lastly, the ``sin()`` method takes the sine of the current value (returning a ``double``). The ``cos()`` method works in the same way, except that it takes the cosine of the current value.  The current value is assumed to be in *radians*. 
+The method ``abs()`` returns the non-negative version the ``int`` it is called on, producing a ``uint``.  The ``logBase10()`` method does what its name implies: It takes the base 10 logarithm of whatever number it's called on. In addition, ``min()`` and ``max()`` each take another ``int`` as a parameter and compare it to the ``int`` the method was called on, returning the minimum or maximum of the two numbers, respectively.  The ``pow()`` method raises the current value to an exponent, which is the single parameter for the method, and returns a ``double``. Lastly, the ``sin()`` method finds the sine of the current value (returning a ``double``). The ``cos()`` method works in the same way, except that it finds the cosine of the current value.  For all trigonometric methods, angle values are assumed to be in *radians*. 
 
 .. code-block:: shadow 
-    :linenos:
     
+	// Prints 70
     Console.printLine((-70).abs()); 
-    //70 is printed to the console
-		
+    
+	// Prints 2.0
     Console.printLine(100.logBase10()); 
-    //2.0 is printed to the console
-		
+    
+	// Prints 7
     Console.printLine(8.min(7)); 
-    //7 is printed to the console
-		
+
+	// Prints 8.0
     Console.printLine(2.power(3)); 
-    //8.0 is printed to the console
-	
+    
+	// Prints -0.9880316240928618
     Console.printLine(30.sin()); 
-    //-0.9880316240928618 is printed to the console
 
-Other ``int`` Methods
-^^^^^^^^^^^^^^^^^^^^^
+Other methods
+-------------
 
-Although we have touched on a few ``int`` methods, they only represent a handful of them. A complete list can be found on the `documentation page for ``int`` http://shadow-language.org/documentation/shadow/standard/int.html>`_. It is also important to note that there are different versions of some of the methods we discussed above, like ``add()`` (e.g., it can also return a ``double``). 
+Although only a few have been discussed here, the remainining ``int`` methods are described on its `documentation page <http://shadow-language.org/documentation/shadow/standard/int.html>`__.
 
 * ``addWithOverflow(int other)``
 * ``bitAnd(int other)``, can also take a ``long``
@@ -175,7 +165,6 @@ Although we have touched on a few ``int`` methods, they only represent a handful
 * ``bitShiftRight(int amount)``, can also take a ``unit``
 * ``bitXor(int other)``, can also take a ``long``
 * ``compare(double other)``, can also take a ``float``, ``int``, or ``long``
-* ``copy(AddressMap addresses)``
 * ``equal(double other)``, can also take a ``float``, ``int``, or ``long``
 * ``flipEndian()``
 * ``leadingZeros()`` 
@@ -185,14 +174,21 @@ Although we have touched on a few ``int`` methods, they only represent a handful
 * ``ones()``
 * ``squareRoot()``
 * ``subtractWithOverflow(int other)``
-* ``toByte()``
-* ``toCode()``
-* ``toDouble()`` (same for ``float``, ``int``, ``long``, ``short``, ``String``, ``ubyte``, ``uint``, ``ulong``, ``ushort``, and ``unsigned``)
+* ``toDouble()`` (same for ``byte``, ``code``, ``float``, ``int``, ``long``, ``short``, ``String``, ``ubyte``, ``uint``, ``ulong``, and ``ushort``)
+* ``toUnsigned()``
 * ``trailingZeroes()``
 
-Lastly, the ``double`` class has methods that can be called on ``double`` values. They can be found on the ` documentation page for ``double`` <http://shadow-language.org/documentation/shadow/standard/double.html>`_. The same is true for all of the other primitive types such as ``code``, ``long``, ``boolean``, and so on. In order to explore the entire Shadow standard library, visit the `documentation page for the ``standard`` package <http://shadow-language.org/documentation/shadow/standard/$package-summary.html>`_, and select the desired class or interface to see its methods and properties. 
+Except for the methods corresponding to bitwise operations, the ``double`` type has most of the same methods as the ``int`` type, with a few additional ones appropriate for floating-point values, which are listed below.  All ``double`` methods are described on its `documentation page <http://shadow-language.org/documentation/shadow/standard/double.html>`__.
 
-		
+* ``ceiling()``
+* ``floor()``
+* ``isFinite()``
+* ``isInfinite()``
+* ``isNaN()``
+* ``multiplyAdd(double multiplicand, double addend)``
+* ``round()``
+
+	
 
 
 
