@@ -125,20 +125,46 @@ As you can see, the syntax for using ``copy`` is quite simple. You simply write 
 
 In order to review how ``freeze`` works, take a look at the :ref:`above section<immutable-and-freeze-keywords>`. The syntax is the same. The only difference is that ``freeze`` creates an immutable copy of the object. 
 
+The ``copy`` keyword can be used on arrays as well.  Because it's a deep copy, making changes to objects inside of a copy of an array won't change the objects inside of the original. 
 
-Arrays as Objects
-^^^^^^^^^^^^^^^^^
-At this point in the tutorials, you probably have noticed that arrays appear to behave much like objects. You can initialize them with ``create()``, use the ``copy`` command, and call certain methods on them (e.g. ``index()`` ). As it turns out, **arrays themselves are objects**, so concepts relating to Objects in general apply to arrays.
-
-Now that we have introduced objects, it is also worth mentioning that instead of having an array of primitive type or a ``String`` array,  you can also create an array of objects as well. In addition, you can also declare an array to be ``nullable``. This will be covered in the next section. 
+Using the example from the ``default`` section above, where ``a`` is a ``String`` array with size 5, let's examine how ``copy`` works. 
 
 
-.. _nullable-arrays: 
+.. code-block:: shadow 
+    :linenos:
+	
+	String[] a = String:create[5]:default("Serendipity");
+    String[] b = copy(a); 
+    for (int i = 0; i < b->size; i += 1)
+    {
+        Console.printLine("b[" # i # "]: " # b[i]);
+    }
+		
+    b[0] = "Oops"; 
+		
+    Console.printLine("a[0]:" # a[0]); 
+    Console.printLine("b[0]:" # b[0]); 
 
-``nullable`` Arrays
+Below is the console output: 
+
+.. code-block:: console
+
+    b[0]: Serendipity
+    b[1]: Serendipity
+    b[2]: Serendipity
+    b[3]: Serendipity
+    b[4]: Serendipity
+    a[0]: Serendipity
+    b[0]: Oops
+
+The expression ``copy(a)``  on **Line 2** creates an entirely new array and copies over everything in ``a``.  This copied array is then stored in ``b``. When we change the value of the first element in ``b`` to "Oops" on **Line 7**, it does *not* change the first element in ``a``.  More importantly, all the elements in the array have *also* had deep copies made of themselves.
+
+
+
+``nullable`` arrays
 ^^^^^^^^^^^^^^^^^^^^
 
-Just as you can declare a ``String`` reference to be ``nullable``, you can do the same for arrays. However, it is important to note that the **array itself is not nullable, but the elements inside of it are.** Consider the example below. 
+Just as you can declare a ``String`` or other reference to be ``nullable``, you can do the same for arrays. However, the array itself is *not* nullable. Instead, the elements inside of it are. Consider the example below:
 
 .. code-block:: shadow 
     :linenos: 
@@ -158,7 +184,7 @@ The console output is:
 
     [null, Joy, default@Otter, null]
 
-The ``nullable`` ``String`` array ``test`` is created with 4 elements, all storing ``null``. Then, in **Line 5**, we have changed the value of the 2nd element in the array to "Joy". In **Line 6**  have changed the value of the 3rd element in the array to the ``String`` representation of the ``Otter`` object ``ophelia``. 
+The ``nullable`` ``String`` array ``test`` is created with 4 elements, all containing ``null``. Then, in **Line 5**, we change the value of the 2:superscript:`nd` element in the array to ``"Joy"``. In **Line 6** we change the value of the 3:superscript:`rd` element in the array to the ``String`` representation of the ``Otter`` object ``ophelia``. 
 
 .. note:: Recall that putting the ``#`` in front of a value converts it to a ``String``.
 
@@ -171,7 +197,7 @@ Often confused with method overloading, **method overriding** is when the progra
 ``toString()``
 ^^^^^^^^^^^^^^
 
-You may have noticed in an :ref:`earlier section<nullable-arrays>` that the ``String`` representation of the ``Otter`` object ``ophelia`` was ``default@Otter`` . In other languages like Java, ``toString()`` returns a number representing the location of that object in memory, and most of that time the number is meaningless to the programmer. In Shadow, the default implementation of ``toString()`` **returns the package and class that the object belongs to.**  If you don't create a package for a class, like in the ``Otter`` example, the package will be default automatically. 
+You may have noticed in an :ref:`earlier section <\`\`nullable\`\` arrays>` that the ``String`` representation of the ``Otter`` object ``ophelia`` was ``default@Otter`` . In other languages like Java, ``toString()`` returns a number representing the location of that object in memory, and most of that time the number is meaningless to the programmer. In Shadow, the default implementation of ``toString()`` **returns the package and class that the object belongs to.**  If you don't create a package for a class, like in the ``Otter`` example, the package will be default automatically. 
 
 Either way, the default implementation is often useless. This is where **method overriding** becomes valuable. For example, let's pretend we have a very simple class representing Shadow State Park, located in the Methods Mountain Range. The member variables represent the guest's name, length of stay, and preferred activity, respectively. See below for the full class. 
 

@@ -61,15 +61,17 @@ The ``isEmpty()`` method returns ``true`` if the ``String`` has no characters (i
 Value at a location inside a ``String``
 ---------------------------------------
 
-The ``index()`` method takes a ``long`` and returns the ``byte`` value at that location inside the ``String``.  This method is equivalent to using the ``[]`` operator.  Locations start at 0 and go up to one less than the size of the ``String``.
+The ``index()`` method takes a ``long`` and returns the ``ubyte`` value at that location inside the ``String``.  This method is equivalent to using the ``[]`` operator.  Locations start at 0 and go up to one less than the size of the ``String``.
 
 If the ``String`` only contains ASCII characters, this method returns the character at the given location.
 
 .. code-block:: shadow 
 
 	var word = "autological";
-	Console.printLine(cast<code>(word.index(6))); // Prints "g"
-	Console.printLine(cast<code>(word[6])); // Also prints "g"
+	code letter1 = word.index(6);
+	code letter2 = word[6];
+	Console.printLine(letter1); // Prints "g"
+	Console.printLine(letter2); // Also prints "g"
 
 Substrings
 ----------
