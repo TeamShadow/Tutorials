@@ -1,16 +1,77 @@
+****************************
 Advanced Features of Classes
-----------------------------
+****************************
 
-Now that we have covered the basics of classes in Shadow, we can move on to some features/properties of classes. 
+Now that we have covered the basics of classes in Shadow, we can move on to some of their more advanced features. 
 
-.. _immutable-and-freeze-keywords: 
+Deep copying
+============
 
-The ``immutable`` and ``freeze`` Keywords
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Shadow has the ability to create *deep copies* of objects. Making a deep copy means not only copying the object but making deep copies of all members of the object as well.  With a few exceptions, making a deep copy of an object means that every member variable inside the object will have the same contents yet be a new object stored in a new location.
 
-In a :ref:`previous tutorial <\`\`String\`\` and Numerical Methods>`, we discussed the concept of immutability of the ``String`` type. When we say that a ``String`` is immutable, we mean that once it is created, its value **cannot** be changed. 
+The process of deep copying is built into Shadow and is intended to be a central part of thread communication in Shadow.  Although threading is not yet fully implemented, the intention is that sending an object from one thread to another will automatically involve creating a deep copy so that that threads don't share data, preventing data races.
 
-In Shadow, a ``String`` is not the only thing that is ``immutable`` -- classes and references can be as well. We will start with analyzing ``immutable`` classes. See the basic example below: 
+Shadow uses the keyword ``copy`` to create a copy of an object.  Although the syntax is simple, care should be taken when using the ``copy`` command because it will deeply copy *everything* inside of the object.  If the object only contains a few primitive member variables, the process will be quick and efficient.  However, if the object is a list that contains millions of objects, all of those objects (and references to objects they contain) will be copied as well.
+
+See below for an example of using ``copy``, which references the ``Otter`` class from the :ref:`previous tutorial <Classes>`: 
+
+.. code-block:: shadow 
+
+    Otter oliver = Otter:create("Oliver", "ocean"); 
+    Otter oscar = copy(oliver); 
+
+As you can see, you simply write ``copy(objectName)`` and store the result in an appropriate type. The ``Otter`` ``oscar`` is now a deep copy of ``oliver`` -- including deep copies of all of its members. Any changes to ``oscar`` will not be reflected in ``oliver``. Internally, the ``copy`` command keeps track of all new objects allocated. If a circular reference would cause an object to be copied a second time, the ``copy`` command instead uses the first copy. An exception to the rule is ``immutable`` objects, which cannot be changed anyway. References to such objects are assigned directly, without making copies of the underlying objects.
+
+The ``copy`` keyword can be used on arrays as well.  Because it's a deep copy, making changes to objects inside of a copy won't change the objects inside of the original. Let's see an example using ``copy`` on an array.  First, let's make a very short class called ``Number`` that holds an ``int`` called ``value``:
+
+.. code-block:: shadow 
+	
+	class tutorials:advanced@Number
+	{
+		get set int value;
+		
+		public create(int value)
+		{
+			this:value = value;
+		}
+	}
+
+Then, we can create an array of ``Number`` objects containing the values ``3``, ``5``, and ``7``, respectively.
+	
+.. code-block:: shadow 
+    :linenos:
+	
+	Number[] original = {Number:create(3), Number:create(5), Number:create(7)};
+    Number[] copied = copy(original); 
+    for(int i = 0; i < copied->size; i += 1)
+    {
+        Console.printLine("copied[" # i # "]: " # copied[i]->value);
+    }
+		
+    copied[0]->value = 9; 
+		
+    Console.printLine("original[0] :" # original[0]->value); 
+    Console.printLine("copied[0]: " # copied[0]->value); 
+
+Below is the console output: 
+
+.. code-block:: console
+
+    copied[0]: 3
+	copied[1]: 5
+	copied[2]: 7
+	original[0]:3
+	copied[0]:9
+
+The expression ``copy(original)``  on **Line 2** creates an entirely new array with fresh copies of all the ``Number`` objects from ``original`` and stores the result into ``copied``. When we change ``value`` inside of the first element in ``copied`` to 9 on **Line 8**, it does *not* change the ``value`` inside the first element in ``original``.  If we had made a copy of ``original`` using the ``subarray()`` method, for example, the ``value`` *would* have changed in the ``original`` because the first element in a *shallow* copy of the array would still point at the same object.
+
+
+Immutable classes and references
+================================
+
+In a :ref:`previous tutorial <\`\`String\`\` and Numerical Methods>`, we mentioned that the ``String`` class is *immutable*. An immutable object is one whose value *cannot* be changed after it's been created.
+
+In Shadow, the ``String`` class is not the only thing that's ``immutable`` -- other classes and references can be as well. We will start by looking at ``immutable`` classes. Consider the example below: 
 
 
 .. code-block:: shadow 
@@ -18,66 +79,59 @@ In Shadow, a ``String`` is not the only thing that is ``immutable`` -- classes a
 
     import shadow:io@Console;
 
-    /* Imagine you own a restaurant, 
-     * and you are looking to hire a 
-     * another server. You use this 
-     * class to create application 
-     * objects. Once an object is  
-     * created, which represents one
-     * application, its contents can 
-     * never change. Thus, we declare 
+    /* Imagine you own a restaurant and you are looking to hire a 
+     * another server. You use this class to create application 
+     * objects. Once an object is created, which represents one
+     * application, its contents can never change. Thus, we declare 
      * the class to be immutable.
      */
 
-    immutable class tutorials:properties@JobApplication
+    immutable class tutorials:advanced@JobApplication
     {
         get String name; 
         get int age; 
         get boolean experience; 
         get String skill; 
 
-        public create(String n, int a, boolean e, String s) 
+        public create(String name, int age, boolean experience, String skill) 
         {
-            name = n;
-            age = a; 
-	    experience = e; 
-	    skill = s; 
+            this:name = name;
+            this:age = age; 
+			this:experience = experience; 
+			this:skill = skill; 
         }
 	
-        public evaluateApp() => () 
+        public evaluate() => () 
         {
-            if ( age <= 18 or experience == false ) 
-	    {
-	        Console.printLine(name # " is not qualifed for the job!"); 
-	    }
-			
-	    else 
-	    {
-	        Console.printLine(name # " would be a great employee!"); 
-	    }	
+            if (age <= 18 or experience == false) 
+			{
+				Console.printLine(name # " is not qualifed for the job."); 
+			}
+			else 
+			{
+				Console.printLine(name # " would be a great employee!"); 
+			}	
         }
     }
 
-In order to declare a class to be ``immutable``, the syntax is: ``immutable class ClassName`` (see **Line 14**).  The constructor and other methods within the class **cannot** be marked as ``immutable``, just the class header. 
+In order to declare a class to be ``immutable``, we simply have to put the ``immutable`` modifier before the ``class`` keyword as we do on **Line 10**.  The constructor and other methods within the class *cannot* be marked ``immutable``, just the class header. 
 
-Aside from the keyword ``immutable``, the ``JobApplication`` class does not *appear* to be any different from the other non-``immutable`` class we have studied, the ``Otter`` class. However, notice how none of the member variables are marked with the keyword ``set``. If you tried to do so, you would get a compile error because instances of ``immutable`` classes cannot be changed once they are created. Further, any method (outside of the constructor) that would try to change the contents of an object of an ``immutable`` class will result in a compile error. Yet, the method ``evaluateApp()`` is valid because although it uses the values of some member variables in an ``if`` / ``else`` , it does not attempt to change them. 
+Aside from the keyword ``immutable``, the ``JobApplication`` class does not appear to be any different from the the regular classes we have written. However, notice how none of the member variables are marked with the keyword ``set``. If you tried to do so, you would get a compiler error because data inside an ``immutable`` object cannot be changed after the object is created. Furthermore, any method (other than the constructor) that tries to change the contents of an object of an ``immutable`` class will result in a compiler error. Yet the method ``evaluate()`` is valid because it only uses the values of some member variables without trying to change them.
 
-Syntax aside, why is it beneficial to create ``immutable`` classes, and why would we want to create ``immutable`` objects/references? The answer lies in the idea of **thread safety**. If  you have a program that is multi-threaded, it is possible that more than one thread could be trying to change a single object at the same time. This could lead to unintended results or errors in the program. Thus, by creating as many ``immutable`` objects as possible, you help to eliminate the chances of running into this problem. You can then pass around the object with confidence that it will not be changed. 
-In order to understand how to create an immutable reference/object, take a look at the following driver program for the ``JobApplication`` class. 
-
+Using an ``immutable`` class is no different from any other class, as seen in the driver code below:
 
 .. code-block:: shadow 
     :linenos: 
 
     import shadow:io@Console;
 
-    class tutorials:properties@ApplicationDriver
+    class tutorials:advanced@ApplicationDriver
     {
         public main( String[] args ) => ()
-	{
-	    JobApplication chris = JobApplication:create("Chris", 20, true, "positive attitude"); 
-	    chris.evaluateApp(); 	
-	}
+		{
+			JobApplication chris = JobApplication:create("Chris", 20, true, "positive attitude"); 
+			chris.evaluate(); 	
+		}
     }
 
 The console output is: 
@@ -86,154 +140,79 @@ The console output is:
     
     Chris would be a great employee! 
 
-As you can see in the driver program, **when a class is declared to be** ``immutable``, you do not need to use the ``immutable`` keyword to make the object ``immutable``; it automatically is.  The ``evaluateApp()`` method is called and executes as expected.
+Syntax aside, why is it beneficial to create ``immutable`` classes, and why would we want to create ``immutable`` objects and references? The answer is program safety.  You can pass around ``immutable`` objects with confidence that they won't be changed.  This knowledge allows the compiler to make some optimizations that it otherwise wouldn't be able to. 
 
-However, let's imagine that the ``JobApplication`` class is non- ``immutable``. How can we create an ``immutable`` instance of the class? **We use the** ``freeze`` **keyword**. Using ``freeze`` creates an ``immutable`` , deep copy of the object it is called on. 
-
-The syntax for using ``freeze`` is below. 
-
-``immutable JobApplication chris = freeze(JobApplication:create("Chris", 20, true, "positive attitude"));`` 
-
-Using ``freeze`` on the right side of the equals sign creates an ``immutable`` reference to a non- ``immutable`` object and stores it in the ``immutable`` object ``Chris``. If the statement on the left side of the equals sign had just been ``JobApplication chris``, then you would have gotten a compile error **because an** ``immutable`` **reference cannot be assigned to a non-** ``immutable`` **object (and vice versa).** 
+This idea becomes even more important when it's extended to *thread safety*. If  you have a program that is multi-threaded in another programming language, it's possible that more than one thread could be trying to change a single object at the same time. This could lead to unintended results or errors in the program.  Shadow doesn't allow threads to share mutable data, requiring deep copies of all objects passed from one thread to another.  However, ``immutable`` objects do not need to be copied because they can't be changed. Thus, by creating as many ``immutable`` objects as possible, you make your programs safer and your multi-threaded programs faster.
 
 
-``readonly``
-^^^^^^^^^^^^
+The ``freeze`` keyword
+----------------------
 
-Although ``immutable`` references/classes can help with **thread safety**, the trouble is that an immutable reference cannot be stored into a normal reference without losing the guarantee that its contents are protected (as explained above). To mediate between the two different kinds of references, ``readonly`` references are used.
+It's possible to declare an entire class with the ``immutable`` keyword, but what if you only need a particular reference to be ``immutable``?  You can declare any local or member variable with the ``immutable`` keyword.  If you try to store an object whose class is ``immutable`` into an ``immutable`` reference, everything will work fine.
 
-If a reference is marked as ``readonly``, it means that no mutable method can be called on it. However, it is useful because you can store either a normal reference or a ``immutable`` reference in it. Although this may not seem much different from an ``immutable`` reference, with a ``readonly`` reference, someone might have a normal reference they can use to change the contents of the object. Conversely, with an ``immutable`` reference, it's as if all the references to the object are ``readonly``. No one can ever change the contents of such an object.
+However, you can't store a normal object into an ``immutable`` reference without using the ``freeze`` keyword.  The ``freeze`` command creates an ``immutable``, deep copy of the object it's called on. 
 
-Although methods can be marked as ``readonly``, classes cannot be. In addition, all methods of an ``immutable`` class are ``readonly`` automatically. 
-
-
-Deep Copying and ``copy``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Another notable feature of Shadow and Shadow classes is the ability to create **deep copies** of objects. You have probably already made deep copies without knowing it;  there was a section on ``copy`` in the :ref:`Arrays<Arrays>` tutorial, and we just discussed ``freeze`` (i.e. a form of deep copying). 
-
-Nevertheless, to be precise, making a **deep copy** means not only copying the object, but all members of the object as well. This is different than storing an object in another reference, as this only creates an **alias** to the original object. Especially in other programming languages such as Java, attempting to make a deep copy can lead to a circular reference,  where a cycle of copying begins that never terminates. Shadow mitigates this potential problem through the keywords ``copy`` and ``freeze``.  
-
-See below for an example of using ``copy`` (references the ``Otter`` class from the :ref:`previous tutorial <Classes>`): 
+Here's an example in which we freeze an instance of the ``Number`` class we defined earlier in this tutorial:
 
 .. code-block:: shadow 
+    
+	immutable Number number = freeze(Number:create(42));
+	Console.printLine(number->value);
 
-    Otter oliver = Otter:create("Oliver", "Ocean"); 
-    Otter oscar = copy(oliver); 
+Using ``freeze`` creates an ``immutable`` reference to a non- ``immutable`` object, allowing us to store it in the ``immutable`` reference ``number``.  We are able to use the ``value`` ``get`` property to print out the value ``42``.  However, if we had tried to use the ``set`` version of the ``value`` property to change ``value`` to something else, the code would not have compiled.
 
-As you can see, the syntax for using ``copy`` is quite simple. You simply write ``copy(objectToCopy)`` and store it in an object of the appropriate type. The ``Otter`` ``oscar`` is now a deep copy of ``oliver`` -- including deep copies of all of its members. Any changes to ``oscar`` are not reflected in ``oliver``. Internally, the ``copy`` command keeps track of all the new objects allocated. If a circular reference would cause something to be copied a second time, the ``copy`` command instead uses the first copy. The exception to the rule is ``immutable`` objects, which cannot be changed anyway. References to such objects are assigned directly, without making copies of the underlying objects.
+The ``readonly`` keyword
+------------------------
 
-In order to review how ``freeze`` works, take a look at the :ref:`above section<immutable-and-freeze-keywords>`. The syntax is the same. The only difference is that ``freeze`` creates an immutable copy of the object. 
+When an object is stored in an ``immutable`` reference, only its ``readonly`` methods can be called.  These are the methods that are guaranteed not to change values inside of the object.  In an ``immutable`` class, all methods are implicitly ``readonly``.  In a regular class, methods must be explicitly marked ``readonly``.  By default, ``get`` properties for primitive types and ``immutable`` member variables are implicitly ``readonly``.
 
-The ``copy`` keyword can be used on arrays as well.  Because it's a deep copy, making changes to objects inside of a copy of an array won't change the objects inside of the original. 
+In addition to methods, references can be marked ``readonly`` as well.  Like an ``immutable`` reference, only ``readonly`` methods can be called from a ``readonly`` reference.  The key difference is that a ``readonly`` reference only guarantees that the object won't be changed through this particular reference while an ``immutable`` reference guarantees that the object won't be changed *ever*.  One way to think about it is that an ``immutable`` reference behaves as if *all* references to that object are ``readonly``.
 
-Using the example from the ``default`` section above, where ``a`` is a ``String`` array with size 5, let's examine how ``copy`` works. 
+We use ``readonly`` references to resolve a problem: An ``immutable`` reference can't be stored into a regular reference, and (without using ``freeze``) a regular reference can't be stored into an ``immutable`` reference.  To mediate between the two different kinds of references, ``readonly`` references are used. You can store either a normal reference or an ``immutable`` reference in a ``readonly`` reference.
 
-
-.. code-block:: shadow 
-    :linenos:
-	
-	String[] a = String:create[5]:default("Serendipity");
-    String[] b = copy(a); 
-    for (int i = 0; i < b->size; i += 1)
-    {
-        Console.printLine("b[" # i # "]: " # b[i]);
-    }
-		
-    b[0] = "Oops"; 
-		
-    Console.printLine("a[0]:" # a[0]); 
-    Console.printLine("b[0]:" # b[0]); 
-
-Below is the console output: 
-
-.. code-block:: console
-
-    b[0]: Serendipity
-    b[1]: Serendipity
-    b[2]: Serendipity
-    b[3]: Serendipity
-    b[4]: Serendipity
-    a[0]: Serendipity
-    b[0]: Oops
-
-The expression ``copy(a)``  on **Line 2** creates an entirely new array and copies over everything in ``a``.  This copied array is then stored in ``b``. When we change the value of the first element in ``b`` to "Oops" on **Line 7**, it does *not* change the first element in ``a``.  More importantly, all the elements in the array have *also* had deep copies made of themselves.
+Although methods and references can be marked ``readonly``, classes can't be, since a ``readonly`` class would really be the same as an ``immutable`` class.
 
 
+The ``toString()`` method
+=========================
 
-``nullable`` arrays
-^^^^^^^^^^^^^^^^^^^^
+Every object has a ``toString()`` method that returns a ``String`` representation of that object.  This method is defined in the ``Object`` class, and other objects get that default implementation through a process called *inheritance*, which will be discussed in detail in the :ref:`Inheritance` tutorial.
 
-Just as you can declare a ``String`` or other reference to be ``nullable``, you can do the same for arrays. However, the array itself is *not* nullable. Instead, the elements inside of it are. Consider the example below:
+This default implementation of the ``toString()`` method isn't very useful:  All it does is return the full type name of the object as a ``String``.  However, you can write your own ``toString()`` method to give a more meaningful ``String`` representation for the objects of any class you create.
 
-.. code-block:: shadow 
-    :linenos: 
-
-    nullable String[] test = String:null[4]; 
-		
-    Otter ophelia = Otter:create("Ophelia", "River", 7); 
-		
-    test[1] = "Joy"; 
-    test[2] = #ophelia; 
-
-    Console.printLine(test); 
-
-The console output is: 
-
-.. code-block:: shadow 
-
-    [null, Joy, default@Otter, null]
-
-The ``nullable`` ``String`` array ``test`` is created with 4 elements, all containing ``null``. Then, in **Line 5**, we change the value of the 2:superscript:`nd` element in the array to ``"Joy"``. In **Line 6** we change the value of the 3:superscript:`rd` element in the array to the ``String`` representation of the ``Otter`` object ``ophelia``. 
-
-.. note:: Recall that putting the ``#`` in front of a value converts it to a ``String``.
-
-
-Method Overriding
-^^^^^^^^^^^^^^^^^
-
-Often confused with method overloading, **method overriding** is when the programmer provides a new default implementation for a pre-provided method in a class. In order to properly override a method, the overridden method header must **exactly** match the header of the original method. The method body may -- and should -- be different. A commonly overridden method for Objects is the ``toString()`` method, which gives a ``String`` representation of the object. It is a good example on how to override a method, and it is shown in the next section. 
-
-``toString()``
-^^^^^^^^^^^^^^
-
-You may have noticed in an :ref:`earlier section <\`\`nullable\`\` arrays>` that the ``String`` representation of the ``Otter`` object ``ophelia`` was ``default@Otter`` . In other languages like Java, ``toString()`` returns a number representing the location of that object in memory, and most of that time the number is meaningless to the programmer. In Shadow, the default implementation of ``toString()`` **returns the package and class that the object belongs to.**  If you don't create a package for a class, like in the ``Otter`` example, the package will be default automatically. 
-
-Either way, the default implementation is often useless. This is where **method overriding** becomes valuable. For example, let's pretend we have a very simple class representing Shadow State Park, located in the Methods Mountain Range. The member variables represent the guest's name, length of stay, and preferred activity, respectively. See below for the full class. 
+For example, let's pretend we have a simple class representing guests visiting Shadow State Park, located in the Method Mountains. The member variables represent the guest's name, length of stay, and preferred activity, respectively. See below for the full class: 
 
 .. code-block:: shadow 
     :linenos:  
     
     import shadow:io@Console;
 
-    class tutorials:properties@ShadowPark
+    class tutorials:advanced@Guest
     {
-        get String guestName; 
-	get set int days; 
-	get set String activity; 
-	
-	public create(String gn, int d, String a) 
-	{
-	    guestName = gn; 
-	    days = d; 
-	    activity = a; 
-	}
-	
-	public readonly toString() => (String)
-	{
-	    String one = # guestName # " is staying for " # days # " days"; 
-	    String two = " and would like to go " # activity; 
+        get String name; 
+		get set int days; 
+		get set String activity; 
 		
-	    return one # two; 			
-	}
-	
+		public create(String name, int days, String activity) 
+		{
+			this:name = name; 
+			this:days = days; 
+			this:activity = activity; 
+		}
+		
+		public readonly toString() => (String)
+		{
+			String part1 = name # " is staying for " # days # " days"; 
+			String part2 = " and would like to go " # activity; 
+			
+			return part1 # part2; 			
+		}	
     }
 
 
-Here is an exerpt from the driver program and console output: 
+Here's an excerpt from the driver program and its console output: 
 
 .. code-block:: shadow 
-    :linenos: 
 
     ShadowPark guest1 = ShadowPark:create("Natasha", 3, "rock climbing"); 
     Console.printLine(guest1); 
@@ -242,11 +221,6 @@ Here is an exerpt from the driver program and console output:
 
     Natasha is staying for 3 days and would like to go rock climbing
 
-The key lines to pay attention to in the ``ShadowPark`` class are **Lines 16-22**. This is where we have overridden the default ``toString()`` method. If a programmer decides to override the ``toString()`` method in any class, the method header **MUST** match ``public readonly toString() => (String)``, exactly. Omitting ``readonly`` will cause a compile error, as ``toString()`` cannot make changes to the object it is called on. 
+The ``toString()`` method is overridden on **Lines 16-22**. If a programmer decides to override the ``toString()`` method in any class, the method header *must* match ``public readonly toString() => (String)`` exactly. Omitting ``readonly`` will cause a compile error, as the ``toString()`` method cannot make changes to the object it's called on. 
 
-Now, when we say ``Console.printLine(objectName)``, or ``#objectName``,  the program will display on the console the ``String`` value returned by the ``toString()`` method that we overrode, as shown in the driver program above. Our new ``toString()`` method is now much more helpful/informational than what would have been returned from the ``toString()`` method by default, ``properties@ShadowPark``. 
-
-More information on method overriding will be provided when we start discussing **inheritance** in a :ref:`later tutorial<Inheritance>`. 
-
-
-
+Using ``Console.printLine(objectName)``, ``objectName.toString()``, or ``#objectName`` will produce the ``String`` value returned by the ``toString()`` method for ``objectName``.  If the programmer overrode the ``toString()`` method for its class, the output will be a customized ``String`` representing that object.  Otherwise, the output will just be the type name.

@@ -219,14 +219,15 @@ In addition, you can also create ``protected`` ``get`` and ``set`` properties. A
 
 The first thing to pay attention to is that the class ``Bonjour`` extends ``Hello``. This means that unless ``speakFrench()`` is called, the member variable ``word`` will equal the literal value "hello" for each class. However, notice in **Lines 11 and 12** that we call ``speakFrench()`` on ``bonjour`` and use the ``get`` property to display the updated value "bonjour" on the console. The important point to make here is that we were not able to use the ``set`` property in the driver class ``Language`` because it is defined as ``protected`` in the parent class ``Hello``. This means that only ``Hello`` and its children may call the ``set`` property, and it is done so in the ``speakFrench()`` method of the subclass ``Bonjour``. Using ``protected`` methods helps to promote **data encapsulation**. 
 
-Method Overriding, Revisited 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Method overriding
+=================
 
-The last topic we will briefly discuss in this introduction to **inheritance** is **method overriding**. If this concept is completely new to you, it would be a good idea to review the tutorial :ref:`Method Overriding<Method Overriding>`. 
+The last topic we will discuss in this introduction to inheritance is *method overriding*. Often confused with method overloading, method overriding is when the programmer provides a new default implementation for a pre-provided method in a class. In order to properly override a method, the overridden method header must match the header of the original method *exactly*. The method body may -- and should -- be different.
 
-As a refresher, method overriding is when the programmer provides a new default implementation for a pre-provided method in a class. In order to properly override a method, the overridden method header must exactly match the header of the original method. The method body may -- and should -- be different.
+A commonly overridden method is the ``toString()`` method, which gives a ``String`` representation of the object. Overriding the ``toString()`` method was discussed in an :ref:`earlier tutorial <The \`\`toString()\`\` method>`.
 
-Since subclasses inherit the methods of its superclass, it is possible to override an inherited method. In our ``Employee`` and ``Waiter`` class examples above, ``Waiter`` inherits the methods ``clockIn()`` and ``clockOut()`` from ``Employee``. In order to use these methods (as defined in ``Employee``) on a ``Waiter`` object (named ``waiter``), all you would need to do is write ``waiter.clockOut()``. However, what if the waiter works different hours than a regular employee? You could then override the ``clockIn()`` and/or ``clockOut()`` methods in ``Waiter`` as shown below: 
+
+Subclasses inherit the methods of its superclass, and most inherited methods can be overridden. In our ``Employee`` and ``Waiter`` class examples above, ``Waiter`` inherits the methods ``clockIn()`` and ``clockOut()`` from ``Employee``. In order to use these methods (as defined in ``Employee``) on a ``Waiter`` object (named ``waiter``), all you would need to do is write ``waiter.clockOut()``. However, what if the waiter works different hours than a regular employee? You could then override the ``clockIn()`` and/or ``clockOut()`` methods in ``Waiter`` as shown below: 
 
 .. code-block:: shadow 
     :linenos:

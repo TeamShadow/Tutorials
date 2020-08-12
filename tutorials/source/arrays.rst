@@ -158,12 +158,40 @@ As seen in **Line 1** and the console output below, the addition of ``:default("
     a[2]: Serendipity
     a[3]: Serendipity
     a[4]: Serendipity
+	
+	
+``nullable`` arrays
+===================
+
+Just as you can declare a ``String`` or other reference to be ``nullable``, you can do the same for arrays. However, the array itself is *not* ``nullable``. Rather, the elements inside of it are.
+
+When creating a ``nullable`` array, you must use the ``null`` keyword instead of the ``create`` keyword before specifying the size of the array inside square brackets.
+
+Consider the example below:
+
+.. code-block:: shadow 
+    :linenos: 
+
+    nullable String[] test = String:null[4];
+		
+    test[1] = "Joy"; 
+    test[2] = "Wombat"; 
+
+    Console.printLine(test); 
+
+The console output is: 
+
+.. code-block:: console 
+
+    [null, Joy, Wombat, null]
+
+The ``nullable`` ``String`` array ``test`` is created with 4 elements, all containing ``null``. Then, in **Line 3**, we change the value of the 2\ :superscript:`nd` element in the array to ``"Joy"``. In **Line 4** we change the value of the 3\ :superscript:`rd` element in the array to ``"Wombat"``.
 
 
 ``subarray()`` method
 =====================
 
-The ``subarray()`` method allows you to create a new array that is a copy of part of an existing array, very much like the ``substring()`` method described in an :ref:`earlier tutorial <Substrings>`. This copy is a *shallow copy*, which means that a reference to an object inside of one array will be copied to the other array, making the two references point at the same object.  Later, changing what is stored inside one array will not affect the other, but making internal changes to an object that both arrays point at will be reflected in both arrays. In this way, using ``subarray()`` is different from the *deep copy* technique discussed in a :ref:`later tutorial <Deep Copying and \`\`copy\`\`>`.
+The ``subarray()`` method allows you to create a new array that is a copy of part of an existing array, very much like the ``substring()`` method described in an :ref:`earlier tutorial <Substrings>`. This copy is a *shallow copy*, which means that a reference to an object inside of one array will be copied to the other array, making the two references point at the same object.  Later, changing what is stored inside one array will not affect the other, but making internal changes to an object that both arrays point at will be reflected in both arrays. In this way, using ``subarray()`` is different from the *deep copy* technique discussed in a :ref:`later tutorial <Deep copying>`.
 
 The parameters of the ``subarray()`` method are the start index, which is the first index you want to copy, and the stop index, which is one location *after* the last index you want to copy. The result must be stored in an array of compatible type.
 
