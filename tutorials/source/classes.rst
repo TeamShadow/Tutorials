@@ -1,11 +1,16 @@
+*******
 Classes
--------
+*******
 
-Congratulations! Now that you have reached this point in the tutorials, you should have good understanding of the basics of the Shadow language: variables, operators, making choices, loops, methods, and arrays. Now, it is time to move on to classes, objects, and interfaces -- three crucial topics. Similar to Java, Shadow is **object-oriented**. However, before we dive into creating and using objects, we must first define the key components of a Shadow class. 
+Congratulations! If you've reached this point in the tutorials, you should have good understanding of the basics of the Shadow language: variables, operators, making choices, loops, methods, and arrays. Now, it's time to move on to classes, objects, and interfaces -- three crucial topics. Similar to Java, Shadow is *object-oriented*. However, before we dive into creating and using objects, we must first understand Shadow classes. 
 
-Whenever we write a program, we always start by creating and naming the class that serves as the "container" for our code. So far, we have been writing the majority of our code directly inside the ``main()`` method to test out the language basics. However, this is not entirely realistic. In most cases we we want to define a **class** that represents some **object**, or idea. Then, we create and test the methods/properties of objects of the class in the ``main()`` method. 
+Whenever we write a program, we always start by creating and naming the class that serves as the container for our code. So far, we've been writing the majority of our code directly inside the ``main()`` method to test out the language basics.  In the :ref:`Methods` tutorial, we introduced the idea of methods as a way to break down long segments of code into useful, named chunks. However, methods are always part of an *object*, which can also contain data.
 
-In order to explain the concepts behind classes and objects, we will be analyzing an extended example of the ``Otter`` class. In a literal sense, otters are objects, and we can create class a that represents them. Read through the program below to get familiar with it before we break it down. 
+We want to keep data organized so that only the methods that need to access the data can do so.  To define a group of data and the methods that can access it, we write *classes* which are the blueprints for objects.  Just as we started with just the ``main()`` method and showed how we could add additional methods, we're going to show you how you can write different classes to create objects that can hold different data and interact with each other.
+
+In order to explain the concepts behind classes and objects, we'll be analyzing an extended example of the ``Otter`` class. An object is a collection of data and methods to manipulate that data.  Sometimes Shadow objects model objects in the physical word, as in this case where ``Otter`` objects could model real otters.  In other cases, a Shadow object could represent something more abstract like a collection of messages or a particular shade of blue.
+
+Before we go on, take a moment to read through the program below to get familiar with it. 
 
 
 .. code-block:: shadow 
@@ -14,313 +19,342 @@ In order to explain the concepts behind classes and objects, we will be analyzin
     class Otter
     {
         /* These are the private member variables
-	 * of the Otter class.
-	 */
-	get String name; 
-	get set String habitat; 
-	get set boolean mate; 
-	get set int age; 
-	
-	/* This is the contructor for the Otter class,
-	 * which initializes its private memebers.
-	 */
-	public create(String n, String h, int age) 
-	{
-	    name = n; 
-	    habitat = h; 
-	    this:age = age; 
-	    mate = false; 
-	} 
-	
-	/* Implementation of the set method
-	 * for the member variable mate. 
-	 */
-	public set mate(boolean value) => ()
-	{
-	    if (value and age > 2)
-	    {
-	        mate = true;
-	    }
-	}
+		 * of the Otter class.
+		 */
+		get String name; 
+		get set String habitat; 
+		get set boolean mate; 
+		get set int age; 
+		
+		/* This is the contructor for the Otter class,
+		 * which initializes its private members.
+		 */
+		public create(String newName, String newHabitat, int age) 
+		{
+			name = newName; 
+			habitat = newHabitat; 
+			this:age = age; 
+			mate = false; 
+		} 
+		
+		/* Implementation of the set method
+		 * for the member variable mate. 
+		 */
+		public set mate(boolean value) => ()
+		{
+			if (value and age > 2)
+			{
+				mate = true;
+			}
+			else
+			{
+				mate = false;
+			}
+		}
 
-	/*This is a method that is part of 
-	 * the Otter Class. It returns an int 
-	 * representing the number of fish caught. 
-	 */
-	public goFishing() => (int)
-	{
-	    int numFish; 
-	    if (mate) 
-	    {
-	        numFish = 10; 	
-	    }
-	    else 
-	    {
-	        numFish = 5; 
-	    }
-			
-	    return numFish; 
-	}	
+		/* This  method returns an int 
+		 * representing the number of fish caught. 
+		 */
+		public goFishing() => (int)
+		{
+			int fish; 
+			if (mate) 
+			{
+				fish = 10; 	
+			}
+			else 
+			{
+				fish = 5; 
+			}				
+			return fish; 
+		}	
     }
 
-Member Variables
-^^^^^^^^^^^^^^^^
+Member variables
+================
 
-The first thing to note about the ``Otter`` class are its **member variables** (or **fields**)  as seen in **Lines 6-9**. Member variables, in essence, represent a class's attributes. They "belong" to the class (i.e. in the scope of it).  For example, imagine you are looking at a real, live otter (lucky you!). How would you describe or define the animal? Does it have a name? Habitat? Mate? Age? All of these questions can be translated into specific **member variables** of the ``Otter`` class. ``name`` is a ``String`` variable, ``mate`` a ``boolean``, ``age`` an ``int``, and ``habitat`` a ``String`` as well. There is no limit to how many member variables a class can have, and there is no minimum requirement. In fact, a class does not *need* to have member variables at all. 
+The first thing to note about the ``Otter`` class is its *member variables* (also called *fields*)  seen on **Lines 6-9**. Member variables represent a class's data. For example, imagine you're looking at a real, live otter. How would you describe or define the animal? Does it have a name? What's its habitat? Does it have a mate? What's its age? Each piece of information can be stored as specific member variable in the ``Otter`` class. The ``name`` member is a ``String`` variable, ``mate`` is a ``boolean``, ``age`` is an ``int``, and ``habitat`` is a ``String`` as well. There's no limit to how many member variables a class can have, and there's no minimum requirement. A class doesn't *need* to have member variables at all. 
 
-Aside from the words ``get`` and ``set``, declaring a member variable is the same as declaring any local variable. The difference, though, is that every member variable is automatically declared ``private``. You do need to and should not include this **reserved word** as a modifier. It is a given. When ``private`` is used to modify a variable, it means that the variable can only be accessed **within the class that it is declared in**. This is exactly why we use ``get`` and ``set``: to allow other classes to be able to access or change the value of these private member variables. ``get`` and ``set`` will be explained in later section on this page. 
+Aside from the modifiers ``get`` and ``set``, declaring a member variable is the same as declaring any local variable. Unlike local variables, which only exist for the lifetime of a method, these variables exist inside of an object for its lifetime.
 
-**A Brief Conceptual Note** 
+.. note:: Unlike local variables, member variables *must* be declared with an explicit type, instead of ``var``.
 
-It is important to understand that the ``Otter`` class *is not an otter object*. Rather, it is like a framework or blueprint that describes the attributes, features, and "actions" of an otter in general. The member variables **do not** need to be (but they can be) initialized to a literal value (i.e. every otter will probably not live in the same place or have the same age). Rather, when we create an object, or an **instance** of the otter class (usually in the ``main()`` method), we send in literal values as parameters, which  initialize the member variables to these user-defined values. You may be asking, how do we create an object, and how are these values are initialized? The next section will cover this in detail. 
+Member variables cannot be accessed by code written in a different class.  If you're familiar with other object-oriented languages, it's as if all member variables in Shadow are declared ``private``, although this keyword should not be used explicitly for Shadow member variables.
 
-
-Constructors and Objects Intro
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-A **constructor** is another key element in a Shadow class and can be seen in **Lines 14-20** of the example program. Syntactically almost the same as a method, **constructors** are how the instances of a class (or objects) are created. The general method header for a constructor is as follows: 
-
-``public create(parameters passed in)``
-
-No matter the name of the class, a constructor must always start with ``public create``. The number and type of parameters will vary by class. Before we get into the body of the constructor, let's go over the basic syntax of creating an object in Shadow, which will probably remind you of how arrays are declared. 
-
-**Creating an Object**
-
-As aforementioned, objects are typically created in the ``main()`` method of a class. Although we could have a ``main()`` method in the ``Otter`` class itself, it is also common to create a separate **driver** class where the functionality of a class can be tested. For example, say we have another class called ``OtterDriver`` with a ``main()`` method. 
-
-.. note:: The driver class should be placed in the same directory/folder as the class you are testing. 
-
-The first line of the ``main()`` method is: 
-
-``Otter olive = Otter:create("Olive", "River", 6);``
-
-``Otter olive`` is how we declare the object. The type, which has to be the **name of the class** , is ``Otter``. ``olive`` is the name of our object, or an instance of the ``Otter`` class. The same naming conventions outlined in :ref:`Variables` should be followed. There is no limit on the number of ``Otter`` objects we can create. 
-
-The expression to the right of the equals sign invokes the object's **constructor** and thus creates an ``Otter`` object (as made clear by the reserved word ``create``). Inside the parentheses we see 3 literal values. Much like the method calls discussed in an earlier tutorial, **constructors** can take in parameters. 
-
-Looking back at the ``Otter`` class, you can see in the constructor parameter list that it requires two ``String`` variables and an ``int`` *in that order*. Thus, that is why we passed in "Olive", "River", and 6 when creating the object. 
+Since these variables can only be directly accessed by code in the same class,  we use the ``get`` and ``set`` modifiers to allow other classes to read or write the value of these private member variables through properties, explained :ref:`below <Properties>`.
 
 
-**The Constructor Body**
 
-Now that you know how to create an object, let's examine how the body of the constructor works (**Lines 16-19**). **Overall, the goal of the constructor is to initialize the class's member variables, using the parameters passed in.** Thus, ``fieldName = paramName;`` is the order in which the statement should be written. Consider **Line 16**, ``name = n;`` In the example above, the first parameter of the ``Otter`` object ``olive`` was "Olive", so ``n`` holds this value. Since ``name = n;``, the member variable ``name`` is now equal to "Olive". 
 
-What happens if the parameter name is the same as the member variable name? Although this is legal in Shadow, it can sometimes become confusing which variable is being referenced. Take a look at **Line 18**. Both the member variable and the parameter (which acts as a local variable) have the same name, ``age``. Although the code would still compile if you said ``age = age;``, it can become quite ambiguous which ``age`` is which. Thus, if you choose to name the member variable and the parameter the same, use the ``this`` keyword. By saying ``this:age = age;``, the program knows the first ``age`` is the field, or member variable. 
+Classes vs. objects
+-------------------
 
-In addition, not all member variables need to be initialized using parameter values like in **Line 19**.  The member variable ``mate`` is set to ``false``, as we are assuming an ``Otter`` object does not have a mate when it is first created. 
+It is important to understand that the ``Otter`` class is *not* an ``Otter`` object. Rather, it's a template or blueprint that describes the attributes, features, and actions of an ``Otter``. Writing the class doesn't create any ``Otter`` objects, but we can create an object, or an *instance*, of the ``Otter`` class.  This object will have its own name, habitat, age, and will either be mated or not.  ``Otter`` objects will all have the same member variables, but the *values* of those member variables will vary from one object to another. Otters, like people, are unique, after all.
 
-.. note:: We also could have set the field ``mate`` equal to ``false`` at **Line 8** where the variable was initially declared.
+Creating objects and specifying the initial values for member variables is the subject of the next section.
 
-Overloaded Constructors
-^^^^^^^^^^^^^^^^^^^^^^^
 
-Just like **methods** in Shadow, constructors can also be **overloaded**. This simply means that each overloaded constructor's parameter list must vary in type and/or number than the others. For example, if one constructor took in a ``String``, an overloaded constructor could take in more than one ``String``, a ``String`` and a ``code``, etc. 
+Constructors and objects
+========================
 
-Consider this additional constructor for the ``Otter`` class: 
+A *constructor* is a special kind of method in a Shadow class.  There's an example of a constructor on lines **Lines 14-20** of our example ``Otter`` class.  We use constructors to create a new object by passing in the appropriate values. The general method header for a constructor is as follows: 
+
+.. code-block:: shadow 
+
+	public create(parameters)
+
+The name of every constructor in Shadow is ``create``.  Most constructors are ``public``, allowing code in other classes to create a new object of the class. The number and type of parameters will vary, depending on the class. Before we get into the body of the constructor, let's go over the basic syntax for creating an object in Shadow, which is similar to how arrays are created.
+
+A constructor is used to initialize an object, not to give back information. Unlike normal methods, a constructor has no return types, not even ``=> ()``.
+
+.. note:: Many object-oriented languages use the name of the class for constructors, but Shadow uses ``create``.
+
+
+Creating an object
+------------------
+
+Objects can be created in any method.  Some classes have a ``main()`` method where a program can start, and other's don't.  Although the ``Otter`` class doesn't have a ``main()`` method, we could, for example, create an ``Otter`` object in a method of another class.  Sometimes, we will call a class that tests objects of other classes a *driver class*.
+
+We could imagine a driver class ``OtterDriver`` that has a ``main()`` method.  Inside this ``main()`` method, the following code could create an ``Otter`` object:
+
+.. code-block:: shadow 
+
+	Otter olive = Otter:create("Olive", "river", 6);
+
+The first part of this line, ``Otter olive``, declares a variable of type ``Otter`` to point at the object we're about to create.  The type must match the kind of object we're creating. The name of our variable is ``olive``, which follows the same naming conventions  we discussed in the  :ref:`Variables` tutorial.
+
+The expression on the right of the equals sign invokes the ``Otter`` constructor, creating an ``Otter`` object. Inside the parentheses we see three literal values, the name (``"Olive"``), habitat (``"river"``), and age (``6``) that the constructor requires as parameters. Looking back at the ``Otter`` class, you can see in the constructor parameter list that it requires two ``String`` variables and an ``int``, in that order.
+
+
+The constructor body
+--------------------
+
+Now that you know how to create an object, let's examine **Lines 16-19** of the ``Otter`` class to see how the constructor works . The goal of a constructor is to initialize the object's member variables. On **Line 16**, the ``newName`` parameter giving the name of the ``Otter`` is stored into the ``name`` member variable.  Given the driver code above, ``"Olive"`` will be stored into ``name``.
+
+What happens if the parameter name is the same as the member variable name? Although this is legal in Shadow, the parameter name will *hide* the name of the member variable. **Line 18** shows a way to resolve this problem. Both the member variable and the parameter have the same name, ``age``. Although the code would compile if you said ``age = age;``, it would have no effect, since it would set the value of the parameter to itself.  By putting ``this:`` before the name of a member variable, you can specify that you're referring to the member variable *inside* the current object.  The keyword ``this`` is a Shadow reserved word that refers to whatever object the code is currently inside of. 
+
+**Line 19** demonstrates that not all member variables need to be initialized using parameter values.  The member variable ``mate`` is always initialized to ``false``, as we assume that an ``Otter`` object does not have a mate when it's first created. 
+
+.. note:: We also could have set the field ``mate`` equal to ``false`` at **Line 8** where the variable is initially declared.
+
+Overloaded constructors
+=======================
+
+Just like other methods in Shadow, constructors can be *overloaded*. This means that one class can have more than one constructor, as long as each one's parameter list varies in type or number from the others. Consider this additional constructor for the ``Otter`` class: 
 
 
 .. code-block:: shadow 
-    :linenos:  
 
-    public create(String n, String h) 
+    public create(String newName, String newHabitat) 
     {
-        name = n; 
-	habitat = h; 
-	age = 0; 
-	mate = false; 
+        name = newName; 
+		habitat = newHabitat; 
+		age = 0; 
+		mate = false; 
     }
 
 
-The only difference is this overloaded constructor does not take in an ``int`` representing age. It sets the member variable ``age`` to 0 when the object is created. 
+The only difference is this overloaded constructor does not take in an ``int`` representing age. It sets the member variable ``age`` to ``0`` when the object is created.  This constructor is legal because it has a different number of parameters. 
 
-Thus, the following statement is now valid: 
+If this constructor is part of the ``Otter`` class, someone could create an ``Otter`` object with the following code: 
 
-``Otter oliver = Otter:create("Oliver", "Ocean");``
+.. code-block:: shadow 
 
-The program recognizes that this second constructor exists, and now ``oliver`` has ``age = 0;``. It is important to recognize that both ``olive`` and ``oliver`` are still otters. They were just created by invoking different constructors. 
+	Otter oliver = Otter:create("Oliver", "ocean");
 
-Default Constructors
-^^^^^^^^^^^^^^^^^^^^^
+Now ``oliver`` is an ``Otter`` whose ``age`` member is ``0``. Both ``olive`` and ``oliver`` are still ``Otter`` objects containing the same kinds of data, even though they were created by invoking different constructors. 
 
-A default constructor is a "built-in" constructor that takes in no parameters and can be invoked **only when no other constructor is defined in the class**. If this is the case, the default constructor gives each member variable a **default value**. For primitive member variables, this is no problem. They are assigned default values, usually a variation on ``0``. 
+Default constructors
+====================
 
-However, what happens to **reference-type** member variables? Unless the variable declared to be **nullable**, you will get a compile error that says: 
+A default constructor is a constructor that takes in no parameters.  Objects created by default constructors are assigned default values for all of their member variables.
 
-``Uninitialized field: Non-nullable field name might not be initialized by a create``. This happens because the program is trying to assign the value ``null`` to a non- ``nullable`` reference type. 
+If you don't write any constructors for your class, the Shadow compiler creates a default one behind the scenes, initializing all variables with the following default values for commonly used primitive types:
 
-How can we get around this error in order to invoke the default constructor? You *could* mark all reference variable types as ``nullable`` , but this would not help keep the number of ``nullable`` references at a minimum, which is the goal. Instead you could just as easily initialize the individual member variables outside of any constructor. 
+* ``int``: ``0``
+* ``double``: ``0.0``
+* ``boolean``: ``false``
+* ``code``: ``'\0'``
 
-For example, if one of your member variables in ``String something;``, to avoid using ``nullable`` and still use the default constructor, you could simply write ``String something = " ";`` 
+Note that this default constructor is created for you only if *no other* constructor is defined in the class. However, what happens to reference (non-primitive) member variables? If the member variable is ``nullable``, the compiler will initialize it to ``null``, but if it isn't, the compiler will give an error because you haven't said what this member variable will be initialized to and there's no suitable default.
 
-Lastly, if you have at least one programmer-defined constructor, you will get a compile error if you try to invoke the default constructor. 
+If you get this compiler error, you *could* mark all reference variable types as ``nullable`` , but doing so would increase the number of ``nullable`` references, which is a bad programming practice. If there are reasonable defaults for these member variables, you can easily initialize the individual member variables outside of any constructor. 
 
-Constructor Chaining
-^^^^^^^^^^^^^^^^^^^^
+For example, if one of your member variables is ``String something;``, to avoid using ``nullable`` and still use the default constructor, you could simply write ``String something = "";`` 
 
-**Constructor chaining** is another feature of constructors that helps eliminate repeated blocks of code to increase efficiency. In essence, using the keyword **this**, you are able to invoke an existing constructor from another constructor of that class. The constructors are executed from the "top of the chain" down. This will become clear in the example below. 
 
-Let's say we added the following constructors to the ``Otter`` class: 
+Constructor chaining
+====================
+
+*Constructor chaining* is another feature of constructors that helps eliminate repeated code. Using the keyword *this*, you can invoke an existing constructor from another constructor of that class. Doing so makes it easy to provide a range of different constructors to programmers who will use your class.  These constructors will often call other constructors that that take more parameters, supplying them with default parameter values.
+
+The following code shows the original constructor for the ``Otter`` class with two more added: 
 
 .. code-block:: shadow 
     :linenos: 
 
-    public create(String n, String h, int age)
+    public create(String newName, String newHabitat, int age)
     {
-        name = n;
-        habitat = h;
+        name = newName;
+        habitat = newHabitat;
         this:age = age;
         mate = false;
     }
     
-    public create(String n, String h)
+    public create(String newName, String newHabitat)
     {
-    	this(n, h, 0); 
+    	this(newName, newHabitat, 0); 
     }
     
-    public create(String n)
+    public create(String newName)
     {
-    	this(n, "Unknown"); 
-        name = "end of chain"; 
+    	this(newName, "unknown"); 
     }
 
-Now, consider the following test-program excerpt below: 
-
+Now, consider the following code from a test program: 
 
 .. code-block:: shadow 
 
-    Otter one = Otter:create("Jasmine"); 
-    Console.printLine(one->name); 
+    Otter jasmine = Otter:create("Jasmine"); 
+    Console.printLine(jasmine->name); 
 
-    Otter two = Otter:create("Harrison", "Pond"); 
+    Otter harrison = Otter:create("Harrison", "pond"); 
 
-With the first object, ``one``, notice how we create it with only one parameter (representing its name). You may be wondering, how do the other member variables get instantiated? Look at **Line 17**. Inside the ``this()`` statement, we are sending the name that was passed in ("Jasmine") along with a literal value for ``habitat`` ("Unknown") as parameters. Control then flows to the constructor that takes two ``String`` values as parameters. If there hadn't been such a matching constructor, we would have gotten a compile error. In this constructor, there is yet *another* example of constructor chaining. The two ``String`` values passed in, along with the value 0, are sent as parameters to the original constructor where the member variables are initialized.
+Notice that we create ``jasmine`` using that constructor that takes only one parameter, the name. How do the other member variables get instantiated? Look at **Line 16** above. Using the ``this`` keyword, it invokes the previous constructor using the name that was passed in (``"Jasmine"``) along with a value for ``habitat`` (``"unknown"``) as parameters. Control then flows to the constructor that takes two ``String`` values as parameters. If there hadn't been such a  constructor, we would have gotten a compiler error. In this constructor, there is yet *another* example of constructor chaining. The two ``String`` values passed in, along with the value ``0``, are sent as parameters to the original constructor where the member variables are initialized.
 
-However, consider **Line 2** of the test program. What do you think is the value of ``name``? "Unknown" or "end of chain"? Although the member variable ``name`` was initially set to ``Unknown`` via constructor chaining, ``name`` actually stores the literal value "end of chain". This is because the ``this()`` statement is executed first, with control flowing to the "top of the chain" (constructor without a ``this()`` call) back down to the constructor that was originally invoked. Thus, ``name = "end of chain;"`` is executed last. You will get a compile error if any ``this()`` call is not the first statement in the constructor. 
+Finally, look at the second ``Otter`` object, ``harrison``. Here, we have invoked the constructor that takes two ``String`` values, which also includes a call using ``this``. The member variable ``age`` is set to ``0``. 
 
-Finally, look at the ``Otter`` object ``two``. Here, we have invoked the constructor that takes two ``String`` values, which also includes a ``this()`` call. The member variable ``age`` is set to 0. 
+.. note:: It's permitted to write other code inside a constructor after invoking another constructor using ``this``, but the constructor invocation *must* be the first statement.
 
-``get`` and ``set`` Properties
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We are now going to move back to our analysis of the ``Otter`` class and address the properties ``get`` and ``set``. 
+Properties
+==========
 
-Because all member variables (or fields) in Shadow are ``private``, how can other classes access or change these values? It would be quite tedious to write **accessors** (a method that returns the value of a member variable)  and **mutators** (a method that updates/changes the value of a member variable) for each field. Instead, we use **properties**. Properties are accessed with the arrow operator (``->``). 
+Let's return to the original ``Otter`` class and consider the ``get`` and ``set`` keywords. 
 
-In order to see how properties work, take a look at **Line 6** of the ``Otter`` class: 
+Because all member variables in Shadow are private, how can other classes access or change these values? It would be tedious to write *accessors* (methods that return the value of a member variable)  and *mutators* (methods that change the value of a member variable) for every single member variable. Instead, Shadow provides a tool called *properties*. Properties are similar to method calls, but they use the arrow operator (``->``) instead of parentheses with arguments. 
 
-``get String name;``
+In order to see how properties work, take a look at **Line 6** of the original ``Otter`` class: 
 
-Here ``get`` the property is modifying the member variable ``name``. We can then use this property in our ``OtterDriver`` program, part of which is shown below.
+.. code-block:: shadow 
+
+		get String name;
+
+Here the ``get`` keyword modifies the member variable ``name``, creating an accessor property that we can use in our ``OtterDriver`` program, part of which is shown below:
 
 
 .. code-block:: shadow 
     :linenos: 
 
-    Otter olive = Otter:create("Olive", "River", 6); 
+    Otter olive = Otter:create("Olive", "river", 6); 
     Console.printLine(olive->name # " lives in a " # olive->habitat); 
 		
     olive->mate = true; 
-    Console.printLine(olive->name # " found a mate! " # olive->mate); 
+    Console.printLine(olive->name # " has a mate: " # olive->mate); 
     Console.printLine(olive->name # " just caught " # olive.goFishing() # " fish!"); 
 		
 The program output is below: 
 
 .. code-block:: console 
 
-    Olive lives in a River
-    Olive found a mate! true
+    Olive lives in a river
+    Olive has a mate: true
     Olive just caught 10 fish!
 
 
-In **Line 2** of the driver program we see ``olive->name``, which returns the value of the member variable ``name`` ("Olive"), as shown in the console output. The same applies for ``olive->habitat``. If either ``name`` or ``habitat`` hadn't had ``get`` in their declaration, you would've needed to write accessor methods for both in order to "get" their values in ``OtterDriver``. 
+In **Line 2** of the driver program we see ``olive->name``, which returns the value of the member variable ``name`` (``"Olive"``). The same applies for ``olive->habitat``. If either ``name`` or ``habitat`` hadn't had ``get`` in their declaration, we would've needed to write accessor methods for both in order to retrieve their values in ``OtterDriver``. 
 
-Additionally, ``set`` can be used to store a value into a member variable.  **Line 4** states ``olive->mate = true;``. If no ``set`` mutator method was defined in the program, the member variable ``mate`` would simply have been changed to ``true``. However, in the ``Otter`` class, a condition must be met before ``mate`` is set to a new value (code excerpted below): 
+Additionally, the ``set`` keyword can be used to create a mutator property. **Line 4** states ``olive->mate = true;``. If no ``set`` mutator method was defined in the program, the member variable ``mate`` would simply have been changed to ``true``.
+
+Most of the time, simply applying the ``get`` or ``set`` modifier to a member variable is fine, but it's possible to customize what happens if you want something more complicated than retrieving or storing a value.  For example, in the ``Otter`` class, a condition must be met before ``mate`` can be set to ``true``: 
 
 .. code-block:: shadow 
     :linenos: 
 
     public set mate(boolean value) => ()
     {
-        if( value and age > 2 )
-	{
-	    mate = true;
-	}
+        if(value and age > 2)
+		{
+			mate = true;
+		}
+		else
+		{
+			mate = false;
+		}
     }
 
 In order for the property to work correctly, the method header is critical. The syntax is as follows:  
 
-``public set memberName(var of member type) => ()``
+.. code-block:: shadow 
+	
+	public set memberName(parameter of member type) => ()
 
-In the ``Otter`` class, the member variable name is ``mate`` and the type is ``boolean``, as reflected in the method header. Now, ``mate`` will only be set to ``true`` if the ``Otter`` object has an age greater than 2. As you can see in the console output from ``OtterDriver``, ``olive`` is ``6``, so she has found a ``mate``! 
+In the ``Otter`` class, the member variable name is ``mate`` and the type is ``boolean``, as reflected in the method header. Now, ``mate`` will only be set to ``true`` if the ``Otter`` object has an age greater than 2. As you can see in the console output from ``OtterDriver``, ``olive`` is 6, so she did find a mate. 
 
-.. note:: This method and indeed all properties can also be called directly as methods (since that's what they are, under the covers), but we suggest that property syntax is used whenever possible.
+.. note:: This method and indeed all properties can also be called directly as methods (since that's what they are, under the covers), but property syntax is easier to read.
 
 
-Class Methods
-^^^^^^^^^^^^^
+Normal methods
+==============
 
-Outside of  **constructor(s)**, **accessors**, or **mutators**, classes can have any 
-number of other methods, as discussed in the previous :ref:`Methods<Methods>` tutorials. If you need a refresher on how to create, use, or call methods, refer back to this section. 
+Beyond constructors and properties, a class can have any 
+number of other methods, as discussed in the previous :ref:`Methods` tutorial.
 
-Notice how the ``Otter`` class has a method called ``goFishing()`` (see below) 
-
+Recall that the ``Otter`` class has a method called ``goFishing()``, repeated below:
 
 .. code-block:: shadow 
-    :linenos: 
     
     public goFishing() => (int)
     {
-        int numFish; 
-	if ( mate ) 
-	{
-	    numFish = 10; 	
-	}
-	else 
-	{
-	    numFish = 5; 
-	}
-			
-	return numFish; 
+        int fish;
+        if (mate)
+        {
+            fish = 10;
+        }
+        else
+        {
+            fish = 5;
+        }
+        return fish;
     }	
 
 
-The method takes in no parameters and returns an ``int`` representing the number of fish caught. If the ``Otter`` object the method is called on has a mate, twice the number of fish are caught. As seen in **Line 6** of the ``OtterDriver`` class, all you need to do to call the method on an ``Otter`` object is to use the following syntax: 
+The method takes in no parameters and returns an ``int`` representing the number of fish caught. If the ``Otter`` object the method is called on has a mate, it catches twice the number of fish. As seen in **Line 6** of the ``OtterDriver`` class, we call this method using normal method syntax: 
 
-``objectName.methodName(parameters);``
+.. code-block:: shadow
 
-Defining different methods within a class gives the class greater functionality and makes objects even more useful. Now, we are ready to move on to more advanced topics regarding classes.  
+	objectName.methodName(parameters);
+
+
+.. note:: The object's name must always be used when calling a method on a *different* object. However, if we want to call a method on the same object as the method we're currently in, the ``objectName.`` can be left off (or can be replaced with ``this.``).  
 
 Packages
-^^^^^^^^
+========
 
-**Packages** in Shadow are a means of organizing groups of classes that serve a similar function or have some commonality that unites them. They are created by putting these different classes in folders/directories. You have already been exposed to packages, just not explicitly. For example, consider the ``shadow:standard`` package. It contains essential classes, interfaces, singletons, and exceptions (to be explained in later tutorials) needed for any Shadow program. These types do not need to be explicitly imported because the compiler will do so automatically. The other built-in Shadow packages are listed below (as described in the `Shadow API <http://shadow-language.org/reference/>`_). 
+*Packages* in Shadow are a means of organizing groups of classes that are commonly used together. A normal Shadow class should be written in its own file, whose name ends with ``.shadow``.  These files should be put in the same folder if they're in the same package.
 
-* Package ``shadow:io`` contains fundamental types used for input and output, both for the console and for file and path manipulation
+A few packages are worth mentioning because they're used all the time. For example, the ``shadow:standard`` package contains essential classes, interfaces, singletons, and exceptions (to be explained in later tutorials) needed for any Shadow program. These types do not need to be explicitly imported because the compiler will do so automatically. Other built-in Shadow packages are listed below (as described in the `Shadow API <http://shadow-language.org/documentation/$overview.html>`__). 
+
+* Package ``shadow:io`` contains fundamental types used for input and output, both for the console and for file and path manipulation.
 
 * Package ``shadow:natives`` contains classes and exceptions used to interact with C code.
 
 * Package ``shadow:utility`` contains basic data structures and utility classes that are useful in many different kinds of programs.
 
-While these are the packages essential to the Shadow language, what if you wanted to create your own package? For example, you may be wondering what package all of these test programs we have studied are stored in. **If not specified in the class header, classes are stored in the** ``default`` **package**. From now on, let's say we want to put all of these example programs in a Shadow tutorials package. 
+While these are packages fundamental to the Shadow language, what if you wanted to create your own package? For example, you might be wondering what package the sample programs for these tutorials are in. If not specified in the class header, classes are stored in the ``default`` package. Now that we've introduced packages,  we'll put all future programs in a ``tutorials`` package.
 
-First, we will create a folder called ``tutorials``, and inside this folder we can have multiple other folders to hold different classes. For example, inside the ``tutorials`` folder, let's say we make a folder called ``variables``. Inside this folder, we can put all the programs we have relating to variable examples. It becomes a package. But how do we designate the package in class headings? 
+First, we'll create a folder called ``tutorials``. Inside this folder we can have multiple other folders to hold different classes. For example, inside the ``tutorials`` folder, we could make a folder called ``variables``. Inside this folder, we could put all the programs we have relating to variable examples, making it a subpackage of the ``tutorials`` package. But how do we designate the package in class headings? 
 
-Let's pretend we made a class called ``VariableClass``. 
+Let's pretend we made a class called ``VariableClass``. Instead of the class header saying ``class VariableClass``, we should now write ``class tutorials:variables@VariableClass``. 
 
-Instead of the class header saying, ``class VariableClass`` , we now should write ``class tutorials:variables@VariableClass``. 
+The package name is ``tutorials:variables`` (exactly matching the folder names), and the class name is ``VariableClass``. The class name must appear after the ``@`` symbol. 
 
-The package name is ``tutorials:variables`` (these are the folder/directory names), and the class name is ``VariableClass``. The class name must **always** appear after the ``@`` symbol. 
+It's always a good idea to put your code into packages to stay organized. From now on, packages will be incorporated into our example programs.
 
-When working with many classes, interfaces, etc. for a programming project, it is a good idea to put your code into packages to stay organized. From now on, packages will be incorporated into our example programs. 
+If classes are in the same package, they can refer to each other's names without using an ``import`` statement.  However, if you want to use outside classes (with the exception of those in ``shadow:standard``), one approach is to use an ``import`` statement at the top of your program.  We have seen this many times, since most of our code has needed to use the ``Console`` singleton from the ``shadow:io`` package:
 
+.. code-block:: shadow
 
-
-
-
-
-
-    
-
-
-
-
+	import shadow:io@Console;
+	
+Using an ``import`` statement is the most common and convenient way of referring to a class from another package, but it's also possible to use its *fully qualifed name*.  If you don't use an ``import`` statement, you can refer to a class using its whole name, including packages.  Thus, you could type out ``shadow:io@Console`` everytime you wanted to refer to ``Console``.  This approach is sometimes required when you need to import two different classes that have the same name.

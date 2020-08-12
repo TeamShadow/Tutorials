@@ -5084,8 +5084,16 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
 }
 .rst-content tt.literal, .rst-content tt.literal, .rst-content code.literal {
   color: #222;
+  border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.04);
   border: none;
+  /*
+  
+  background: rgba(0, 0, 0, 0.05);
+		border-radius: 4px;
+		font-size: 0.9em;
+		padding: 0.25em 0.325em;
+*/
 }
 .rst-content tt.xref, a .rst-content tt, .rst-content tt.xref, .rst-content code.xref, a .rst-content tt, a .rst-content code {
   font-weight: bold;
