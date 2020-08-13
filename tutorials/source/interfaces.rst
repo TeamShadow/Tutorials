@@ -1,35 +1,38 @@
+**********
 Interfaces
-----------
+**********
 
-In this section we will cover another very important part of Shadow: interfaces. In a broad sense, an **interface** is like a contract with a class: it is made up of one or more methods that the class is required to provide implementation for. For example, consider the following simple interface. It will be used to guide our analysis for the next few sections. 
+In this tutorial we will cover another very important part of Shadow: *interfaces*. In a broad sense, an interface is like a contract a class must follow: It's made up of methods that the class is required to provide implementations for. For example, consider the following simple interface. It will be used to guide our examples for the next few sections. 
 
 .. code-block:: shadow 
-    :linenos: 
+    :linenos:
 
     interface tutorials:interfaces@CanVacation
     {
         vacation() => (); 
     }
 
-Basic Syntax
-^^^^^^^^^^^^
+	
+Interface syntax
+================
 
-The syntax for creating interfaces is very simple. Instead of using the reserved word ``class``, we use ``interface InterfaceName`` in the header, as seen in **Line 1**. Then, in the body of the interface, there should be a collection of one or more method headers, **without any implementation provided**. 
+The syntax for creating interfaces is simple. Instead of using the reserved word ``class``, we use ``interface`` before the interface's name, as seen on **Line 1** above. Then, in the body of the interface, there should be a collection of one or more method headers, without any implementation provided. 
 
-As illustrated in **Line 3**, there are a few differences between method headers in an interface and those in regular classes. For one, interface methods cannot be marked ``public``, ``private``, or ``protected`` because they will **always be public by definition.** The whole purpose of an interface is to require a class to implement its methods, which would not be possible if a method was marked as ``private``. However, interface methods **can** be marked as ``readonly``. Lastly, the method header must end with a semicolon and should not include braces. 
+As illustrated on **Line 3**, there are a few differences between method headers in an interface and those in regular classes. For one, interface methods cannot be marked ``public``, ``private``, or ``protected`` because they will *always* be public by definition. The purpose of an interface is to require a class to provide a series of methods for use by other code, which would not be possible if a method was marked ``private``. However, interface methods *can* be marked ``readonly``. Lastly, the method header must end with a semicolon and should not include braces. 
 
-Naming
-^^^^^^
+Interface naming
+================
 
-By convention, interface names usually begin with ``Can`` and then some word(s) which suggests the ability that the interface ensures. For example, based on the interface name ``CanVacation`` and its single method, ``vacation()``, it is reasonable to assume that the classes that implement this interface have the ability to "take a vacation." 
+By convention, Shadow interface names often begin with ``Can`` and then some words which suggests the ability that the interface ensures. For example, based on the interface name ``CanVacation`` and its single method ``vacation()``, it's reasonable to assume that the classes that implement this interface have the ability to take a vacation. 
 
-However, for some interfaces that have many abilities (or methods), it does not make sense to use ``Can``. The ``List`` interface, which will be covered in a later tutorial, is a perfect example of this. It has numerous methods, so naming it something like ``CanDoListyThings`` would not be super clear. 
+However, for some interfaces that have many methods, it doesn't make sense to name them starting with ``Can``. The ``List`` interface, which will be covered in a later tutorial, is a perfect example. It has numerous methods, so naming it something like ``CanDoListyThings`` would be needlessly wordy. 
 
 Implementing interfaces
-^^^^^^^^^^^^^^^^^^^^^^^
+=======================
+
 At this point you are probably wondering *how* to implement an interface. Take a look at the two classes below. 
 
-First, is the ``Bermuda`` class: 
+First, the ``Bermuda`` class: 
 
 
 .. code-block:: shadow 
@@ -40,65 +43,55 @@ First, is the ``Bermuda`` class:
     class tutorials:interfaces@Bermuda is CanVacation 
     {
         public vacation() => ()
-	{
-	    Console.printLine("Get ready! You are going to " # this # "!"); 
-	    Console.printLine("Good luck flying through the Bermuda Triangle!"); 
-	}
-	
-	public readonly toString() => (String) 
-	{
-	    return "Bermuda"; 
-	}
-
+		{
+			Console.printLine("Get ready! You are going to " # this # "!"); 
+			Console.printLine("Good luck flying through the Bermuda Triangle!"); 
+		}
+		
+		public readonly toString() => (String) 
+		{
+			return "Bermuda"; 
+		}
     }
 
 
-Second, is the ``Madagascar`` class: 
+Second, the ``Madagascar`` class: 
 
 .. code-block:: shadow 
-    :linenos: 
-
+    :linenos:
 
     import shadow:io@Console;
 
     class tutorials:interfaces@Madagascar is CanVacation 
     {
         public vacation() => ()
-	{
-	    Console.printLine("Get ready! You are going to " # this # "!"); 
-	    Console.printLine("Take some pictures of the lemurs!"); 
-	}
-	
-	public readonly toString() => (String) 
-	{
-	    return "Madagascar"; 
-	}
-
+		{
+			Console.printLine("Get ready! You are going to " # this # "!"); 
+			Console.printLine("Take some pictures of the lemurs!"); 
+		}
+		
+		public readonly toString() => (String) 
+		{
+			return "Madagascar"; 
+		}
     }
 
 
-First, let's examine **Line 3** of both classes. As you can see, ``class ClassName`` is followed by ``is CanVacation`` in each class header. The keyword ``is`` tells the program that the class **implements** the following interface -- in this case, ``CanVacation``. What does this mean for the ``Bermuda`` and ``Madagascar`` classes? They must provide implementation for **all** methods in the interface ``CanVacation``, or else you will get a compile error. 
+First, let's examine **Line 3** of both classes. In each case, the class name is followed by ``is CanVacation``. The keyword ``is`` tells the program that the class *implements* the following interface -- in this case, ``CanVacation``. What does this mean for the ``Bermuda`` and ``Madagascar`` classes? They *must* provide implementations for *all* methods in the interface ``CanVacation`` or else there will be a compiler error. 
 
-Examine **Lines 5-9** in both classes to see how the implementation works. First and foremost, the method header must *exactly* match the header in the interface, with one exception. Although in an interface each method is automatically marked as ``public``, you will explicitly need to include the keyword ``public`` in the class method headers (and if a method is marked ``readonly`` in the interface, you must also include it in the class method header). Lastly, there are no restrictions to what is included in the method body, but make sure that if the method has a return type, you have a correct ``return`` statement. 
+Examine **Lines 5-9** in both classes to see how the implementation works. First and foremost, the method header must *exactly* match the header in the interface, with one exception: Although each method in an interface is implicitly marked ``public``, you will need to explicitly include the keyword ``public`` in the class method headers.  If a method is marked ``readonly`` in the interface, it must also be marked ``readonly`` in the class method header. Lastly, there are no restrictions on what's included in the method body.  A class is free to implement interface methods however it wants, as long as it conforms to the expectations for the parameters and return types. 
 
-
-Driver Program
-^^^^^^^^^^^^^^
-
-
-Below is a sample driver program and console output for the above interface and classes. 
-
+Below is a sample driver program and console output for the above interface and classes:
 
 .. code-block:: shadow 
-    :linenos: 
+    :linenos:
 
     Bermuda bermuda = Bermuda:create(); 
     bermuda.vacation(); 
     Console.printLine(); 
 		
     CanVacation madagascar = Madagascar:create(); 
-    madagascar.vacation(); 
-		
+    madagascar.vacation();		
 
 .. code-block:: console
 
@@ -109,36 +102,47 @@ Below is a sample driver program and console output for the above interface and 
     Take some pictures of the lemurs!
 
 
-First and foremost, it is important to understand that **you may not create objects/instances of interfaces**. You can, and should, create instances of the classes that implement interfaces, as shown in the example above. 
+Note that you can *never* create instances of interfaces. An interface is not a template for objects; it's a list of promises to write methods. You can, and should, create instances of the classes that implement interfaces, as shown in the example above. 
 
-Let's look at the ``bermuda`` object first. It is an object of the ``Bermuda`` class, and the ``vacation()`` method is called on it. The syntax is the same as discussed in the :ref:`Classes` tutorial. 
+Let's look at the ``bermuda`` variable first. It stores an object of the ``Bermuda`` class, and we call its  ``vacation()`` method on **Line 2**. The syntax for creating the object and calling methods is the same as discussed in the :ref:`Classes` tutorial. 
 
-Now, look at the declaration of the ``madagascar`` object. The object itself is an instance of the ``Madagascar`` class, but it is stored as type ``CanVacation``, an interface. Although there is no real difference between these two different ways of instantiating an object, it is often useful to store an object in an  ``interface`` type variable. If you happen to change the object in one place, you would not need to modify any code that expects an ``interface``. 
+Now, look at the declaration of the ``madagascar`` variable. The object itself is an instance of the ``Madagascar`` class, but it's stored in a variable with type ``CanVacation``, an interface. If you don't care about the specific type of the object, merely its ability to do certain things, it can be useful to store such an object in an  ``interface`` variable that reflects the abilities you care about. One of the benefits of this approach is that you can easily change the type of the object that's stored in the ``interface`` variable, yet no other code will need to change.
 
-.. note:: Although you can declare a variable to be an ``interface`` **type**, you may not write something like ``CanVacation:create();``. It would cause a compile error. 
+.. note:: Although you can declare a variable to be an ``interface`` type, it is illegal to write code that instantiates an interface, such as ``CanVacation:create()``.
 
-Implementing Multiple Interfaces
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Implementing multiple interfaces
+================================
 
-Another important feature of interfaces is that a class can implement multiple interfaces. The syntax for the class header is below: 
+Another important feature of interfaces is that a class can implement *multiple* interfaces. The syntax for such a class header is below: 
 
 .. code-block:: shadow 
 
     class ClassName 
     is CanSomething
-    and CanSomething2
-    and CanSoOn
+    and CanSomethingElse
+    and CanYetAnotherThing
 
-The order the interfaces are presented in *does not matter* so long as they are separated by ``and``. 
+The order the interfaces are presented in doesn't matter, but they must be separated by the ``and`` keyword. 
 
-What does this mean for the body of the class? Now, the class must implement **every method** of every interface stated in its class header in order for the code to compile. 
+What does this mean for the body of the class? Now, the class must implement *every* method of *every* interface stated in its class header in order for the code to compile. 
 
-For example, let's say that we added an interface called ``CanScubaDive`` that has one method called ``scubaDive()`` and both ``Madagascar`` and ``Bermuda`` implement it. Now, look back at the driver program from the previous section. If we added the expression ``bermuda.scubaDive();`` , the ``scubaDive()`` method from the ``Bermuda`` class would execute as expected. However, what if we added ``madagascar.scubaDive();`` ? Would the code compile? **No.** It would not compile because ``madagascar`` is declared to be of type ``CanVacation``. This means that when you try to call a method from another interface (in this case, ``CanScubaDive``), the method would not be defined in this context. Therefore, when a class implements more than one interface, pay attention to the variable type when creating objects of the class. 
+For example, let's say that we added an interface called ``CanScubaDive`` that has one method called ``scubaDive()`` and both ``Madagascar`` and ``Bermuda`` implement it. Now, let's update the driver program from a previous section, adding ``scubaDive()`` to both objects as follows:
 
-No Default Implementation
-^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: shadow 
+    :linenos:
 
-If you are familiar with Java, you are probably wondering if it is possible for an ``interface`` to provide a default implementation for some or all of its methods. In Shadow the answer is **no**. You will get a compile error if you try to do so. **The whole purpose of an interface is to outline methods that a class is forced to implement itself based off of the specific needs/function of the class itself**. 
+    Bermuda bermuda = Bermuda:create(); 
+    bermuda.vacation();
+	bermuda.scubaDive();
+    Console.printLine(); 
+		
+    CanVacation madagascar = Madagascar:create(); 
+    madagascar.vacation();
+	madagascar.scubaDive();
+
+Adding the ``scubaDive()`` method on **Line 3** works fine, but adding the ``scubaDive()`` method on **Line 7** prevents the code from compiling.  The problem is that ``madagascar`` is declared to be of type ``CanVacation``. We know that the object itself has the ability to call the ``scubaDive()`` method, but the compiler sees a ``CanVacation`` variable storing an object that may or may not include the ``scubaDive()`` method. 
+
+.. note:: In Java 8 and higher, it's possible for an ``interface`` to provide a default implementation for some or all of its methods. In Shadow, this is not possible since the purpose of an interface is only to outline methods that a class must implement. 
 
 
 
