@@ -172,6 +172,42 @@ We use ``readonly`` references to resolve a problem: An ``immutable`` reference 
 
 Although methods and references can be marked ``readonly``, classes can't be, since a ``readonly`` class would really be the same as an ``immutable`` class.
 
+The ``constant`` keyword
+========================
+
+If a member variable in a class is marked with the keyword ``constant``, its value is fixed at compile time and can never change.  In fact, a member variable marked ``constant`` is not truly a member variable because it doesn't belong to a specific instance of the class. It has the same unchanging value for every object. The types that can be marked ``constant`` are primitive types, ``String`` values, and arrays of those types. In addition, constants can be declared ``public``, ``private``, or ``protected``, as outside classes may need to access their values or not.
+
+These constant fields are used to given convenient names for values that never change.  For example, ``double:PI`` is a constant that records the closest ``double`` approximation to *π*.  Similarly, ``double:E`` is a constant that approximates Euler's number, the base of the natural logarithm. Because they're not connected to a particular object, the syntax for accessing these values is ``ClassName:CONSTANT``, where ``CONSTANT`` is the name of the constant.  It's convention to name constants using all capital letters, separating individual words with an underscore (``_``).
+
+Below is an example class that can store and compute information about a regular pentagon:
+
+.. code-block:: shadow
+
+	class Pentagon
+	{
+		public constant int SIDES = 5;
+		double length;
+		
+		public create(double length)
+		{
+			this:length = length;
+		}
+		
+		public getPerimeter() => (double)
+		{
+			return SIDES * length;
+		}
+		
+		public getArea() => (double)
+		{
+			double apothem = 0.5 * length / (double:PI / SIDES).tan();
+			return 0.5 * SIDES * length * apothem;
+		}
+	}
+
+The ``Pentagon`` class has a single member variable ``length`` that stores the length of one side of the pentagon.  Because it's a regular pentagon, all sides have the same length.  The class also contains the constant ``SIDES``, with a value set to ``5``, since all pentagons have five sides.
+
+
 
 The ``toString()`` method
 =========================

@@ -108,7 +108,7 @@ First, before we get into any explanations, take a few minutes and examine the t
 
 Now that you have a general idea how the program works, we will first touch on the ``abstract`` class ``Vehicle``. Aside from the word ``abstract`` in the class header and the ``abstract`` method ``takeATrip()`` , ``Vehicle`` does not appear to be any different than the classes we have studied previously. It still has a constructor, member variables, and one concrete method, ``buyAuto()``. 
 
-The second class, ``Motorcycle``, extends ``Vehicle``, as you can tell from the keyword ``is`` in the class header. ``Motorcycle`` does not override ``buyAuto()``, but it must provide default implementation for ``takeATrip()``, as seen in **Lines 11-15**. Notice how in **Line 8** we use the ``super()`` call to invoke the ``Vehicle`` constructor. Using ``super()`` was covered in a :ref:`previous section<Extending classes>`. 
+The second class, ``Motorcycle``, extends ``Vehicle``, as you can tell from the keyword ``is`` in the class header. ``Motorcycle`` does not override ``buyAuto()``, but it must provide default implementation for ``takeATrip()``, as seen in **Lines 11-15**. Notice how in **Line 8** we use the ``super()`` call to invoke the ``Vehicle`` constructor. Using ``super()`` was covered in a :ref:`previous section <Calling parent constructors>`. 
 
 Lastly, the driver program should not look any different from any of the examples we have used thus far. We have created a ``Motorcycle`` object and called methods on it. However, it is important to note we could have declared ``harley`` like this as well:  
 

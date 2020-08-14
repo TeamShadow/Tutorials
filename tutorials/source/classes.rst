@@ -84,20 +84,12 @@ Member variables cannot be accessed by code written in a different class.  If yo
 Since these variables can only be directly accessed by code in the same class,  we use the ``get`` and ``set`` modifiers to allow other classes to read or write the value of these private member variables through properties, explained :ref:`below <Properties>`.
 
 
-
-
-Classes vs. objects
--------------------
-
-It is important to understand that the ``Otter`` class is *not* an ``Otter`` object. Rather, it's a template or blueprint that describes the attributes, features, and actions of an ``Otter``. Writing the class doesn't create any ``Otter`` objects, but we can create an object, or an *instance*, of the ``Otter`` class.  This object will have its own name, habitat, age, and will either be mated or not.  ``Otter`` objects will all have the same member variables, but the *values* of those member variables will vary from one object to another. Otters, like people, are unique, after all.
-
-Creating objects and specifying the initial values for member variables is the subject of the next section.
-
-
 Constructors and objects
 ========================
 
-A *constructor* is a special kind of method in a Shadow class.  There's an example of a constructor on lines **Lines 14-20** of our example ``Otter`` class.  We use constructors to create a new object by passing in the appropriate values. The general method header for a constructor is as follows: 
+It is important to understand that the ``Otter`` class is *not* an ``Otter`` object. Rather, it's a template or blueprint that describes the attributes, features, and actions of an ``Otter``. Writing the class doesn't create any ``Otter`` objects, but we can create an object, or an *instance*, of the ``Otter`` class.  This object will have its own name, habitat, age, and will either be mated or not.  ``Otter`` objects will all have the same member variables, but the *values* of those member variables will vary from one object to another. Otters, like people, are unique, after all.
+
+To create objects and specify the initial values for member variables, we use a *constructor*. A constructor is a special kind of method in a Shadow class.  There's an example of a constructor on lines **Lines 14-20** of our example ``Otter`` class.  We use constructors to create a new object by passing in the appropriate values. The general method header for a constructor is as follows: 
 
 .. code-block:: shadow 
 
