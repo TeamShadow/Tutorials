@@ -25,8 +25,7 @@ Welcome to the Shadow Tutorials!
    interfaces
    singletons
    inheritance
-   abstract-classes
-   polymorphism-casting
+   polymorphism
    exceptions
    generics
    

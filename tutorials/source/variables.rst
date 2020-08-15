@@ -1,4 +1,3 @@
-
 *********
 Variables
 *********
@@ -24,13 +23,13 @@ Key *numeric type* variables, which are examples of *primitive variables*, are l
 | ``long``|     8            |  -9223372036854775808  |  9223372036854775807       |       ``0L``      |
 +---------+------------------+------------------------+----------------------------+-------------------+
 
-The rightmost column of this table shows example *literals* for each of these types.  A literal is a concrete value stored into a variable.  In Shadow, ``int`` literals are written as regular numbers, but literals for the ``byte``, ``short``, and ``long`` types are marked with an uppercase or lowercase ``y``, ``s``, or ``L``, respectively, at the end of the literal.
+The rightmost column of this table shows example *literals* for each of these types.  A literal is a concrete value stored into a variable.  In Shadow, ``int`` literals are written as regular numbers (optionally marked with an ``i`` at the end), but literals for the ``byte``, ``short``, and ``long`` types are marked with an uppercase or lowercase ``y``, ``s``, or ``L``, respectively, at the end of the literal.
 
 In addition to integer types, Shadow also has two types of primitive variables for storing *floating-point values* like 98.6 or -204.418: ``double`` and ``float``.  Typically, ``double`` is the appropriate type for floating-point values, since it has much more precision than ``float``.  If you want to use literals of type ``float``, write them ending in ``f`` or ``F``, as in ``98.6f``.  Floating-point values can be written in scientific notation for especially large or especially small numbers.  For example ``6.02E23`` means 6.02 × 10\ :superscript:`23` .
 
 .. warning:: Neither integer nor floating-point literals should be written with commas to separate multiples of 1,000 as is typically done in mathematics.  For example, the number 3,238,461 must be written ``3238461`` in Shadow.
 
-Unlike Java, Shadow has *unsigned types* for primitive variables as well. For example, the unsigned version of ``int`` is ``uint``. Unsigned values can never be negative. Due to strict Shadow type-checking, explicit :ref:`casting <Casting>` is needed if you want to store an ``uint`` in an ``int`` or vice versa.  Exercise caution when using unsigned variables because their behavior can be unexpected when the value would normally become negative.
+Unlike Java, Shadow has *unsigned types* for primitive variables as well. For example, the unsigned version of ``int`` is ``uint``. Unsigned values can never be negative. Due to strict Shadow type-checking, explicit :ref:`casting <Primitive casting>` is needed if you want to store an ``uint`` in an ``int`` or vice versa.  Exercise caution when using unsigned variables because their behavior can be unexpected when the value would normally become negative.
 
 .. note:: There is no ``udouble`` or ``ufloat`` type!
 
@@ -221,8 +220,8 @@ In Shadow, as with most programming languages, there are *reserved words*. Reser
 ============  ==============  ============  =============  =============  =============  =============  
 
 
-A note on ``var`` 
-=================
+The ``var`` keyword
+===================
 
 In all examples in this section, the variables are declared with an explicit type and name. Like C# (and similar to the ``auto`` keyword in C++11), Shadow provides a ``var`` keyword that can be used to declare local variables as long as they are assigned an initial value. This can be done because a variable's type is generally obvious, and the compiler will not confuse a ``double`` value with a ``String``. 
 
@@ -234,11 +233,101 @@ In all examples in this section, the variables are declared with an explicit typ
 As you can see, ``milesRun`` is clearly a ``double``, and ``marathonCity`` is a ``String``. Going forward with the tutorials, variables will usually be declared using ``var`` in examples.  Note that there is no type ``var``!  The variable ``milesRun`` has type ``double``, but the programmer used ``var`` as a shorthand instead of stating the type explicitly.
 
 
+Primitive casting
+=================
+
+Shadow is a *strongly typed* language, which means that it usually isn't possible to store values of one type into variables of a different type.  For example, it's not permitted to store a ``double`` value like ``8.316`` into an ``int`` variable.  The compiler shows an error if you try to do this because you'd lose the digits after the decimal point.
+
+There are exceptions to this rule.  It's legal to store a narrower type into a broader type.  In other words, you *could* store an ``int`` value like ``-37`` into a ``double`` variable.  The ``double`` type is broader than the ``int`` type, so there's no risk you'll lose information.
+
+There are, however, situations where you have a broader type and *need* to store it into a variable of a narrower type.  In these situations, Shadow provides a tool called *casting* that allows you to change the type of an expression into a different type.  By using the ``cast`` keyword, you are overriding the rules of Shadow, so there are risks that you will lose information or end up with a value whose meaning is different.
+
+The syntax for casting is as follows:
+
+.. code-block:: shadow 
+
+	cast<resultType>(expression)
+	
+The ``resultType`` is the type you want to change ``expression`` to.
+
+Numeric casting
+---------------
+
+Consider the short segment of code below: 
+
+.. code-block:: shadow 
+    :linenos: 
+
+    double a = cast<double>(8); 
+    Console.printLine(w); 
+    double b = 8; 
+    Console.printLine(x);
+
+**Lines 2 and 4** both print ``8.0`` to the console. In both cases, we're converting the ``int`` value ``8`` into the ``double`` value ``8.0``.  On **Line 1** we're performing an *explicit cast* by using the cast syntax shown above, using the ``cast`` keyword.  On **Line 3**, we're using an *implicit cast* where Shadow automatically converts the ``int`` value into a ``double`` value, because it knows that no data will be lost.
+
+Now, let's look another example: 
+
+.. code-block:: shadow 
+    :linenos: 
+    
+    int x = cast<int>(8.7); 
+    Console.printLine(y); 
+    
+    int y = 8.0;
+
+On **Line 1** of this code segment, we're using an explicit cast to convert the ``double`` value ``8.7`` to an ``int`` value.  **Line 2** will print ``8`` to the console because the conversion *truncates* the value instead of rounding it.
+
+.. note:: If you want to round a ``double`` value instead of truncating it, you must call its ``round()`` method before coverting to an ``int``.
+
+**Line 3** of this code segment, however, doesn't work.  Mathematically, there's no difference between 8.0 and 8, but for Shadow, ``8.0`` is a ``double``, which can't be stored into an ``int`` variable without an explicit cast.  Storing a signed type into an unsigned type will also always require an explicit cast, and storing an unsigned type into a signed type will require one unless the signed type is large enough to hold the unsigned type without overflowing.
+
+Casting ``code`` values
+-----------------------
+
+Both a ``code`` and an ``int`` are stored as 4-byte quantities inside the computer.  However, the compiler treats these values differently, as either a character or an integer. 
+
+Consider the code below: 
+
+.. code-block:: shadow 
+ 
+	var digit = '7'; 
+    var number = cast<int>(digit); 
+    Console.printLine(number); 
+
+In this example, we are casting the ``code`` ``'7'`` into an  ``int`` and storing it in ``number``. You might expect that ``number`` now holds the numeric value ``7``, but it actually holds ``55``. The *character* ``'7'``, when converted to a number, is ``55``. Programmers rarely need to know the numerical values of characters, but it is possible to look them up in `Unicode reference documentation <https://en.wikipedia.org/wiki/List_of_Unicode_characters>`__.
+
+A similar issue applies when converting an ``int`` to a ``code`` as in this example:
+	
+.. code-block:: shadow 
+
+	var anotherNumber = 97; 
+    var letter = cast<code>(anotherNumber); 
+    Console.printLine(anotherNum2); 
+
+The character corresponding to the numeric value ``97`` is ``'a'``, so ``a`` is what's printed to the console. Always be careful and intentional when casting between primitive types. 
+
+.. note:: You may *not* cast a ``String`` to a ``code`` or vice versa.
+
+It can be useful to remember that the numerical values of the uppercase Latin letters ``'A'`` through ``'Z'`` are sequentially numbered.  Thus, the value of ``'B'`` is larger than the value of ``'A'`` by exactly 1, and the value of ``'C'`` is larger than the value of ``'A'`` by exactly 2.  Similarly, the lowercase Latin characters ``'a'`` through ``'z'`` are also sequentially numbered (and are, perhaps strangely, larger than the values of the uppercase Latin letters).  Finally, the numerical values of the digits ``'0'`` through ``'9'`` are also sequentially numbered.  Using ``if`` statements, which will describe in a :ref:`future tutorial <Flow Control and Looping>`, a programmer can employ this knowledge to see if a particular character belongs to one of these three categories.
+
+.. code-block:: shadow
+
+    public printCharacterType(code character)
+	{
+		if(character >= 'A' and character <= 'Z')
+			Console.printLine("Uppercase"); 
+		else if(character >= 'a' and character <= 'z')
+			Console.printLine("Lowercase"); 
+		else if(character >= '0' and character <= '9')
+			Console.printLine("Digit"); 
+		else
+			Console.printLine("Something else"); 
+	}
 
 ``nullable`` and ``check``
 ==========================
 
-To conclude this section on variables, we will mention the ``nullable`` modifier and the associated ``check`` command. For reference types, which includes ``String``, many programming languages like C, C++, and Java allow them to be assigned the special value ``null``, which means that the reference isn't pointing at any object. However, those who are familiar with such languages will know that ``null`` can cause many unintended errors in a program, leading to a ``NullPointerException`` in Java, for example. Shadow deals with this issue with the ``nullable`` modifier. If a reference is marked as ``nullable``, it means that it is able to store the value ``null``. For example:
+To conclude this section on variables, we'll mention the ``nullable`` modifier and the associated ``check`` command. Many programming languages like C, C++, and Java allow reference types, including ``String``, to be assigned the special value ``null``, which means that the reference isn't pointing at any object. However, those who are familiar with such languages will know that ``null`` can cause many unintended errors in a program, leading to a ``NullPointerException`` in Java, for example. Shadow deals with this issue with the ``nullable`` modifier. If a reference is marked as ``nullable``, it means that it's able to store the value ``null``. For example:
 
 .. code-block:: shadow 
 
@@ -259,4 +348,4 @@ Since you cannot store a ``nullable`` reference into a regular reference or call
     nullable String hint =  "machine";
     String mystery = check(hint);
  
-What is stored in the non-``nullable`` ``String`` variable ``mystery``? The literal value ``"machine"``. The ``check`` command took in the ``nullable`` variable ``hint`` and returned a non-``nullable`` version of it. But what would have happened if ``hint`` was equal to ``null``? The program would have crashed with an error, displaying ``shadow:Standard@UnexpectedNullException`` on the console. Exceptions will be covered in a :ref:`later tutorial<Exceptions>` where we will also show how to create a block of code to handle a ``nullable`` variable in a safe way.
+What's stored in the non-``nullable`` ``String`` variable ``mystery``? The literal value ``"machine"``. The ``check`` command took in the ``nullable`` variable ``hint`` and returned a non-``nullable`` version of it. But what would have happened if ``hint`` had contained ``null``? The program would have crashed with an error, displaying ``shadow:Standard@UnexpectedNullException`` on the console. Exceptions will be covered in a :ref:`later tutorial<Exceptions>` where we will also show how to create a block of code to handle a ``nullable`` variable in a safe way.

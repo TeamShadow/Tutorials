@@ -106,7 +106,7 @@ Using ``is`` for inheritance
 
 By itself, there's nothing new about the ``Employee`` class. It has three member variables, one constructor, and two methods.
 
-Now, look at the ``Waiter`` class. Notice how the class header says, ``class Waiter is Employee``. The keyword ``is`` signifies to the compiler that ``Waiter`` inherits from ``Employee``. Syntactically, this is the only thing you have to do to establish the inheritance relationship. 
+Now, look at the ``Waiter`` class. Notice how the class header says, ``class Waiter is Employee``. The keyword ``is`` signifies to the compiler that ``Waiter`` inherits from ``Employee``. Syntactically, this is the only thing you have to do to establish the inheritance relationship.  If no class is specified with an ``is``, the class ``Object`` is assumed to be the parent.
 
 What's inherited?
 -----------------

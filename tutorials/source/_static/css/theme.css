@@ -2822,7 +2822,7 @@ button[disabled] {
 }
 
 .btn-invert {
-  background-color: #222;
+  background-color: #000;
 }
 .btn-invert:hover {
   background-color: #2f2f2f !important;
@@ -3524,8 +3524,8 @@ input[type="radio"][disabled], input[type="checkbox"][disabled] {
 }
 .wy-table thead th, .rst-content table.docutils thead th, .rst-content table.field-list thead th {
   font-weight: bold;
-  border-bottom: solid 2px #e1e4e5;
-  background-color: #096cc3;
+  border-bottom: solid 1px #e1e4e5;
+  background-color: #a8d0e6;
   color: #fff;
 }
 .wy-table td, .rst-content table.docutils td, .rst-content table.field-list td {
@@ -3753,11 +3753,12 @@ h6 {
 
 hr {
   display: block;
-  height: 1px;
+  height: 0px;
   border: 0;
-  border-top: 1px solid #e1e4e5;
   margin: 24px 0;
   padding: 0;
+  border-top: solid 1px #096cc3;
+  color: transparent;
 }
 
 code, .rst-content tt, .rst-content code {
@@ -4549,7 +4550,7 @@ a.btn.btn-neutral:hover {
   background: left repeat-y #f2f4f5;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxOERBMTRGRDBFMUUxMUUzODUwMkJCOThDMEVFNURFMCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxOERBMTRGRTBFMUUxMUUzODUwMkJCOThDMEVFNURFMCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE4REExNEZCMEUxRTExRTM4NTAyQkI5OEMwRUU1REUwIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjE4REExNEZDMEUxRTExRTM4NTAyQkI5OEMwRUU1REUwIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+EwrlwAAAAA5JREFUeNpiMDU0BAgwAAE2AJgB9BnaAAAAAElFTkSuQmCC);
   background-size: 300px 1px;
-  color: #222;
+  color: #000;
 }
 
 .wy-grid-for-nav {
@@ -4821,11 +4822,12 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
 }
 .rst-versions .rst-other-versions hr {
   display: block;
-  height: 1px;
+  height: 0px;
   border: 0;
   margin: 20px 0;
   padding: 0;
-  border-top: solid 1px #413d3d;
+  border-top: solid 1px #096cc3;
+  color: transparent;
 }
 .rst-versions .rst-other-versions dd {
   display: inline-block;
@@ -4978,11 +4980,13 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   text-decoration: none;
   cursor: pointer;
   font-style: normal;
-  border-bottom: dotted 1px rgba(128, 128, 128, 0.5);
+  color: #096cc3;
+  border-bottom: dotted 1px rgba(9, 108, 195, 0.5);
   outline: 0;
 }
 
 .rst-content .document a.reference.external:hover, .rst-content .document a.reference.external em:hover, .rst-content .document a.reference.internal:hover, .rst-content .document a.reference.internal em:hover {
+  color: #d7263d;
   border-bottom: 0;
   border-top: 0;
 }
@@ -5083,7 +5087,7 @@ footer span.commit code, footer span.commit .rst-content tt, .rst-content footer
   line-height: normal;
 }
 .rst-content tt.literal, .rst-content tt.literal, .rst-content code.literal {
-  color: #222;
+  color: #000;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.04);
   border: none;

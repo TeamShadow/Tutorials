@@ -58,8 +58,8 @@ In some cases, it is necessary or convenient to specify additional options in a 
 
 Configuration files are XML-based, and may be passed to the compiler following the option ``-c`` (or ``--config``). If the option is not used, the compiler will check for the file ``shadow.xml``, first in the directory of the given source file and then in the compiler executable's directory. If neither file exists, the compiler will fall back on default settings. The following is a complete description of all legal tags and attributes within a Shadow configuration file:
 	
-Tags:
------
+Tags
+----
 
 * ``<shadow>`` - The outermost tag of the file, used to specify platform information for the compilation process. (*required*)
 * ``<system>`` - Used to specify the location of the Shadow standard libraries. Only one standard path may be specified. (*optional*)
