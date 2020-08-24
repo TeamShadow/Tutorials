@@ -206,18 +206,27 @@ Reserved words
 In Shadow, as with most programming languages, there are *reserved words*. Reserved words inherently have meaning in Shadow. For example, ``double`` is a reserved word because Shadow recognizes this as a primitive type -- it has meaning. Thus, you will get a compiler error if you try to name a variable with a reserved word. See the chart below for a full list of reserved words in Shadow. 
 
 
-============  ==============  ============  =============  =============  =============  =============  
-``abstract``   ``and``        ``assert``    ``boolean``    ``break``      ``byte``       ``case`` 
-``cast``       ``catch``      ``check``     ``class``      ``code``       ``constant``   ``continue``
-``copy``       ``create``     ``default``   ``destroy``     ``do``        ``double``     ``else``
-``enum``       ``exception``  ``extern``    ``false``      ``finally``    ``float``      ``for``  
-``foreach``    ``freeze``     ``get``       ``if``         ``immutable``  ``import``     ``in``
-``int``        ``interface``  ``is``        ``locked``     ``long``       ``native``     ``null`` 
-``nullable``   ``or``         ``private``   ``protected``  ``public``     ``readonly``   ``recover``
-``return``     ``send``       ``set``       ``short``      ``singleton``  ``skip``       ``spawn``
-``super``      ``switch``     ``this``      ``throw``      ``true``       ``try``        ``ubyte``
-``unit``       ``ulong``      ``ushort``    ``var``        ``weak``       ``while``      ``xor``
-============  ==============  ============  =============  =============  =============  =============  
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+  
+|``abstract`` |``and``      |``assert``   |``boolean``   |``break``    |``byte``     |``case``     |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+ 
+|``cast``     |``catch``    |``check``    |``class``     |``code``     |``constant`` |``continue`` |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+ 
+|``copy``     |``create``   |``default``  |``destroy``   |``do``       |``double``   |``else``     |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+
+|``enum``     |``exception``|``false``    |``finally``   |``float``    |``for``      |``foreach``  |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+ 
+|``freeze``   |``get``      |``if``       |``immutable`` |``import``   |``in``       |``int``      |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+ 
+|``interface``|``is``       |``locked``   |``long``      |``null``     |``nullable`` |``or``       |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+         
+|``private``  |``protected``|``public``   |``readonly``  |``receive``  |``recover``  |``return``   |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+     
+|``send``     |``set``      |``short``    |``singleton`` |``skip``     |``spawn``    |``super``    |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+
+|``switch``   |``this``     |``throw``    |``true``      |``try``      |``ubyte``    |``uint``     |
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+       
+|``ulong``    |``ushort``   |``var``      |``weak``      |``while``    |``xor``      |             | 
++-------------+-------------+-------------+--------------+-------------+-------------+-------------+
 
 
 The ``var`` keyword

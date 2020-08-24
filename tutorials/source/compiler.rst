@@ -120,8 +120,7 @@ The canonical form of LLVM target triple is either ``Architecture-Vendor-Operati
 
 Many additional options exist for each field. See the beginning of the `header file <http://llvm.org/doxygen/Triple_8h_source.html>`__ from LLVM's triple-handling code for a more complete (but still incomplete) listing.
 
-Examples:
-^^^^^^^^^
+A few useful examples are listed below:
 
 * ``x86_64-pc-windows-msvc``
 * ``x86_64-unknown-Linux-GNU``
